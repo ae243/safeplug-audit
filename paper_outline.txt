@@ -1,0 +1,37 @@
+Intro
+    -Safeplug
+    -Tor
+    -Motivation
+
+Review of Literature
+    -Tor
+        -Papers
+        -Limitations
+        -Dingledine + Tor list
+    -Fingerprinting
+    -Third-party/Supercookies
+
+User Experience
+    -Terms of Service
+    -Setup to __ home router
+    -Using the internet
+    -__ experience
+    -Cookie experience (Fourthparty)
+
+TCPDump (What is happening?)
+    -What's the udpate?
+    -Phone home frequency
+    -Does it do anything else?
+    -How does the ad-blocking work?
+
+Takeapart
+    -Parts in the box
+    -Possible attacks via USB/SD Card
+
+SSH
+    -How we got access
+    -What's the software
+    -What/where are the settings
+    -RPC server
+        -Attacks from anyone on local network
+        -Attack from a website?

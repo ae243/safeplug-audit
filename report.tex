@@ -9,6 +9,9 @@
 \maketitle
 
 \section{Introduction}
+    -Motivation
+    -Tor
+    -Safeplug
 
 \section{Background}
 Safeplug is a product that launched last week from the cloud storage company Pogoplug, offering to let users browse the web with “complete security and anonymity” for the cheap price of \$49 \cite{safeplug}.  Safeplug offers Tor out of the box, with no additional software installation, by sitting between a user’s router and the internet \cite{wired}.  Pogoplug’s marketing pitch centers around the protection of user’s IP addresses by using Tor \cite{safeplug,bittech}.  Lots of folks are excited about the idea, but waiting to see a security audit, including Bruce Schneier \cite{schneier}.  Gigaom quotes Pogoplug CEO Dan Putterman as saying the box uses “vetted software” \cite{gigaom} but who knows what that means?
@@ -21,10 +24,35 @@ What are the configurations on the box?  Is it clear to users what information i
 
 Safeplug can act as a relay in the Tor network \cite{techreview}; how would widespread use of the box affect the Tor network?
 
-\section{Methodology}
+\section{Procedure}
 Safeplug is not open source, which makes a security audit much more challenging.  This leads to a debate on where a user will put his/her trust.  Despite not having the source code, we hope to get a Safeplug, set it up via their website, and use Wireshark to capture traffic and see what happens.  Wireshark allows us to capture and analyze network data \cite{wireshark}.  We are interested both in the communication between the clients and the Safeplug and between the Safeplug and the outside world.  
 
 \section{Results}
+
+\subsection{User Experience}
+    -Terms of Service
+    -Setup to home router
+    -Using the internet
+    -Experience
+    -Cookie experience (Fourthparty)
+
+\subsection{Teardown}
+    -Parts in the box
+    -Possible attacks via USB/SD Card
+
+\subsection{Traffic Analysis}
+    -What's the udpate?
+    -Phone home frequency
+    -Does it do anything else?
+    -How does the ad-blocking work?
+
+\subsection{Gaining Access through SSH}
+    -How we got access
+    -What's the software
+    -What/where are the settings
+    -RPC server
+        -Attacks from anyone on local network
+        -Attack from a website?
 
 \subsection{Comparison with Tor Browser Bundle}
 
@@ -35,6 +63,9 @@ TODO: Annie
 TODO: Annie
 
 \subsection{Fingerprinting}
+TODO: Annie
+
+\subsection{Third-party and Supercookies}
 TODO: Annie
 
 \section{Conclusion}
