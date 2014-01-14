@@ -1,0 +1,159 @@
+#!/bin/sh
+
+sp_version=0.0
+if [ -f /opt/xce/etc/sp_version ]; then
+    . /opt/xce/etc/sp_version
+fi
+
+outputstatus () {
+    echo "Content-type: application/json"
+    echo ""
+    if [ -f /tmp/sp_upgrade ]; then
+	echo "{\"version\":\"$sp_version\",\"upgrading\":1}"
+    else
+        if [ -f /opt/xce/etc/sp.conf ]; then
+            . /opt/xce/etc/sp.conf
+	    echo "{\"version\":\"$sp_version\",\"tor\":$sp_tor,\"torrelay\":$sp_relay,\"torexitrelay\":$sp_exitrelay,\"adblock\":$sp_adblock,"
+	    echo " \"pacurl\":\"http://$SERVER_NAME:$SERVER_PORT/wpad.dat\"}"
+        else
+	    echo "{\"version\":\"$sp_version\",\"upgrade_failure\":1}"
+        fi
+    fi
+}
+
+outputexceptions () {
+    local first=0
+    echo "Content-type: text/plain"
+    echo ""
+    cat /opt/xce/etc/sp_torexceptions | while read item; do
+        if [ "x$first" = "x1" ]; then
+            echo -n ",$item"
+        else
+            echo -n "$item"
+            first=1
+        fi
+    done
+    echo ""
+}
+
+if [ "x$PATH_INFO" = "x/getStatus" ]; then
+    echo "HTTP/1.1 200 OK"
+    echo "Access-Control-Allow-Origin: *"
+    outputstatus
+    exit 0
+fi
+
+if [ "x$PATH_INFO" = "x/getTorExceptions" ]; then
+    echo "HTTP/1.1 200 OK"
+    outputexceptions
+    exit 0
+fi
+
+if [ "x$PATH_INFO" = "x/setTorExceptions" -a "x$REQUEST_METHOD" = "xPOST" ]; then
+    if [ $CONTENT_LENGTH -lt 0 ] || [ $CONTENT_LENGTH -gt 4096 ] ; then
+        echo "HTTP/1.1 400 Bad Request"
+        exit 0;
+    fi
+    if ! rm -f /tmp/sp_torexceptions.new; then
+        echo "HTTP/1.1 500 Server Error"
+        exit 0;
+    fi
+    for item in `cat | tr A-Z a-z | sed -e 's/,/ /g'`; do
+        echo "$item" >> /tmp/sp_torexceptions.new
+    done
+    if grep -v '^[A-Za-z0-9\.]*$' /tmp/sp_torexceptions.new > /tmp/sp_torexceptions.bad; then
+        echo "HTTP/1.1 400 Bad Request"
+        echo "Content-type: text/plain"
+        echo ""
+        cat /tmp/sp_torexceptions.bad
+        rm -f /tmp/sp_torexceptions.new
+        exit 0;
+    fi
+    /opt/xce/sbin/go_updateexceptions /tmp/sp_torexceptions.new
+
+    echo "HTTP/1.1 200 OK"
+    outputexceptions
+    exit 0
+fi
+
+if [ "x$PATH_INFO" = "x/enableTor" -a "x$REQUEST_METHOD" = "xPOST" ]; then
+    /opt/xce/sbin/go_update sp_tor=1
+    echo "HTTP/1.1 200 OK"
+    outputstatus
+    exit 0
+fi
+if [ "x$PATH_INFO" = "x/disableTor" -a "x$REQUEST_METHOD" = "xPOST" ]; then
+    /opt/xce/sbin/go_update sp_tor=0
+    echo "HTTP/1.1 200 OK"
+    outputstatus
+    exit 0
+fi
+
+if [ "x$PATH_INFO" = "x/enableTorRelay" -a "x$REQUEST_METHOD" = "xPOST" ]; then
+    /opt/xce/sbin/go_update sp_relay=1
+    echo "HTTP/1.1 200 OK"
+    outputstatus
+    exit 0
+fi
+if [ "x$PATH_INFO" = "x/disableTorRelay" -a "x$REQUEST_METHOD" = "xPOST" ]; then
+    /opt/xce/sbin/go_update sp_relay=0
+    echo "HTTP/1.1 200 OK"
+    outputstatus
+    exit 0
+fi
+
+if [ "x$PATH_INFO" = "x/enableTorExitRelay" -a "x$REQUEST_METHOD" = "xPOST" ]; then
+    /opt/xce/sbin/go_update sp_relay=1 sp_exitrelay=1
+    echo "HTTP/1.1 200 OK"
+    outputstatus
+    exit 0
+fi
+if [ "x$PATH_INFO" = "x/disableTorExitRelay" -a "x$REQUEST_METHOD" = "xPOST" ]; then
+    /opt/xce/sbin/go_update sp_exitrelay=0
+    echo "HTTP/1.1 200 OK"
+    outputstatus
+    exit 0
+fi
+
+if [ "x$PATH_INFO" = "x/enableAdBlock" -a "x$REQUEST_METHOD" = "xPOST" ]; then
+    /opt/xce/sbin/go_update sp_adblock=1
+    echo "HTTP/1.1 200 OK"
+    outputstatus
+    exit 0
+fi
+if [ "x$PATH_INFO" = "x/disableAdBlock" -a "x$REQUEST_METHOD" = "xPOST" ]; then
+    /opt/xce/sbin/go_update sp_adblock=0
+    echo "HTTP/1.1 200 OK"
+    outputstatus
+    exit 0
+fi
+
+if [ "x$PATH_INFO" = "x/enableSSHD" -a "x$REQUEST_METHOD" = "xPOST" ]; then
+    /opt/xce/sbin/go_sshd
+    echo "HTTP/1.1 200 OK"
+    outputstatus
+    exit 0
+fi
+
+if [ "x$PATH_INFO" = "x/checkUpgrade" -a "x$REQUEST_METHOD" = "xPOST" ]; then
+    # make sure we aren't alrealdy upgrading...
+    upgurl=""
+    if [ ! -f /tmp/sp_upgrade ]; then
+        eval `/opt/xce/sbin/blparam | grep cesvcid | sed -e 's/[A-Z0-9][A-Z0-9][A-Z0-9]$//'`
+        upgurl=`/opt/xce/bin/wget -S -O - -e https_proxy=http://127.0.0.1:8080/ "https://upgrade.pogoplug.com/svc/xconnect/checkUpgrade?product=safeplug&sku=SAFEPLUG&hwversion=SAFEPLUG1&swversion=$sp_version&nid=SP_$cesvcid" 2>&1 | tee /tmp/checkUpgrade.log | grep 'upgurl' | sed -e 's/.*upgurl":"//' -e 's/".*//'`
+    fi
+    if [ "x$upgurl" != "x" ]; then
+        touch /tmp/sp_upgrade
+        /opt/xce/sbin/go_upgrade
+    fi
+    echo "HTTP/1.1 200 OK"
+    outputstatus
+    exit 0
+fi
+
+echo "HTTP/1.1 400 Bad Request"
+echo "Content-type: text/html; charset=UTF-8"
+echo ""
+
+echo "<h1>Invalid Request</h1>"
+env | sed -e 's/$/<br>/'
