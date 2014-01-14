@@ -1,0 +1,377 @@
+body {
+    background-color: #ededed;
+    color: #333333;
+    font-family: Helvetica,Sans-serif;
+}
+
+.hidden {
+    width: 0px;
+    height: 0px;
+    display: none !important;
+    visibility: hidden;
+    overflow: hidden;
+}
+
+#sfpg_loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url(images/loading.gif) no-repeat scroll center center rgba(255, 255, 255, 0.6);
+    z-index: 100;
+}
+
+div.headstrip {
+    background: linear-gradient(to bottom, #585858 0%, #242424 100%) repeat scroll 0 0 transparent;
+    border-top: 3px solid #127C96;
+    height: 70px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+div.headstrip div.logo {
+    background: url(images/logo-safeplg.png) no-repeat scroll left top transparent;
+    height: 45px;
+    left: 50%;
+    margin-left: -576px;
+    position: absolute;
+    top: 13px;
+    width: 180px;
+}
+div.headstrip div.ttl {
+    color: #FFFFFF;
+    font-size: 26px;
+    height: 67px;
+    line-height: 67px;
+    margin-right: -573px;
+    position: absolute;
+    right: 50%;
+    white-space: nowrap;
+}
+
+div.page {
+    font-size: 14px;
+    left: 50%;
+    margin-left: -573px;
+    margin-top: 100px;
+    position: relative;
+    width: 1145px;
+}
+div.toptxt {
+    line-height: 26px;
+}
+
+div.tabline {
+    position: relative;
+    margin-top: 30px;
+}
+div.tab {
+    background-color: #B0B0B0;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 17px;
+    height: 37px;
+    line-height: 37px;
+    margin-right: 3px;
+    text-align: center;
+    width: 252px;
+}
+div.tab.selected {
+    background-color: #FFFFFF;
+    color: #333333;
+}
+
+div.contentarea {
+    position: relative;
+    width: 1054px;
+    background-color: #FFFFFF;
+    padding-left: 45px;
+    padding-right: 45px;
+    padding-bottom: 45px;
+}
+div.sec {
+    position: relative;
+    padding-bottom: 30px;
+    padding-top: 30px;
+}
+div.sec div.ttl {
+    font-size: 24px;
+    margin-bottom: 6px;
+}
+div.sec div.txt {
+    position: relative;
+    margin-right: 210px;
+    line-height: 22px;
+}
+
+div.switch {
+    background-color: #a9a9a9;
+    border: 1px solid #5F5F5F;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 28px;
+    margin-top: -14px;
+    position: absolute;
+    right: 37px;
+    top: 50%;
+    width: 94px;
+}
+div.switch.on {
+    background-color: #58A0FF;
+}
+div.switch div.nib {
+    background-color: #F0F0F0;
+    border: 1px solid #929292;
+    border-radius: 8px;
+    height: 26px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 37px;
+}
+div.switch.on div.nib {
+    left: auto;
+    right: 0;
+}
+div.switch div.lbl {
+    position: absolute;
+    height: 28px;
+    line-height: 28px;
+    top: 0;
+}
+div.switch div.lbl.off {
+    right: 107px;
+    font-weight: bold;
+}
+div.switch div.lbl.on {
+    left: 108px;
+}
+div.switch.on div.lbl.on {
+    font-weight: bold;
+}
+div.switch.on div.lbl.off {
+    font-weight: normal;
+}
+div.sep {
+    background-color: #e5e5e5;
+    height: 1px;
+    width: 100%;
+}
+
+div.subsec {
+    background-color: #fcfcfc;
+    border: 1px solid #f5f5f5;
+}
+div.subsec div.sec {
+    margin-left: 40px;
+    margin-right: 20px;
+}
+
+div.filtersec {
+    position: relative;
+    padding-top: 24px;
+}
+div.filtersec div.left,
+div.filtersec div.right {
+    height: 140px;
+}
+div.filtersec div.left {
+    position: relative;
+    width: 420px;
+    margin-left: 20px;
+}
+div.filtersec div.right {
+    position: absolute;
+    width: 440px;
+    top: 24px;
+    right: 20px;
+}
+div.filtersec div.subttl {
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+div.addln {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+div.addln input {
+    border: 1px solid #C7C7C7;
+    border-radius: 3px;
+    bottom: 0;
+    font-size: 18px;
+    height: 43px;
+    left: 0;
+    margin: 0;
+    padding: 0 0 0 10px;
+    position: absolute;
+    width: 67%;
+}
+div.greenbut {
+    position: relative;
+    display: inline-block;
+    height: 43px;
+    line-height: 43px;
+    padding-left: 20px;
+    padding-right: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #FFFFFF;
+    font-size: 18px;
+    text-align: center;
+    border: 1px solid #5d9c03;
+    border-radius: 3px;
+    background: rgb(152,212,24);
+    background: -moz-linear-gradient(top,  rgba(152,212,24,1) 0%, rgba(104,192,17,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(152,212,24,1)), color-stop(100%,rgba(104,192,17,1)));
+    background: -webkit-linear-gradient(top,  rgba(152,212,24,1) 0%,rgba(104,192,17,1) 100%);
+    background: -o-linear-gradient(top,  rgba(152,212,24,1) 0%,rgba(104,192,17,1) 100%);
+    background: -ms-linear-gradient(top,  rgba(152,212,24,1) 0%,rgba(104,192,17,1) 100%);
+    background: linear-gradient(to bottom,  rgba(152,212,24,1) 0%,rgba(104,192,17,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#98d418', endColorstr='#68c011',GradientType=0 );
+}
+div.greenbut:active {
+    background: rgb(104,192,17);
+    background: -moz-linear-gradient(top,  rgba(104,192,17,1) 0%, rgba(152,212,24,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(104,192,17,1)), color-stop(100%,rgba(152,212,24,1)));
+    background: -webkit-linear-gradient(top,  rgba(104,192,17,1) 0%,rgba(152,212,24,1) 100%);
+    background: -o-linear-gradient(top,  rgba(104,192,17,1) 0%,rgba(152,212,24,1) 100%);
+    background: -ms-linear-gradient(top,  rgba(104,192,17,1) 0%,rgba(152,212,24,1) 100%);
+    background: linear-gradient(to bottom,  rgba(104,192,17,1) 0%,rgba(152,212,24,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#68c011', endColorstr='#98d418',GradientType=0 );
+}
+
+div.greenbut.addbut {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 119px;
+    padding: 0;
+}
+
+div.filterlst {
+    position: absolute;
+    top: 26px;
+    left: 0;
+    right; 0;
+    bottom: 0;
+    overflow-y: scroll;
+    border: 1px solid #c0c0c0;
+    width: 100%;
+    background-color: #FFFFFF;
+}
+div.filterlst div.itm {
+    background-color: #FFFFFF;
+    color: #000000;
+    cursor: pointer;
+    height: 39px;
+    line-height: 39px;
+    overflow: hidden;
+    padding-left: 14px;
+    padding-right: 14px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+div.filterlst div.itm.selected {
+    background-color: #2674cc;
+    color: #FFFFFF;
+}
+
+div.removeln {
+    margin-top: 6px;
+    margin-bottom: 8px;
+    margin-right: 18px;
+    text-align: right;
+}
+div.removebut, div.removebut:active.disabled {
+    position: relative;
+    display: inline-block;
+    width: 149px;
+    height: 34px;
+    line-height: 34px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #FFFFFF;
+    font-size: 18px;
+    text-align: center;
+    border: 1px solid #3e3e3e;
+    border-radius: 3px;
+    background: rgb(178,178,178);
+    background: -moz-linear-gradient(top,  rgba(178,178,178,1) 0%, rgba(141,141,141,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(178,178,178,1)), color-stop(100%,rgba(141,141,141,1)));
+    background: -webkit-linear-gradient(top,  rgba(178,178,178,1) 0%,rgba(141,141,141,1) 100%);
+    background: -o-linear-gradient(top,  rgba(178,178,178,1) 0%,rgba(141,141,141,1) 100%);
+    background: -ms-linear-gradient(top,  rgba(178,178,178,1) 0%,rgba(141,141,141,1) 100%);
+    background: linear-gradient(to bottom,  rgba(178,178,178,1) 0%,rgba(141,141,141,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b2b2b2', endColorstr='#8d8d8d',GradientType=0 );
+}
+div.removebut:active {
+    background: rgb(141,141,141);
+    background: -moz-linear-gradient(top,  rgba(141,141,141,1) 0%, rgba(178,178,178,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(141,141,141,1)), color-stop(100%,rgba(178,178,178,1)));
+    background: -webkit-linear-gradient(top,  rgba(141,141,141,1) 0%,rgba(178,178,178,1) 100%);
+    background: -o-linear-gradient(top,  rgba(141,141,141,1) 0%,rgba(178,178,178,1) 100%);
+    background: -ms-linear-gradient(top,  rgba(141,141,141,1) 0%,rgba(178,178,178,1) 100%);
+    background: linear-gradient(to bottom,  rgba(141,141,141,1) 0%,rgba(178,178,178,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8d8d8d', endColorstr='#b2b2b2',GradientType=0 );
+}
+div.removebut.disabled, div.removebut:active.disabled {
+    cursor: default;
+    opacity: 0.3;
+}
+
+div.sec.upg {
+    text-align: center;
+    padding-bottom: 0;
+}
+
+#settings_browser iframe {
+    border: none;
+    width: 100%;
+    height: 1500px;
+    overflow: hidden;
+}
+
+div.dlgbg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0.6);
+    z-index: 99;
+}
+div.dlg {
+    position: absolute;
+    width: 500px;
+    top: 50%;
+    left: 50%;
+    margin-left: -250px;
+    padding: 30px;
+    background: white;
+    border: 1px solid gray;
+    box-shadow: 1px 1px 6px #808080;
+}
+div.dlg div.txt {
+}
+div.dlg div.addr {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 20px;
+    text-align: center;
+}
+div.dlg div.dlgbuts {
+    text-align: center;
+    margin-top: 20px;
+}
+div.dlg div.dlgbuts div.greenbut {
+    height: 30px;
+    line-height: 30px;
+}

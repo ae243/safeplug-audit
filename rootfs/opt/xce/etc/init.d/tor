@@ -1,0 +1,42 @@
+#!/bin/sh
+
+killandwait() {
+    local thepid=`pidof $1`
+    thepid=`echo $thepid | sed -e "s/ *$$ *//"`
+    if [ "x$thepid" != "x" ]; then
+        kill $thepid
+        if [ -d /proc/$thepid ]; then
+            retries=$2
+            while usleep 250000 && [ -d /proc/$thepid ] && [ $retries -gt 0 ]; do
+                kill $thepid
+                let retries--
+            done
+            if [ -d /proc/$thepid ]; then
+                kill -9 $thepid
+            fi
+        fi
+    fi
+}
+
+case "$1" in
+    start)
+        config=""
+        if [ -f /opt/xce/etc/sp.conf ]; then
+            . /opt/xce/etc/sp.conf
+            if [ "x$sp_exitrelay" = "x1" ]; then
+                config=".exitrelay"
+            fi
+            if [ "x$sp_relay" = "x1" ]; then
+                config=".relay"
+            fi
+        fi
+
+        mkdir -p /var/run
+        mkdir -p /var/log/tor
+        chown tor:tor /var/log/tor
+        /opt/xce/bin/tor -f /opt/xce/etc/tor/torrc$config >& /var/log/tor/tor_startup.log < /dev/null
+        ;;
+    stop)
+        killandwait tor 4
+        ;;
+esac

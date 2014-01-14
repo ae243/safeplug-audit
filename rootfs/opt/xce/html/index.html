@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Safeplug Settings</title>
+    <link rel="stylesheet" type="text/css" href="safeplug.css"/>
+  </head>
+  <body onload="SFPG.init()">
+    <div id="sfpg_loading" class="hidden"></div>
+    <div class="headstrip">
+      <div class="logo"></div>
+      <div class="ttl">Safeplug Settings</div>
+    </div>
+    
+    <div class="page">
+      <div class="toptxt">
+        Safeplug uses the Tor network to secure your Internet connection. Tor works by routing your Internet traffic through a series of random destinations, much like driving a twisty, complicated route to throw off someone who is following you, making it impossible for websites and organizations to identify the source or destination of Internet traffic.
+      </div>
+      <div class="tabline">
+        <div id="tab_browser" class="tab selected" onclick="SFPG.clickTab('browser')">Browser Settings</div><div id="tab_plug" class="tab" onclick="SFPG.clickTab('plug')">Safeplug Settings</div>
+      </div>
+      <div id="settings_plug" class="contentarea hidden">
+        
+        <div class="sec">
+          <div class="ttl">Safe Browsing</div>
+          <div class="txt">Enable this feature to protect your family from others knowing your identity and location. Safe Browsing stops people from knowing your IP address which can be used to track you, right down to your exact street address, and exposes other information about how you connect to the Internet.</div>
+          <div id="switch_tor" class="switch" onclick="SFPG.toggleTor()">
+            <div class="nib"></div>
+            <div class="lbl off">OFF</div>
+            <div class="lbl on">ON</div>
+          </div>
+        </div>
+
+        <div class="subsec">
+          
+          <div class="filtersec">
+            <div class="left">
+              <div class="subttl">Website Filter</div>
+              <div class="subtxt">Exclude these sites from using Safeplug and use your real IP address.</div>
+              <div class="addln">
+                <input id="filterinp" onkeydown="SFPG.onFilterDomainKey(event)"/>
+                <div class="greenbut addbut" onclick="SFPG.addFilterDomain()">Add</div>
+              </div>
+            </div>
+            <div class="right">
+              <div class="subttl">Filtered Sites</div>
+              <div id="filterlst" class="filterlst"></div>
+            </div>
+          </div>
+          
+          <div class="removeln">
+            <div id="removebut" class="removebut disabled">Remove</div>
+          </div>
+          
+        </div>
+        
+        <div class="sep"></div>
+
+        <div class="sec">
+          <div class="ttl">Ad Blocking</div>
+          <div class="txt">Enable Ad Blocking to automatically remove ads from sites that you visit on your computer and mobile devices.</div>
+          <div id="switch_adblock" class="switch" onclick="SFPG.toggleAdblock()">
+            <div class="nib"></div>
+            <div class="lbl off">OFF</div>
+            <div class="lbl on">ON</div>
+          </div>
+        </div>
+        
+        <div class="sep"></div>
+
+        <div class="sec">
+          <div class="ttl">Tor Relay</div>
+          <div class="txt">
+            Make the Tor network stronger for everybody! Enabling Tor Relay allows your Safeplug to act as a relay point on the Tor network. The more Tor relays that join the Tor network, the faster and more robust Tor becomes, helping everybody be more secure online.
+            <br/>
+            <br/><b>NOTE:</b> You must forward inbound traffic on <b>port 9001</b> to <b><span id="portip"></span></b>.
+            <br/>For help configuring your router, <a href="http://portforward.com/">click here</a>.
+          </div>
+          <div id="switch_relay" class="switch" onclick="SFPG.toggleTorRelay()">
+            <div class="nib"></div>
+            <div class="lbl off">OFF</div>
+            <div class="lbl on">ON</div>
+          </div>
+        </div>
+        
+        <div id="relay_subopts" class="subsec hidden">
+
+          <div class="sec">
+            <div class="ttl">Allow Exits</div>
+            <div class="txt">Enable this feature if you want to allow users to access Internet resources from your relay. Tor will automatically block some outgoing mail and file sharing applications to reduce spam and other abuse.</div>
+            <div id="switch_exits" class="switch" onclick="SFPG.toggleExits()">
+              <div class="nib"></div>
+              <div class="lbl off">OFF</div>
+              <div class="lbl on">ON</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="sec upg">
+          <div class="greenbut upgbut" onclick="SFPG.checkForUpdate()">Check for Update</div>
+          <br/><small>Current Version: <span id="sfpgver"></span></small>
+        </div>
+
+      </div>
+
+      
+      <div id="settings_browser" class="contentarea">
+        <iframe src="browser.html" frameBorder="0" allowTransparency="true"></iframe>
+      </div>
+    </div>
+    
+    <div id="bookmarkprompt" class="dlgbg hidden">
+      <div id="bookmarkprompt_dlg" class="dlg">
+        <div class="txt">To make future changes to your Safeplug's settings, you will need to save the address of this page. The address of your Safeplug's settings page is:</div>
+        <div id="addr" class="addr"></div>
+        <div class="txt">To ensure your anonymity and security, you will be unable to return to this page without this unique address. Please save it!</div>
+        <div class="dlgbuts">
+          <div class="greenbut" onclick="SFPG.createBookmark()">Create a bookmark</div>
+          <div class="greenbut" onclick="SFPG.closeBookPrompt()">Close</div>
+        </div>
+      </div>
+    </div>
+    
+    <script type="text/javascript" src="safeplug.js"></script>
+  </body>
+</html>
