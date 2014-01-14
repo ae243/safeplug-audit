@@ -115,6 +115,10 @@ Next, we wanted to see how usable this would be to a normal Internet user.  A us
 
 {\bf Cookies.}  While browsing the Internet, we logged into a Google Account in a tab, and then subsequently went to a website that had the Google+ logo in a different tab.  When we clicked on the Google+ logo, it remember who we are; so we can confirm that we still have first-party cookies.  We experienced the same situation with Facebook and its corresponding ``like'' button.
 
+This is clearly not the perfect ``anonymity'' that Safeplug promised in their publicity.  Although normal use does follow this model of persisting logins across browser tabs and sessions, a user concerned about anonymity and seeing each session coming up differently (German vs Swedish) might mistakenly believe that they do not have to log out of their social media accounts to preserve their anonymity when accessing other websites.
+
+More interesting and damaging to the user's control over their anonymity would be third-party cookies because the user cannot remove those just by logging out.  It requires a trip to the browser settings to clear cookies (or not have them set in the first place).  We used the FourthParty plugin developed by Jonathan Mayer at Stanford to collect information about cookies and other browsing data during the client's use of the Safeplug \cite{fourthparty}, and future work will include an analysis of this data, particularly looking for third-party cookies.
+
 \subsection{Teardown}
 \label{sec:tear}
 We opened up the Safeplug device to look at the internals.  Figure~\ref{fig:top} shows the top of the board and Figure~\ref{fig:bottom} shows the bottom.  We identified an SD card slot, Lan transformer, and Ethernet transceiver on the top of the board.  On the bottom, we found flash memory and the integrated circuit.
