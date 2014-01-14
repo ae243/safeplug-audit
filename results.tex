@@ -6,6 +6,7 @@
 Before setting up and using the Safeplug device, we read a variety of news articles as well as opinions through the Tor mailing list~\cite{tormailinglist}.  There were many thoughts on the Terms of Service and the option to use the device as a Tor relay node; this inspired us to start our analysis with these items.  
 
 \subsubsection{Terms of Service}
+\label{tos}
 Safeplug's Terms of Service are interesting because they are controlling, yet the product they are for is a device for anonymization.  The first section of the Terms of Service explains how to agree to them:
 
 \begin{quotation}
@@ -24,7 +25,7 @@ Most Safeplug users will likely not read the Terms of Service once, let alone on
 ``Pogoplug includes several open source components in the Software. You agree to abide by the terms of the relevant licenses, as may be updated by Pogoplug from time to time at http://pogoplug.com/home-en-developers-open-source.html. '' \cite{safeplug}
 \end{quotation}
 
-The link included is a dead link and takes the user to a web page with a 404 error.  This may indicate that there are other errors related to Safeplug (potential security vulnerabilities).  The last section of the Terms of Service that stood out described Pogoplug's policy on updates:
+The link included is a dead link and takes the user to a web page with a 404 error.  This lack of attention to detail or respect for open source licenses does not put Pogoplug in a good light.  In fact, the Tor mailing list noted this particularly, since Tor is an open source project \cite{tormailinglist}.  The last section of the Terms of Service that stood out described Pogoplug's policy on updates:
 
 \begin{quotation}
 ``As part of the Service, you may from time to time receive updates to the Software from Pogoplug that may be automatically downloaded and installed to your applicable device. These updates may include bug fixes, security enhancements or improvements, or entirely new versions of the Software. You agree that Pogoplug may automatically deliver such updates to you as part of the Service. '' \cite{safeplug}
@@ -56,7 +57,7 @@ One of our concerns is how understandable this setting is to the average Interne
 This could easily be remedied; Safeplug should choose a target audience and have consistent descriptions.  The best option is to explain the Tor network and the functionality of a Tor relay node at the same level, preferably a level that normal Internet users can understand.  This increases the chances that users will run their Safeplug as a relay node.
 
 \subsubsection{Internet Use}
-
+\label{inetuse}
 {\bf Setting up Safeplug.} The first step was to plug Safeplug into our router and activate our device.  Our instructions are shown in Figure~\ref{fig:instructions}.  We followed them, activated our device, and then ended on the configuration page.  The configuration page has a combination of platforms and browsers, with a different set of proxy configuration instructions for each one.  It is interesting to note that the only platform options were: OSX, Windows, Android, and iOS.  Figure~\ref{fig:proxyconfig} shows our configuration. 
 
 \begin{figure}[htb]

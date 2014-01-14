@@ -1,4 +1,5 @@
 *.tex*
 *.aux
+report.out
 report.log
 report.pdf
