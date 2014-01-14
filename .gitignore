@@ -1,0 +1,4 @@
+*.tex*
+*.aux
+report.log
+report.pdf

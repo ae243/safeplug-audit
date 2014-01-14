@@ -1,0 +1,2 @@
+2014-01-10 00:43:02: (log.c.166) server started 
+2014-01-10 00:54:32: (mod_cgi.c.1145) write() failed due to:  Broken pipe 
