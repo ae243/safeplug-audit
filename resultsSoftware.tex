@@ -46,7 +46,7 @@ After the activation and the configuration of the Safeplug as a proxy, all traff
 \subsection{Gaining Access through SSH}
 \label{sec:SSH}
     \subsubsection{Accessing the Device}
-    Safeplug runs an RPC server that allows the enabling of SSH access via HTTP. SSH instructions for Cloud Engine's other device (Pogoplug) are widely available online and an email in the Tor-talk mailing list confirms that the instructions are the same \cite{ceadmin}:
+    Safeplug runs an RPC server that allows the enabling of SSH access via HTTP. SSH instructions for Cloud Engine's other device (Pogoplug) are widely available online and an email in the Tor-talk mailing list confirms that the instructions are the same (although the Pogoplug support staff note that SSH access breaks the warranty!) \cite{ceadmin}:
 \begin{fileName}
 curl --data ``'' http://<IP-of-Safeplug>/svc/xspctrl/enableSSHD
 ssh root@<IP-of-Safeplug>
@@ -60,12 +60,24 @@ Obviously having a publically available root password means that SSH can be done
 As would be suspected from the analysis of the update script described above in Section \ref{updatetraf}, the installed software is in \verb!/opt/xce! and includes lighttpd, privoxy, and tor.  Lighttpd is an open-source webserver, which is serving the settings page on the device - the project's description mentions ``security, speed, compliance, and flexibility [... while being] designed and optimized for high perfomance environments'' \cite{lighttpd}.  Privoxy is a ``non-caching web proxy with advanced filtering capabilities for enhancing privacy, modifying webpage data and HTTP headers, controlling access, and removnig ads and other obnoxious Internet junk'' and it specifically advertises its ``flexible configuration'' \cite{privoxy}.  Privoxy is also open source.  All three pieces of software appear to be there with default configuration files (with all appropriate citations and comments present).  The Safeplug uses its own configuration files to determine how these pieces of software are set up and used.
     
     \subsubsection{Configuration on the Safeplug}
-\label{spconfig}
+    \label{spconfig}
+The Safeplug configuration files can be found in \verb!/opt/xce/etc! and include \verb!sp.conf! and \verb!sp_version! and \verb!sp_torexceptions!.  The first contains all of the important details from the configuration page (whether to use Tor, whether to be a relay, whether to adblock) as well as a hidden option about whether to be an exitrelay for the Tor network.  This is not documented anywhere on the site, so enabling this option would likely require SSH access to discover it, thereby breaking the warranty, but it is interesting that this option is available.  The version file is likely used for updates, and the exceptions file is used by the privoxy configuation to control the whitelist of sites not to connect to via Tor.
 
-\subsection{Attacking the RPC Server}
+These configuration files are read by the scripts in \verb!/opt/xce/etc/init.d! which enable lighttpd, privoxy, and tor.  As expected, Privoxy looks at the Tor, adblock and exceptions configurations, and Tor reads the \verb!sp.conf! file to set which Tor configuration file (regular, relay or exitrelay) to use.
+
+\subsection{Attacking the RPC Capability}
+As we discovered while enabling SSH, the Safeplug has a remote procedure call (RPC) capability.  This is a script called \verb!xspctrl! found in \verb!/opt/xce/html/svc! and it contains more options than just SSH enabling.  Particularly, functional calls to this script include enable and disable for all of the Safeplug settings, including Tor, ad block, and Tor relay.  None of them require any arguments in the POST string.
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[width=.75\textwidth]{disabletor}
+\caption{Disabling Tor as an insider attack.}
+\label{disable}
+\end{center}
+\end{figure}
 
 \subsubsection{Insider Attack}
-Since the RPC server does not perform any kind of validation or authentication on the settings strings, it would be easy for anyone inside the local network to send a command and change the settings, for example to disable Tor or adblocking.  All the attacker would need to know is the IP of the device.  It does not even require SSH or discovering the (publically available) root password, or the user's new root password if they have been well-informed and adept enough to change it.  
+Since the RPC server does not perform any kind of validation or authentication on the settings strings, it would be easy for anyone inside the local network to send a command and change the settings, for example to disable Tor or adblocking.  All the attacker would need to know is the IP of the device.  It does not even require SSH or discovering the (publically available) root password, or the user's new root password if they have been well-informed and adept enough to change it.  Figure \ref{disable} shows an example of this attack.
 
 This attacker could also be any kind of device on the local network, or the local gateway if it is compromised.  The NSA ``Spymall'' catalog leaked in December shows tools for compromising a number of different devices and home routers are traditionally insecure \cite{spymall}.  It is easy to imagine any malicious party, not just one with the resources of a government, (although governments might be some of the most interested parties in attacking a Tor proxy) compromising the gateway and using that access make a disabling RPC call into the Safeplug.  This would occur silently from the perspective of a client unless the happen to check the Settings page for the Safeplug.  Instead, the client would continue browsing with a belief that they are protected by their use of the Tor network, while in fact any external adversary can track their traffic.
 
@@ -73,5 +85,5 @@ This seems like a fairly important vulnerability and requires action from Pogopl
 
 
 \subsubsection{Website Attack}
-We think it is also possible that an external website could perform this attack by returning the correctly formatted POST string.  
+We think it is also possible that an external website could perform this attack by returning the correctly formatted POST string.  Setting this up is future work.
 
