@@ -1,0 +1,444 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style type="text/css" media="screen">
+/* reset */body{font:14px/1.5 Helvetica,Sans-serif}a:focus{outline:1px dotted}hr{border:0 #ccc solid;border-top-width:1px;clear:both;height:0}h1{font-size:25px}h2{font-size:23px}h3{font-size:21px}h4{font-size:19px}h5{font-size:17px}h6{font-size:15px}ol{list-style:decimal}ul{list-style:disc}li{margin-left:30px}p,dl,hr,h1,h2,h3,h4,h5,h6,ol,ul,pre,table,address,fieldset{margin-bottom:9px}
+/* Font reset */ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outline:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0;}
+body {background:#ffffff; color:#333333;}
+.hidden {
+    width: 0px;
+    height: 0px;
+    display: none !important;
+    visibility: hidden;
+    overflow: hidden;
+}
+#sp_container {margin:0px auto;width:990px;padding:30px 0;}
+#sp_title {font-size:24px;margin:0 0 10px;}
+.sp_step_title {font-size:22px;margin:0 0 15px;color:#333;}
+input {width:60%;height:42px;margin:0 0 30px 0px;padding-left:1%;-webkit-border-radius:3px;border-radius:3px;border:1px solid #dedede;float:left;font-size:20px;color:#777;}
+#sp_copy_btn {font:22px Helvetica,Sans-serif;border:1px solid #5d9c03;padding:8px 24px 9px;-webkit-border-radius:3px;border-radius:3px;float:left;margin:0 0 0 10px;color:#fff;display:block;cursor:pointer;}
+.sp_btn_color {background: #96d315; background: -moz-linear-gradient(top, #96d315 0%, #67bf0f 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#96d315), color-stop(100%,#67bf0f)); background: -webkit-linear-gradient(top, #96d315 0%,#67bf0f 100%); background: -o-linear-gradient(top, #96d315 0%,#67bf0f 100%); background: -ms-linear-gradient(top, #96d315 0%,#67bf0f 100%); background: linear-gradient(to bottom, #96d315 0%,#67bf0f 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#96d315', endColorstr='#67bf0f',GradientType=0 );-webkit-box-shadow: inset 0px 0px 0px 1px #b6e06c;box-shadow: inset 0px 0px 0px 1px #b6e06c;text-shadow: 1px 1px 0px #477506;}
+.clear{clear:both;display:block;overflow:hidden;visibility:hidden;width:0;height:0}
+.sp_step_cont {padding:30px 0px;border-top:1px solid #dedede;}
+.sp_select_title {font-size:18px;color:#021d6a;font-weight:bold;float:left;padding:15px 22px}
+ul, li {float:left;font-size:18px;}
+ul {margin-bottom:20px;}
+li {padding:15px 22px;margin-right:6px;cursor:pointer;color:#666;}
+li.selected {background: #96d315; background: -moz-linear-gradient(top, #96d315 0%, #67bf0f 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#96d315), color-stop(100%,#67bf0f)); background: -webkit-linear-gradient(top, #96d315 0%,#67bf0f 100%); background: -o-linear-gradient(top, #96d315 0%,#67bf0f 100%); background: -ms-linear-gradient(top, #96d315 0%,#67bf0f 100%); background: linear-gradient(to bottom, #96d315 0%,#67bf0f 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#96d315', endColorstr='#67bf0f',GradientType=0 );-webkit-box-shadow: inset 0px 0px 0px 1px #b6e06c;box-shadow: inset 0px 0px 0px 1px #b6e06c;color:#fff;font-weight:bold;border:1px solid #5d9c03;-webkit-border-radius:3px;border-radius:3px;text-shadow: 1px 1px 0px #477506;}
+.sp_step_caption {font-size:18px;line-height:26px;}
+.sp_setup_item {padding:20px 0px 235px;border-bottom:1px solid #cecece;}
+.sp_step_cont {padding-left:10px;}
+.setup_step {width:312px;height:186px;border:1px solid #fefefe;float:left;margin-right:10px;margin-top:10px;border-radius:5px;}
+.sp_setup_item strong {color:#105a91;}
+.sp_setup_item strong.sp_li {color:#000;}
+.sp_step_instructions {color:#666;font-size:15px;line-height:22px;padding-left:0px;padding-right:150px;padding-bottom:20px;}
+.sp_step_des {color:#666;font-size:15px;line-height:22px;padding-left:0px;padding-right:40px;padding-bottom:0px;}
+/*						Win IE					*/
+#sp_win_ie .sp_step1 {background:url(images/winie_setup_step1.png) no-repeat top center;}
+#sp_win_ie .sp_step2 {background:url(images/winie_setup_step2.png) no-repeat top center;}
+#sp_win_ie .sp_step3 {background:url(images/winie_setup_step3.png) no-repeat top center;}
+#sp_win_ie .sp_step4 {background:url(images/winie_setup_step4.png) no-repeat top center;}
+#sp_win_ie .sp_step5 {background:url(images/winie_setup_step5.png) no-repeat top center;}
+#sp_win_ie .sp_step6 {background:url(images/winie_setup_step6.png) no-repeat top center;}
+#sp_win_ie .sp_step7 {background:url(images/winchrome_setup_step8.png) no-repeat top center;}
+#sp_win_ie .sp_step8 {background:url(images/winchrome_setup_step9.png) no-repeat top center;}
+/*						Win Firefox					*/
+#sp_win_firefox .sp_step1 {background:url(images/winff_setup_step1.png) no-repeat top center;}
+#sp_win_firefox .sp_step2 {background:url(images/winff_setup_step2.png) no-repeat top center;}
+#sp_win_firefox .sp_step3 {background:url(images/winff_setup_step3.png) no-repeat top center;}
+#sp_win_firefox .sp_step4 {background:url(images/winff_setup_step4.png) no-repeat top center;}
+#sp_win_firefox .sp_step5 {background:url(images/winff_setup_step5.png) no-repeat top center;}
+#sp_win_firefox .sp_step6 {background:url(images/winff_setup_step6.png) no-repeat top center;}
+#sp_win_firefox .sp_step7 {background:url(images/winff_setup_step7.png) no-repeat top center;}
+#sp_win_firefox .sp_step8 {background:url(images/winff_setup_step8.png) no-repeat top center;}
+#sp_win_firefox .sp_step9 {background:url(images/winff_setup_step9.png) no-repeat top center;}
+/*						Win Chrome					*/
+#sp_win_chrome .sp_step1 {background:url(images/winchrome_setup_step1.png) no-repeat top center;}
+#sp_win_chrome .sp_step2 {background:url(images/winchrome_setup_step2.png) no-repeat top center;}
+#sp_win_chrome .sp_step3 {background:url(images/winchrome_setup_step3.png) no-repeat top center;}
+#sp_win_chrome .sp_step4 {background:url(images/winchrome_setup_step4.png) no-repeat top center;}
+#sp_win_chrome .sp_step5 {background:url(images/winchrome_setup_step5.png) no-repeat top center;}
+#sp_win_chrome .sp_step6 {background:url(images/winchrome_setup_step6.png) no-repeat top center;}
+#sp_win_chrome .sp_step7 {background:url(images/winchrome_setup_step7.png) no-repeat top center;}
+#sp_win_chrome .sp_step8 {background:url(images/winchrome_setup_step8.png) no-repeat top center;}
+#sp_win_chrome .sp_step9 {background:url(images/winchrome_setup_step9.png) no-repeat top center;}
+/*						Mac Chrome					*/
+#sp_osx_chrome .sp_step1 {background:url(images/macchrome_setup_step1.png) no-repeat top center;}
+#sp_osx_chrome .sp_step2 {background:url(images/macchrome_setup_step2.png) no-repeat top center;}
+#sp_osx_chrome .sp_step3 {background:url(images/macchrome_setup_step3.png) no-repeat top center;}
+#sp_osx_chrome .sp_step4 {background:url(images/macchrome_setup_step4.png) no-repeat top center;}
+#sp_osx_chrome .sp_step5 {background:url(images/macchrome_setup_step5.png) no-repeat top center;}
+#sp_osx_chrome .sp_step6 {background:url(images/macchrome_setup_step6.png) no-repeat top center;}
+#sp_osx_chrome .sp_step7 {background:url(images/setup_step7.png) no-repeat top center;}
+#sp_osx_chrome .sp_step8 {background:url(images/setup_step8.png) no-repeat top center;}
+/*						Mac Firefox					*/
+#sp_osx_firefox .sp_step1 {background:url(images/macff_setup_step1.png) no-repeat top center;}
+#sp_osx_firefox .sp_step2 {background:url(images/macff_setup_step2.png) no-repeat top center;}
+#sp_osx_firefox .sp_step3 {background:url(images/macff_setup_step3.png) no-repeat top center;}
+#sp_osx_firefox .sp_step4 {background:url(images/macff_setup_step4.png) no-repeat top center;}
+#sp_osx_firefox .sp_step5 {background:url(images/macff_setup_step5.png) no-repeat top center;}
+#sp_osx_firefox .sp_step6 {background:url(images/macff_setup_step6.png) no-repeat top center;}
+#sp_osx_firefox .sp_step7 {background:url(images/macff_setup_step7.png) no-repeat top center;}
+#sp_osx_firefox .sp_step8 {background:url(images/macff_setup_step8.png) no-repeat top center;}
+#sp_osx_firefox .sp_step9 {background:url(images/macff_setup_step9.png) no-repeat top center;}
+/*						Mac Safari					*/
+#sp_osx_safari .sp_step1 {background:url(images/macsf_setup_step1.png) no-repeat top center;}
+#sp_osx_safari .sp_step2 {background:url(images/macsf_setup_step2.png) no-repeat top center;}
+#sp_osx_safari .sp_step3 {background:url(images/macsf_setup_step3.png) no-repeat top center;}
+#sp_osx_safari .sp_step4 {background:url(images/macsf_setup_step4.png) no-repeat top center;}
+#sp_osx_safari .sp_step5 {background:url(images/macsf_setup_step5.png) no-repeat top center;}
+#sp_osx_safari .sp_step6 {background:url(images/macsf_setup_step6.png) no-repeat top center;}
+#sp_osx_safari .sp_step7 {background:url(images/macsf_setup_step7.png) no-repeat top center;}
+#sp_osx_safari .sp_step8 {background:url(images/macsf_setup_step8.png) no-repeat top center;}
+#sp_osx_safari .sp_step9 {background:url(images/macsf_setup_step9.png) no-repeat top center;}
+/*						IOS						*/
+#sp_ios_browser .sp_step1 {background:url(images/ios_setup_step1.png) no-repeat top center;}
+#sp_ios_browser .sp_step2 {background:url(images/ios_setup_step2.png) no-repeat top center;}
+#sp_ios_browser .sp_step3 {background:url(images/ios_setup_step3.png) no-repeat top center;}
+#sp_ios_browser .sp_step4 {background:url(images/ios_setup_step4.png) no-repeat top center;}
+#sp_ios_browser .sp_step5 {background:url(images/ios_setup_step5.png) no-repeat top center;}
+#sp_ios_browser .sp_step6 {background:url(images/ios_setup_step6.png) no-repeat top center;}
+#sp_ios_browser .sp_step7 {background:url(images/ios_setup_step7.png) no-repeat top center;}
+#sp_ios_browser .sp_step8 {background:url(images/ios_setup_step8.png) no-repeat top center;}
+#sp_ios_browser .sp_step9 {background:url(images/ios_setup_step9.png) no-repeat top center;}
+/*						Android						*/
+#sp_and_browser .sp_step1 {background:url(images/and_setup_step1.png) no-repeat top center;}
+#sp_and_browser .sp_step2 {background:url(images/and_setup_step2.png) no-repeat top center;}
+#sp_and_browser .sp_step3 {background:url(images/and_setup_step3.png) no-repeat top center;}
+#sp_and_browser .sp_step4 {background:url(images/and_setup_step4.png) no-repeat top center;}
+#sp_and_browser .sp_step5 {background:url(images/and_setup_step5.png) no-repeat top center;}
+#sp_and_browser .sp_step6 {background:url(images/and_setup_step6.png) no-repeat top center;}
+#sp_and_browser .sp_step7 {background:url(images/and_setup_step7.png) no-repeat top center;}
+#sp_and_browser .sp_step8 {background:url(images/and_setup_step8.png) no-repeat top center;}
+#sp_and_browser .sp_step9 {background:url(images/and_setup_step9.png) no-repeat top center;}
+/*						End						*/
+.sp_feat {padding:30px 0px;}
+.sp_switch {padding:15px 0px 45px;}
+.sp_on {float:right;}
+.sp_off {float:left;}
+.sp_feat td {vertical-align:middle;}
+.sp_switch {font-size:25px;cursor:pointer;}
+.sp_switch.on {background:url(images/sp_switch_on.png) center center no-repeat;}
+.sp_switch.off {background:url(images/sp_switch_off.png) center center no-repeat;}
+.sp_switch.off .sp_off {color:#777}
+.sp_switch.on .sp_on {font-weight:bold;color:#000;}
+.sp_feat_options {padding:40px;margin-top:20px;background:#fcfcfc;border:1px solid #dedede;max-width:1200px;min-width:400px;}
+.sp_feat_options strong {margin-bottom:10px;display:block;}
+#sp_filter {width:100%;height:100px;margin:0 0 20px 0;display:block;}
+.sp_50 {width:50%;float:left;}
+.sp_feat_options td {vertical-align:top;}
+.sp_btn_color_grey {background: #7d7e7d; background: -moz-linear-gradient(top, #7d7e7d 0%, #333333 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#7d7e7d), color-stop(100%,#333333)); background: -webkit-linear-gradient(top, #7d7e7d 0%,#333333 100%); background: -o-linear-gradient(top, #7d7e7d 0%,#333333 100%); background: -ms-linear-gradient(top, #7d7e7d 0%,#333333 100%); background: linear-gradient(to bottom, #7d7e7d 0%,#333333 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', endColorstr='#333333',GradientType=0 );-webkit-box-shadow: inset 0px 0px 0px 1px #dedede;box-shadow: inset 0px 0px 0px 1px #333;text-shadow: 1px 1px 0px #333;float:right;}
+#sp_remove_btn {font:16px Helvetica,Sans-serif;border:1px solid #fefefe;padding:8px 24px 8px;-webkit-border-radius:4px;border-radius:4px;float:right;margin:0px;color:#fff;display:block;cursor:pointer;}
+select option {font:16px/1.5 Helvetica,Sans-serif;padding:1px 0;}
+#sp_add_input {font-size:12px;min-width:300px;max-width:500px;line-height:42px;height:42px;}
+#sp_tor_hr {height:10px;width:100%;border-top:1px solid #dedede;margin:15px 0 10px;}
+#sp_browser_settings {background:#fff;}
+#sp_header_cont {padding:17px 34px;background:url(images/sp_header_bkr.png);color:#fff;}
+#sp_logo_ {width:241px;height:57px;background:url(images/sp_logo.png) center left no-repeat;float:left;}
+#sp_menu_side {float:right;vertical-align:center;font-size:22px;padding:16px 0;}
+.sp_tab {display:inline-block;padding:12px 130px;font-size:17px;}
+.sp_tab.on {background:#fff;color:#333;font-weight:bold;}
+.sp_tab.off {background:#999;color:#fff;font-weight:bold;}
+</style>
+</head>
+<body>
+<div>
+	<div>
+		<div id="sp_browser_settings" class="">
+			<div id="sp_container">
+				<div id="sp_title">Set up your Safeplug</div>
+				<div id="sp_step1" class="sp_step_cont">
+					<div class="sp_step_title">Copy the URL below</div>
+					<div class="sp_step_instructions">You will need to paste this URL into the settings pane of your browser per the instructions below.</div>
+					<input id="wpadinp" type="text" name="" value="" readonly>
+					<div class="clear"></div>
+				</div>
+				<div id="sp_step2" class="sp_step_cont">
+					<div class="sp_step_title">2. Select Platform and Browser</div>
+					<div class="sp_step_instructions">Choose your operating system and browser. Follow these instructions to configure your browser to work with Safeplug.</div>
+					<div class="sp_select">
+						<div class="sp_select_title">Choose Operating System:</div>
+						<ul>
+							<li id="sp_os_win" class="selected" onclick="return selectPlatform('win');">Windows</li>
+							<li id="sp_os_osx" onclick="return selectPlatform('osx')">OSX</li>
+							<li id="sp_os_ios" onclick="return selectPlatform('ios')">iOS</li>
+							<li id="sp_os_and" onclick="return selectPlatform('and')">Android</li>
+						</ul>
+						<div class="clear"></div>
+					</div>
+					<div class="sp_select">
+						<div class="sp_select_title">Choose Browser:</div>
+						<ul id="li_win" class="">
+							<li id="win_ie" class="" onclick="return selectBrowser('win_ie')">Internet Explorer</li>
+							<li id="win_chrome" onclick="return selectBrowser('win_chrome')">Chrome</li>
+							<li id="win_firefox" onclick="return selectBrowser('win_firefox')">Firefox</li>
+						</ul>
+						<ul id="li_osx" class="hidden">
+							<li id="osx_safari" class="" onclick="return selectBrowser('osx_safari')">Safari</li>
+							<li id="osx_chrome" onclick="return selectBrowser('osx_chrome')">Chrome</li>
+							<li id="osx_firefox" onclick="return selectBrowser('osx_firefox')">Firefox</li>
+						</ul>
+						<ul id="li_and" class="hidden">
+							<li id="and_browser" onclick="return selectBrowser('and_browser')">Chrome</li>
+						</ul>
+						<ul id="li_ios" class="hidden">
+							<li id="ios_browser" onclick="return selectBrowser('ios_browser')">Safari</li>
+						</ul>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<div id="sp_setup_cont" class="sp_step_cont">
+					<div id="sp_win_ie" class="step_browser_cont hidden">
+						<div class="sp_step_title">3. How to Activate Internet Explorer Browser on Windows</div>
+						<div class="setup_step1 sp_setup_item">
+							<div class="sp_step_caption"><strong class="sp_li">1.</strong> Click <strong>'Settings'</strong> icon, and click <strong>'Internet options'</strong>.</div>
+							<div class="sp_step1 setup_step"></div>
+							<div class="sp_step2 setup_step"></div>
+							<div class="sp_step3 setup_step"></div>
+						</div>
+						<div class="setup_step2 sp_setup_item">
+							<div class="sp_step_caption"><strong class="sp_li">2.</strong> Click <strong>'Connections'</strong> tab and click <strong>'LAN settings'</strong>.</div>
+							<div class="sp_step4 setup_step"></div>
+							<div class="sp_step5 setup_step"></div>
+							<div class="sp_step6 setup_step"></div>
+						</div>
+						<div class="setup_step3 sp_setup_item">
+							<div class="sp_step_caption"><strong class="sp_li">3.</strong> Click <strong>'Use automatic configuration script'</strong> and paste URL into <strong>'Address'</strong> field. Click <strong>'OK'</strong> and you're finished!</div>
+							<div class="sp_step7 setup_step"></div>
+							<div class="sp_step8 setup_step"></div>
+							<div class="sp_step9 setup_step"></div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div id="sp_win_chrome" class="step_browser_cont hidden">
+						<div class="sp_step_title">3. How to Activate Chrome Browser on Windows</div>
+						<div class="setup_step1 sp_setup_item">
+							<div class="sp_step_caption"><strong class="sp_li">1.</strong> Click <strong>'Customize'</strong> tab, and click <strong>'Settings'</strong>.</div>
+							<div class="sp_step1 setup_step"></div>
+							<div class="sp_step2 setup_step"></div>
+							<div class="sp_step3 setup_step"></div>
+						</div>
+						<div class="setup_step2 sp_setup_item">
+							<div class="sp_step_caption"><strong class="sp_li">2.</strong> Scroll down to <strong>'Network'</strong>, click <strong>'Change proxy settings'</strong> and click <strong>'Connections'</strong> tab.</div>
+							<div class="sp_step4 setup_step"></div>
+							<div class="sp_step5 setup_step"></div>
+							<div class="sp_step6 setup_step"></div>
+						</div>
+						<div class="setup_step3 sp_setup_item">
+							<div class="sp_step_caption"><strong class="sp_li">3.</strong> Click <strong>'LAN Settings'</strong>, click <strong>'Use automatic configuration script'</strong> and paste URL into <strong>'Address'</strong> field. Click <strong>'OK'</strong> and you're finished!</div>
+							<div class="sp_step7 setup_step"></div>
+							<div class="sp_step8 setup_step"></div>
+							<div class="sp_step9 setup_step"></div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div id="sp_win_firefox" class="step_browser_cont hidden">
+						<div class="sp_step_title">3. How to Activate Firefox Browser on Windows</div>
+						<div class="setup_step1 sp_setup_item">
+							<div class="sp_step_caption"><strong class="sp_li">1.</strong> Click <strong>'Tools'</strong>, click  <strong>'Options'</strong>, and then click  <strong>'Advanced'</strong> tab.</div>
+							<div class="sp_step1 setup_step"></div>
+							<div class="sp_step2 setup_step"></div>
+							<div class="sp_step3 setup_step"></div>
+						</div>
+						<div class="setup_step2 sp_setup_item">
+							<div class="sp_step_caption"><strong class="sp_li">2.</strong> Click <strong>'Network'</strong> tab, and click <strong>'Settings'</strong> button. Click <strong>'Automatic proxy configuration URL:'</strong> and paste URL into the field. Click <strong>'OK'</strong> and you're finished!</div>
+							<div class="sp_step4 setup_step"></div>
+							<div class="sp_step5 setup_step"></div>
+							<div class="sp_step6 setup_step"></div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div id="sp_osx_safari" class="step_browser_cont hidden">
+						<div class="sp_step_title">3. How to Activate Safari Browser on OSX</div>
+						<div class="setup_step1 sp_setup_item">
+							<div class="sp_step_caption"><strong class="sp_li">1.</strong> Click <strong>'Preferences'</strong>, and click <strong>'Advanced'</strong> tab.</div>
+							<div class="sp_step1 setup_step"></div>
+							<div class="sp_step2 setup_step"></div>
+							<div class="sp_step3 setup_step"></div>
+						</div>
+						<div class="setup_step2 sp_setup_item">
+							<div class="sp_step_caption"><strong class="sp_li">2.</strong> Click <strong>'Change Settings'</strong>, and <strong>'Network'</strong> dialogue will appear. Click <strong>'Proxies'</strong> tab.</div>
+							<div class="sp_step4 setup_step"></div>
+							<div class="sp_step5 setup_step"></div>
+							<div class="sp_step6 setup_step"></div>
+						</div>
+						<div class="setup_step3 sp_setup_item">
+							<div class="sp_step_caption"><strong class="sp_li">3.</strong> Click <strong>'Automatic proxy configuration URL:'</strong> and paste URL into <strong>"URL:"</strong> field. Click <strong>'OK'</strong> and you're finished!</div>
+							<div class="sp_step7 setup_step"></div>
+							<div class="sp_step8 setup_step"></div>
+							<div class="sp_step9 setup_step"></div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div id="sp_osx_firefox" class="step_browser_cont hidden">
+						<div class="sp_step_title">3. How to Activate Firefox Browser on OSX</div>
+						<div class="setup_step1 sp_setup_item">
+							<div class="sp_step_caption"><strong class="sp_li">1.</strong> Click <strong>'Preferences'</strong>, click <strong>'Advanced'</strong> tab.</div>
+							<div class="sp_step1 setup_step"></div>
+							<div class="sp_step2 setup_step"></div>
+							<div class="sp_step3 setup_step"></div>
+						</div>
+						<div class="setup_step2 sp_setup_item">
+							<div class="sp_step_caption"><strong class="sp_li">2.</strong> Click <strong>'Network'</strong>, and click <strong>'Settings'</strong>. Click <strong>'Automatic proxy configuration URL:'</strong> and paste URL into <strong>"URL:"</strong> field. Click <strong>'OK'</strong> and you're finished!</div>
+							<div class="sp_step4 setup_step"></div>
+							<div class="sp_step5 setup_step"></div>
+							<div class="sp_step6 setup_step"></div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div id="sp_osx_chrome" class="step_browser_cont hidden">
+						<div class="sp_step_title">3. How to Activate Chrome Browser on OSX</div>
+						<div class="setup_step1 sp_setup_item">
+							<div class="sp_step_caption"><strong class="sp_li">1.</strong> Click <strong>'Preferences'</strong>, and scroll down to <strong>'Network'</strong>.</div>
+							<div class="sp_step1 setup_step"></div>
+							<div class="sp_step2 setup_step"></div>
+							<div class="sp_step3 setup_step"></div>
+						</div>
+						<div class="setup_step2 sp_setup_item">
+							<div class="sp_step_caption"><strong class="sp_li">2.</strong> Click <strong>'Change proxy settings'</strong> and <strong>'Network'</strong> dialogue will appear. Click <strong>'Proxies'</strong> tab.</div>
+							<div class="sp_step4 setup_step"></div>
+							<div class="sp_step5 setup_step"></div>
+							<div class="sp_step6 setup_step"></div>
+						</div>
+						<div class="setup_step3 sp_setup_item">
+							<div class="sp_step_caption"><strong class="sp_li">3.</strong> Click <strong>'Automatic Proxy Configuration'</strong> and paste URL into <strong>"URL:"</strong> field. Click <strong>'OK'</strong> and you're finished!</div>
+							<div class="sp_step7 setup_step"></div>
+							<div class="sp_step8 setup_step"></div>
+							<div class="sp_step9 setup_step"></div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div id="sp_and_browser" class="step_browser_cont hidden">
+						<div class="sp_step_title">3. How to Activate Chrome Browser on Android</div>
+						<div class="setup_step1 sp_setup_item">
+							<div class="sp_step_caption"><strong class="sp_li">1.</strong> Select <strong>Wi-Fi</strong>, Connect to the desired network, Long press on connected network, context menu will appear.</div>
+							<div class="sp_step1 setup_step"></div>
+							<div class="sp_step2 setup_step"></div>
+							<div class="sp_step3 setup_step"></div>
+						</div>
+						<div class="setup_step2 sp_setup_item">
+							<div class="sp_step_caption"><strong class="sp_li">2.</strong>  Click <strong>'Show advanced options'</strong>, scroll to <strong>'proxy settings'</strong>, select <strong>'Manual'</strong>, set proxy to <strong id="proxy_url"></strong> and port to <strong>8080</strong>.</div>
+							<div class="sp_step4 setup_step"></div>
+							<div class="sp_step5 setup_step"></div>
+							<div class="sp_step6 setup_step"></div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div id="sp_ios_browser" class="step_browser_cont hidden">
+						<div class="sp_step_title">3. How to Activate Safari Browser on iOS</div>
+						<div class="setup_step1 sp_setup_item">
+							<div class="sp_step_caption"><strong class="sp_li">1.</strong> Open <strong>'Settings'</strong>, tap <strong>'Wifi'</strong>, tap <strong>'Info'</strong> icon.</div>
+							<div class="sp_step1 setup_step"></div>
+							<div class="sp_step2 setup_step"></div>
+							<div class="sp_step3 setup_step"></div>
+						</div>
+						<div class="setup_step2 sp_setup_item">
+							<div class="sp_step_caption"><strong class="sp_li">2.</strong> Scroll down to <strong>HTTP Proxy</strong>, tap <strong>'Auto'</strong>, enter URL in <strong>'URL'</strong> field and you're finished!</div>
+							<div class="sp_step4 setup_step"></div>
+							<div class="sp_step5 setup_step"></div>
+							<div class="sp_step6 setup_step"></div>
+						</div>
+						<div class="clear"></div>
+					</div>	
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="safeplug.js"></script>
+<script type="text/javascript" src="browserdetect.js"></script>
+<script type="text/javascript">
+
+	function spTab(sptabid,sp1,sp2){
+		var sptabid_ = SFPG.$(sptabid).className;
+		if (sptabid_ == 'sp_tab on') {
+			SFPG.$(sptabid).className = 'sp_tab off';
+			SFPG.$(sp2).className = 'hidden';
+			SFPG.$(sp1).className = '';
+		} 
+		else {
+			SFPG.$(sptabid).className = 'sp_tab on';
+			SFPG.$(sp1).className = '';
+			SFPG.$(sp2).className = 'hidden';
+		}
+	}
+	
+	function switchTwo(switchID,switchID2){
+		var sp_switchId = SFPG.$(switchID).className;
+		if (sp_switchId == 'sp_switch off') {
+			SFPG.$(switchID).className = 'sp_switch on';
+		} else {
+			SFPG.$(switchID).className = 'sp_switch off';
+		}
+		var sp_sb_class = SFPG.$(switchID2).className;
+		if (sp_sb_class == 'sp_feat_options hidden') {
+			SFPG.$(switchID2).className = 'sp_feat_options';
+		} else {
+			SFPG.$(switchID2).className = 'sp_feat_options hidden';
+		}
+	}
+
+	var os_li = ['win','osx','ios','and']
+	var os_ul = ['li_win','li_osx','li_ios','li_and'];
+	var browser_platform = ['sp_win_ie', 'sp_win_firefox', 'sp_win_chrome', 'sp_osx_chrome', 'sp_osx_firefox', 'sp_osx_safari', 'sp_ios_browser', 'sp_and_browser'];
+	var all_browser = ['win_ie','win_chrome','win_firefox','osx_safari','osx_chrome','osx_firefox','and_browser','ios_browser'];
+
+	function selectPlatform(platform) {
+		// hide all browser lists
+		for(var i=0;i<os_ul.length;i++) {
+			SFPG.$(os_ul[i]).className = 'hidden';
+	  	}
+		// display correct ul to display
+		SFPG.$('li_'+platform).className = '';
+		// hide all browsers instructions
+		for(var i=0;i<browser_platform.length;i++) {
+			SFPG.$(browser_platform[i]).className = 'step_browser_cont hidden';
+	  	}
+		// remove selected os_li
+		for(var i=0;i<os_li.length;i++) {
+	    	SFPG.rCN('sp_os_'+os_li[i], 'selected');
+	  	}
+		// highlight the right os_li
+		SFPG.aCN('sp_os_'+platform, 'selected');
+		SFPG.aCN('sp_os_'+platform, 'selected');
+		
+		// Select first browser for the platform
+		for(var i = 0; i < all_browser.length; ++i) {
+		  if(all_browser[i].indexOf(platform+'_') == 0) {
+		    selectBrowser(all_browser[i]);
+		    break;
+		  }
+		}
+	}
+	function selectBrowser(OsBrowser){	
+		for(var i=0;i<browser_platform.length;i++) {
+			SFPG.$(browser_platform[i]).className = 'step_browser_cont hidden';
+	  	}
+		for(var i=0;i<all_browser.length;i++) {
+			SFPG.$(all_browser[i]).className = '';
+	  	}
+		SFPG.$(OsBrowser).className = 'selected';
+		SFPG.$('sp_'+OsBrowser).className = '';
+	}
+	
+	// Init
+	SFPG.$('proxy_url').innerHTML = window.location.host;
+	SFPG.$('wpadinp').value = 'http://' + window.location.host + '/wpad.dat';
+	SFPG.$('wpadinp').select();
+	SFPG.$('wpadinp').focus();
+	
+	BrowserDetect.init();
+	
+	if(all_browser.indexOf(BrowserDetect.OS+'_'+BrowserDetect.browser) != -1) {
+	  // Detected OS and browser
+	  selectPlatform(BrowserDetect.OS);
+	  selectBrowser(BrowserDetect.OS+'_'+BrowserDetect.browser);
+	} else if(os_li.indexOf(BrowserDetect.OS) != -1) {
+	  // Detected platform
+	  selectPlatform(BrowserDetect.OS);
+	} else {
+  	selectPlatform('win');
+	}
+</script>
+</body>
+</html>

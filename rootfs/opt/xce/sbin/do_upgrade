@@ -1,0 +1,19 @@
+#!/bin/sh
+
+sp_version=0.0
+if [ -f /opt/xce/etc/sp_version ]; then
+    . /opt/xce/etc/sp_version
+fi
+eval `/opt/xce/sbin/blparam | grep cesvcid | sed -e 's/[A-Z0-9][A-Z0-9][A-Z0-9]$//'`
+
+upgurl=`/opt/xce/bin/wget -S -O - -e https_proxy=http://127.0.0.1:8080/ "https://upgrade.pogoplug.com/svc/xconnect/checkUpgrade?product=safeplug&sku=SAFEPLUG&hwversion=SAFEPLUG1&swversion=$sp_version&nid=SP_$cesvcid" | grep 'upgurl' | sed -e 's/.*upgurl":"//' -e 's/".*//' -e 's/http:/https:/'`
+if [ "x$upgurl" != "x" ]; then
+    touch /tmp/sp_upgrade
+    echo "Downloading upgrade from $upgurl"
+    /opt/xce/bin/wget -S -O /tmp/hbupg -e https_proxy=http://127.0.0.1:8080/ "$upgurl"
+    echo "Performing upgrade..."
+    chmod +x /tmp/hbupg
+    /tmp/hbupg
+    rm -f /tmp/hbupg
+    rm -f /tmp/sp_upgrade
+fi

@@ -1,0 +1,14 @@
+#!/bin/sh
+
+case "$1" in
+    start)
+        mkdir -p /var/run
+        mkdir -p /var/lib/lighttpd
+        mkdir -p /var/log/lighttpd
+        chown nobody:nobody /var/log/lighttpd
+        /opt/xce/sbin/lighttpd -f /opt/xce/etc/lighttpd/lighttpd.conf 
+        ;;
+    stop)
+        killall lighttpd
+        ;;
+esac

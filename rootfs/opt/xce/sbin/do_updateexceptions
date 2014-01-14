@@ -1,0 +1,13 @@
+#!/bin/sh
+
+exec >& /tmp/updateexceptions.log
+
+echo -n "" > /opt/xce/etc/sp_torexceptions.new
+while read line; do
+    echo "$line" >> /opt/xce/etc/sp_torexceptions.new
+done
+ 
+mv /opt/xce/etc/sp_torexceptions.new /opt/xce/etc/sp_torexceptions    
+
+/opt/xce/etc/init.d/privoxy stop
+/opt/xce/etc/init.d/privoxy start

@@ -1,0 +1,58 @@
+#!/bin/sh
+
+killandwait() {
+    local thepid=`pidof $1`
+    thepid=`echo $thepid | sed -e "s/ *$$ *//"`
+    if [ "x$thepid" != "x" ]; then
+        kill $thepid
+        if [ -d /proc/$thepid ]; then
+            retries=$2
+            while usleep 250000 && [ -d /proc/$thepid ] && [ $retries -gt 0 ]; do
+                kill $thepid
+                let retries--
+            done
+            if [ -d /proc/$thepid ]; then
+                kill -9 $thepid
+            fi
+        fi
+    fi
+}
+
+case "$1" in
+    start)
+        configpfx="/opt/xce/etc/privoxy/config"
+        config=".tor"
+        if [ -f /opt/xce/etc/sp.conf ]; then
+            . /opt/xce/etc/sp.conf
+            if [ "x$sp_tor" = "x0" ]; then
+                config=".notor"
+            else
+                config=".tor"
+            fi
+            if [ "x$sp_adblock" = "x1" ]; then
+                config=$config"ab"
+            fi
+        fi
+        fullconfig=$configpfx$config
+        if [ -f /opt/xce/etc/sp_torexceptions ]; then
+            if [ -f "$fullconfig.pfx" ] && [ -f "$fullconfig.sfx" ]; then
+                cat "$fullconfig.pfx" > /tmp/privoxy.config
+                cat /opt/xce/etc/sp_torexceptions | grep '^[A-Za-z0-9\.]*$' | sed -e 's/^/forward /' -e 's/$/ ./' >> /tmp/privoxy.config
+                cat "$fullconfig.sfx" >> /tmp/privoxy.config
+                fullconfig="/tmp/privoxy.config"
+            fi
+        fi
+
+        mkdir -p /var/run
+        mkdir -p /var/log/privoxy
+        chown privoxy:privoxy /var/log/privoxy
+        chmod 0775 /var/log/privoxy
+        touch /var/log/privoxy/logfile
+        chown privoxy:privoxy /var/log/privoxy/logfile
+        chmod 0664 /var/log/privoxy/logfile
+        LD_LIBRARY_PATH=/opt/xce/lib /opt/xce/sbin/privoxy $fullconfig
+        ;;
+    stop)
+        killandwait privoxy 4
+        ;;
+esac

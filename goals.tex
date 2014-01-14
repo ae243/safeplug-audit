@@ -1,0 +1,37 @@
+\section{Goals}
+\label{sec:goals}
+
+In this project, we perform a security audit of the Safeplug device.  As the purpose of Safeplug is to anonymize its users, its use of Tor is central to the design.  This leads to concern about how Safeplug uses the Tor network; we investigate the following questions about its interaction with Tor.  
+
+\begin{itemize}
+\item How does the box pick which relay node on the Tor network to connect to?
+\item What kind of authentication goes on between the box and the Tor node?
+\item Does it use the same route of Tor relays every time?
+\end{itemize}
+
+We are also interested in the configurations and settings involved in using the Safeplug device.  Studying the following questions help us determine if there are security vulnerabilities related to this part of the device.  
+
+\begin{itemize}
+\item What are the configurations on the box?
+\item How do updates affect the configurations?
+\item Safeplug claims to offer in-box ad-blocking; how does this work and does it remove any functionality?
+\item Is there an easy way to whitelist things without turning Safeplug off entirely?
+\end{itemize}
+
+Another important aspect of this device is that it is marketed as a simple and easy solution to anonymization.  We suspect that the setup might be simple and easy, but will its use be just as good?  If the device causes any problems while browsing the Internet, then users may opt just to turn the device off.  This brought up the following questions about the usability of the device.
+
+\begin{itemize}
+\item Is it clear to users what information is being hidden and what information is being leaked?
+\item The website talks a lot about IP addresses and warns users to clear cookies \cite{safeplug}, but is that sufficient to preserve anonymization across all web traffic (including Flash or Javascript supercookies that might not be cleared when cookies are cleared)?
+\item Can user anonymity be leaked by a user’s behavior while still using the Safeplug?
+\item What else must a user do in addition to using the Safeplug to further preserve anonymity?
+\end{itemize}
+
+The Safeplug device can also be configured for use as a Tor relay node.  We raise the following questions about the affects of this option.
+
+\begin{itemize}
+\item How would widespread use of the box affect the Tor network?
+\item How well is the function of a Tor relay node described to users?
+\end{itemize}
+
+
