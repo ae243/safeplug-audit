@@ -1,0 +1,5 @@
+Jan 10 00:54:34.659 [notice] Tor v0.2.3.25 (git-17c24b3118224d65) running on Linux.
+Jan 10 00:54:34.659 [notice] Tor can't help you if you use it wrong! Learn how to be safe at https://www.torproject.org/download/download#warning
+Jan 10 00:54:34.660 [notice] Read configuration file "/opt/xce/etc/tor/torrc".
+Jan 10 00:54:34.687 [notice] Initialized libevent version 1.4.14b-stable using method epoll. Good.
+Jan 10 00:54:34.687 [notice] Opening Socks listener on 127.0.0.1:9050
