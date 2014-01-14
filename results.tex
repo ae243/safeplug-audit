@@ -38,7 +38,7 @@ One of Safeplug's configurations is the use of the device as a Tor relay node in
 
 One of our concerns is how understandable this setting is to the average Internet user.  The settings page describes Tor in an extremely basic way, as shown in Figure~\ref{fig:funnydesc}, but describes the functionality of a Tor relay node in a much more technical manner.  This description is shown in Figure~\ref{fig:relaydesc}.  If the majority of users can only understand the simpler description, then they likely won't understand the description of a Tor relay node.  This could be a problem if users simply decide not to do anything with that setting (i.e. don't change the setting to use Safeplug as a relay node).  Then there would be a large increase in use of the Tor network, yet most of the users are not giving back to it.
 
-\begin{figure}[htb]
+\begin{figure}[th]
 \begin{center}
 \includegraphics[width=\textwidth]{funnydesc.png}
 \caption{This is a figure.}
@@ -46,7 +46,7 @@ One of our concerns is how understandable this setting is to the average Interne
 \end{center}
 \end{figure}
 
-\begin{figure}[htb]
+\begin{figure}[th]
 \begin{center}
 \includegraphics[width=\textwidth]{relaydesc.png}
 \caption{This is a figure.}
@@ -60,17 +60,17 @@ This could easily be remedied; Safeplug should choose a target audience and have
 \label{inetuse}
 {\bf Setting up Safeplug.} The first step was to plug Safeplug into our router and activate our device.  Our instructions are shown in Figure~\ref{fig:instructions}.  We followed them, activated our device, and then ended on the configuration page.  The configuration page has a combination of platforms and browsers, with a different set of proxy configuration instructions for each one.  It is interesting to note that the only platform options were: OSX, Windows, Android, and iOS.  Figure~\ref{fig:proxyconfig} shows our configuration. 
 
-\begin{figure}[htb]
+\begin{figure}[t]
 \begin{center}
-\includegraphics[width=\textwidth]{instructions}
+\includegraphics[width=.75\textwidth]{instructions}
 \caption{This is a figure.}
 \label{fig:instructions}
 \end{center}
 \end{figure}
 
-\begin{figure}[htb]
+\begin{figure}[t]
 \begin{center}
-\includegraphics[width=\textwidth]{proxyconfig}
+\includegraphics[width=.75\textwidth]{proxyconfig}
 \caption{This is a figure.}
 \label{fig:proxyconfig}
 \end{center}
@@ -80,7 +80,7 @@ After we finished our configuration, we were taken to our settings.  This page i
 
 \begin{figure}[htb]
 \begin{center}
-\includegraphics[width=\textwidth]{settings}
+\includegraphics[width=.75\textwidth]{settings}
 \caption{This is a figure.}
 \label{fig:settings}
 \end{center}
@@ -89,19 +89,18 @@ After we finished our configuration, we were taken to our settings.  This page i
 {\bf Using the Internet.} Figure~\ref{fig:before} shows what a web page looks like before turning Tor and ad-blocking on, while Figure~\ref{fig:after} shows the same website after turning Tor and ad-blocking on.  Both of these figures show our IP address in the top right corner; due to the change in IP address we can see that our traffic is being routed through Tor.  
 
 \begin{figure}[htb]
-\begin{center}
-\includegraphics[width=0.5\textwidth]{before}
+\centering
+\begin{subfigure}[b]{.4\textwidth}
+\includegraphics[width=\textwidth]{before}
 \caption{This is a figure.}
 \label{fig:before}
-\end{center}
-\end{figure}
-
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[width=0.5\textwidth]{after}
+\end{subfigure}%
+\quad
+\begin{subfigure}[b]{.4\textwidth}
+\includegraphics[width=\textwidth]{after}
 \caption{This is a figure.}
 \label{fig:after}
-\end{center}
+\end{subfigure}
 \end{figure}
 
 Next, we wanted to see how usable this would be to a normal Internet user.  A user would probably decide not to use Safeplug if they couldn't read their web pages (if they weren't in their native language), or if they couldn't log into their accounts (some web sites will lock a user out if they try to login from multiple countries in a short time period).  While browsing the Internet, we experienced some pages in German and Swedish, which is expected with Tor; if a user is not familiar with Tor, then they may just get frustrated and stop using Safeplug altogether.  We were also prompted with the page in Figure~\ref{fig:funnygoogle} when we tried to log into our Google account. 
@@ -121,17 +120,17 @@ Next, we wanted to see how usable this would be to a normal Internet user.  A us
 We opened up the Safeplug device to look at the internals.  Figure~\ref{fig:top} shows the top of the board and Figure~\ref{fig:bottom} shows the bottom.  We identified an SD card slot, Lan transformer, and Ethernet transceiver on the top of the board.  On the bottom, we found flash memory and the integrated circuit.
 
 \begin{figure}[htb]
-\begin{center}
-\includegraphics[width=0.25\textwidth]{safeplug_top}
-\caption{This is a figure.}
-\label{fig:top}
-\end{center}
-\end{figure}
-
-\begin{figure}[htb]
-\begin{center}
-\includegraphics[width=0.25\textwidth]{safeplug_bottom}
+\centering
+\begin{subfigure}[b]{.3\textwidth}
+  \includegraphics[width=\textwidth]{safeplug_top}
+  \caption{This is a figure.}
+  \label{fig:top}
+\end{subfigure}%
+\qquad
+\begin{subfigure}[b]{.3\textwidth}
+\includegraphics[width=\textwidth]{safeplug_bottom}
 \caption{This is a figure.}
 \label{fig:bottom}
-\end{center}
+\end{subfigure}
+\caption{Safeplug circuit board after the teardown.}
 \end{figure}
