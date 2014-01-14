@@ -1,20 +1,77 @@
 \subsection{Traffic Analysis}
 \label{sec:traffic}
-TODO: Anna
-    -What's the udpate?
-    -Phone home frequency
-    -Does it do anything else?
-    -How does the ad-blocking work?
+
+\subsubsection{Initial Plugin Behavior}
+Before allowing the Safeplug box to be connected to the outside world, we attached it to the home connection setup described in Section \ref{sec:proc} and captured traffic for a few minutes on the local network.  From visual inspection (Figure \ref{redlight}), there was certainly something trying to access the internet and displaying an error on its failure.  
+
+\begin{figure}[htb]
+        \centering
+        \begin{subfigure}[b]{0.3\textwidth}
+                \includegraphics[width=\textwidth]{redlight.jpg}
+                \caption{Safeplug box when only connected to the local network.}
+                \label{redlight}
+        \end{subfigure}%
+        \quad %add desired spacing between images, e. g. ~, \quad, \qquad etc.
+          %(or a blank line to force the subfigure onto a new line)
+        \begin{subfigure}[b]{0.4\textwidth}
+          \centering
+          \includegraphics[width=.66\textwidth,angle=180]{greenlight.jpg}
+                \caption{Safeplug box after connection to the internet, regardless of whether Tor was enabled.}
+                \label{greenlight}
+        \end{subfigure}
+        \caption{Safeplug box during initial setup prior to an internet connection and after activation from the Pogoplug website.}
+        \label{fig:lights}
+\end{figure}
+
+Analysis of the TCP dump showed that the Safeplug box repeatedly queried the local DNS server for two items: \url{pogoplug.com} and the NIST standardized time.  The first query for the time was to \url{www.nist.gov}, and subsequent queries included \url{nist1-chi.ustiming.org}, \url{nist1-ny.ustiming.org}, \url{time-nw.nist.gov}, and \url{nist1.symmetricom.com}.  Queries about pogoplug were mostly for \url{service.pogoplug.com} but after that set was tried \url{secure.pogoplug.com} was attempted once.  While it was only connected to the local network, we also did a scan of all the ports of the Safeplug and only port 80 was open.
+
+\subsubsection{Activation and Update Traffic}
+\label{updatetraf}
+After establishing the initial update behavior, we connected the other end of our homemade router back to the internet and captured traffic on both the network interfaces. As we had seen previously, the first effort of the Safeplug was to query for \url{service.pogoplug.com} and connect, and the send a POST/XML request to that server containing a 16 byte numerical string of type \verb!nid!, \verb!0x0! as \verb!flags!, and a field called \verb!pingdata! with length of 423 bytes and undiscernable contents.  In future work, we hope to explore the contents of this automatic connection with the Pogoplug servers to discover what information is being passed along. 
+
+The client computer then navigated to the Pogoplug website to complete the activation processes.  Each step of the process resulted in both TCP and UDP traffic between the Safeplug box and the pogoplug servers.  Most interesting was the update step in which the Safeplug box knew to request a script from \url{<update server IP>/svc/upgrade/safeplug\_switch.sh}.  Since this operation occured over normal HTTP, we were able to use \verb!curl! to recover the same script and examine it to discover the contents of the upgrade.
+
+The upgrade script shows (and the network traffic confirms) that the box downloads and installs the following \verb!.tgz! files: 
+\begin{fileName}
+safeplug_lighttpd, safeplug_lighttpd_config, safeplug_wget, safeplug_certs, safeplug_gohelper, safeplug_tor, safeplug_tor_config, safeplug_privoxy, safeplug_privoxy_config
+\end{fileName}
+  Each file is compared to an MD5 hash before being unzipped and installed.  Details about the software found on the Safeplug are discussed in Section \ref{software}.  After the two lighttpd installations, a process called \verb!hbplug! is killed and lighttpd is started.  After the certs are downloaded, the current \verb!/usr/local/ssl! is overwritten with the new certs.  The \verb!go\_helper! is added to the \verb!/opt/xce/sbin! folder, and contains binary files with names related to update and upgrade (which we hope to decompile in future work).
+
+After completing the installations, a default Safeplug configuation file is written with use of Tor set to 1.  (More information about the configuration in Section \ref{spconfig}.)  Finally, the old \verb!rcS! file in \verb!/etc/init.d! is replaced with commands to start lighttpd, tor and privoxy, and the LED is set to green as shown in Figure \ref{greenlight} after the completion of the upgrade. This means that the green LED indicates an up-to-date, internet-connected Safeplug, rather than anything about the use of TOR.
+
+\subsubsection{Traffic After Activation}
+After the activation and the configuration of the Safeplug as a proxy, all traffic was through the Tor network.  The Safeplug connected to a directory to learn about different relays and seemed to cycle through a small set around the world for different connections.  This demonstrates that Tor is working as expected.  If there is any ``phone-home'' being done by the device after Tor has been turned on, then it is doing so through the Tor network.
+
 
 \subsection{Gaining Access through SSH}
 \label{sec:SSH}
-TODO: Anna
-    -How we got access
     \subsubsection{Accessing the Device}
-    -What's the software
+    Safeplug runs an RPC server that allows the enabling of SSH access via HTTP. SSH instructions for Cloud Engine's other device (Pogoplug) are widely available online and an email in the Tor-talk mailing list confirms that the instructions are the same \cite{ceadmin}:
+\begin{fileName}
+curl --data ``'' http://<IP-of-Safeplug>/svc/xspctrl/enableSSHD
+ssh root@<IP-of-Safeplug>
+password: ceadmin
+\end{fileName}
+
+Obviously having a publically available root password means that SSH can be done effectively without authentication.  We tried the SSH procedure twice, once before the internet connection and activation, and once afterwards.  Before the activation and update procedure, SSH was not available.  The simple \verb!Hbplug! software on the box could not accept this RPC call.  However, once the box was updated and had lighttpd installed, the SSH procedure was available and we could download the contents of the root filesystem for analysis.
+
     \subsubsection{Software on the Safeplug}
-Tor, Privoxy, and Lighttpd.  Lighttpd is an open-source webserver, which is serving the settings page on the device - the project's description mentions ``security, speed, compliance, and flexibility [... while being] designed and optimized for high perfomance environments'' \cite{lighttpd}.  Privoxy is a ``non-caching web proxy with advanced filtering capabilities for enhancing privacy, modifying webpage data and HTTP headers, controlling access, and removnig ads and other obnoxious Internet junk'' and it specifically advertises its ``flexible configuration'' \cite{privoxy}.
-    -What/where are the settings
-    -RPC server
-        -Attacks from anyone on local network
-        -Attack from a website?
+\label{software}
+As would be suspected from the analysis of the update script described above in Section \ref{updatetraf}, the installed software is in \verb!/opt/xce! and includes lighttpd, privoxy, and tor.  Lighttpd is an open-source webserver, which is serving the settings page on the device - the project's description mentions ``security, speed, compliance, and flexibility [... while being] designed and optimized for high perfomance environments'' \cite{lighttpd}.  Privoxy is a ``non-caching web proxy with advanced filtering capabilities for enhancing privacy, modifying webpage data and HTTP headers, controlling access, and removnig ads and other obnoxious Internet junk'' and it specifically advertises its ``flexible configuration'' \cite{privoxy}.  Privoxy is also open source.  All three pieces of software appear to be there with default configuration files (with all appropriate citations and comments present).  The Safeplug uses its own configuration files to determine how these pieces of software are set up and used.
+    
+    \subsubsection{Configuration on the Safeplug}
+\label{spconfig}
+
+\subsection{Attacking the RPC Server}
+
+\subsubsection{Insider Attack}
+Since the RPC server does not perform any kind of validation or authentication on the settings strings, it would be easy for anyone inside the local network to send a command and change the settings, for example to disable Tor or adblocking.  All the attacker would need to know is the IP of the device.  It does not even require SSH or discovering the (publically available) root password, or the user's new root password if they have been well-informed and adept enough to change it.  
+
+This attacker could also be any kind of device on the local network, or the local gateway if it is compromised.  The NSA ``Spymall'' catalog leaked in December shows tools for compromising a number of different devices and home routers are traditionally insecure \cite{spymall}.  It is easy to imagine any malicious party, not just one with the resources of a government, (although governments might be some of the most interested parties in attacking a Tor proxy) compromising the gateway and using that access make a disabling RPC call into the Safeplug.  This would occur silently from the perspective of a client unless the happen to check the Settings page for the Safeplug.  Instead, the client would continue browsing with a belief that they are protected by their use of the Tor network, while in fact any external adversary can track their traffic.
+
+This seems like a fairly important vulnerability and requires action from Pogoplug to fix.  Since the purpose of these RPC operations is unclear without access to more of the source code, it is possible that they could be disabled entirely.  If not, perhaps there is some authentication protocol that could be implemented.  The challenge of such a protocol from a user's point of view is that valid access would be infrequent so giving a user a password to remember would be a poor experience.
+
+
+\subsubsection{Website Attack}
+We think it is also possible that an external website could perform this attack by returning the correctly formatted POST string.  
+
