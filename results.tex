@@ -57,9 +57,63 @@ This could easily be remedied; Safeplug should choose a target audience and have
 
 \subsubsection{Internet Use}
 
-    -Setting it up
-    -Using the internet (show before and after for IP addresses)
-    -Cookie experience First party cookies
+{\bf Setting up Safeplug.} The first step was to plug Safeplug into our router and activate our device.  Our instructions are shown in Figure~\ref{fig:instructions}.  We followed them, activated our device, and then ended on the configuration page.  The configuration page has a combination of platforms and browsers, with a different set of proxy configuration instructions for each one.  It is interesting to note that the only platform options were: OSX, Windows, Android, and iOS.  Figure~\ref{fig:proxyconfig} shows our configuration. 
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[width=\textwidth]{instructions}
+\caption{This is a figure.}
+\label{fig:instructions}
+\end{center}
+\end{figure}
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[width=\textwidth]{proxyconfig}
+\caption{This is a figure.}
+\label{fig:proxyconfig}
+\end{center}
+\end{figure}
+
+After we finished our configuration, we were taken to our settings.  This page is shown in Figure~\ref{fig:settings}.  This allowed us to turn on/off Tor, add whitelisted websites, turn on/off ad-blocking, and turn on/off the ability of our device to be a relay node.  
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[width=\textwidth]{settings}
+\caption{This is a figure.}
+\label{fig:settings}
+\end{center}
+\end{figure}
+
+{\bf Using the Internet.} Figure~\ref{fig:before} shows what a web page looks like before turning Tor and ad-blocking on, while Figure~\ref{fig:after} shows the same website after turning Tor and ad-blocking on.  Both of these figures show our IP address in the top right corner; due to the change in IP address we can see that our traffic is being routed through Tor.  
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{before}
+\caption{This is a figure.}
+\label{fig:before}
+\end{center}
+\end{figure}
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{after}
+\caption{This is a figure.}
+\label{fig:after}
+\end{center}
+\end{figure}
+
+Next, we wanted to see how usable this would be to a normal Internet user.  A user would probably decide not to use Safeplug if they couldn't read their web pages (if they weren't in their native language), or if they couldn't log into their accounts (some web sites will lock a user out if they try to login from multiple countries in a short time period).  While browsing the Internet, we experienced some pages in German and Swedish, which is expected with Tor; if a user is not familiar with Tor, then they may just get frustrated and stop using Safeplug altogether.  We were also prompted with the page in Figure~\ref{fig:funnygoogle} when we tried to log into our Google account. 
+
+\begin{figure}[htb]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{funnygoogle}
+\caption{This is a figure.}
+\label{fig:funnygoogle}
+\end{center}
+\end{figure}
+
+{\bf Cookies.}  While browsing the Internet, we logged into a Google Account in a tab, and then subsequently went to a website that had the Google+ logo in a different tab.  When we clicked on the Google+ logo, it remember who we are; so we can confirm that we still have first-party cookies.  We experienced the same situation with Facebook and its corresponding ``like'' button.
 
 \subsection{Teardown}
 \label{sec:tear}
@@ -80,7 +134,3 @@ This could easily be remedied; Safeplug should choose a target audience and have
 \caption{This is a figure.}
 \end{center}
 \end{figure}
-
-\subsubsection{Possible Attacks}
-    -Possible attacks via USB/SD Card
-
