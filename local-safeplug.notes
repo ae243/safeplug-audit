@@ -1,0 +1,94 @@
+### (NB - Device has not yet been activated)
+jkroll@osprey:~$ curl --data "" http://192.168.0.4/svc/xspctrl/enableSSHD
+jkroll@osprey:~$ ssh root@192.168.0.4
+ssh: connect to host 192.168.0.4 port 22: Connection refused
+
+
+jkroll@osprey:/var/lib/dhcp$ nmap -v -A 192.168.0.4
+
+Starting Nmap 5.21 ( http://nmap.org ) at 2014-01-09 19:22 EST
+NSE: Loaded 36 scripts for scanning.
+Initiating Ping Scan at 19:22
+Scanning 192.168.0.4 [2 ports]
+Completed Ping Scan at 19:22, 0.00s elapsed (1 total hosts)
+Initiating Parallel DNS resolution of 1 host. at 19:22
+Completed Parallel DNS resolution of 1 host. at 19:22, 13.00s elapsed
+Initiating Connect Scan at 19:22
+Scanning 192.168.0.4 [1000 ports]
+Discovered open port 80/tcp on 192.168.0.4
+Discovered open port 3333/tcp on 192.168.0.4
+Completed Connect Scan at 19:22, 0.02s elapsed (1000 total ports)
+Initiating Service scan at 19:22
+Scanning 2 services on 192.168.0.4
+Completed Service scan at 19:23, 44.99s elapsed (2 services on 1 host)
+NSE: Script scanning 192.168.0.4.
+NSE: Starting runlevel 1 (of 1) scan.
+Initiating NSE at 19:23
+Completed NSE at 19:23, 0.00s elapsed
+NSE: Script Scanning completed.
+Nmap scan report for 192.168.0.4
+Host is up (0.00030s latency).
+Not shown: 998 closed ports
+PORT     STATE SERVICE    VERSION
+80/tcp   open  http?
+3333/tcp open  dec-notes?
+2 services unrecognized despite returning data. If you know the service/version, please submit the following fingerprints at http://www.insecure.org/cgi-bin/servicefp-submit.cgi :
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port80-TCP:V=5.21%I=7%D=1/9%Time=52CF3D50%P=x86_64-unknown-linux-gnu%r(
+SF:HTTPOptions,A5,"HTTP/1\.1\x20500\x20Server\x20Error\r\nAllow:\x20GET,\x
+SF:20HEAD\r\nContent-Length:\x200\r\nServer:\x20HBHTTP\x20POGOMOBILE\x20-\
+SF:x203\.2\.0\x20-\x20Linux\r\nDate:\x20Thu,\x2001\x20Jan\x201970\x2000:08
+SF::07\x20GMT\r\nConnection:\x20close\r\n\r\n")%r(RTSPRequest,A5,"HTTP/1\.
+SF:1\x20500\x20Server\x20Error\r\nAllow:\x20GET,\x20HEAD\r\nContent-Length
+SF::\x200\r\nServer:\x20HBHTTP\x20POGOMOBILE\x20-\x203\.2\.0\x20-\x20Linux
+SF:\r\nDate:\x20Thu,\x2001\x20Jan\x201970\x2000:08:07\x20GMT\r\nConnection
+SF::\x20close\r\n\r\n")%r(FourOhFourRequest,93,"HTTP/1\.1\x20500\x20Server
+SF:\x20Error\r\nContent-Length:\x200\r\nServer:\x20HBHTTP\x20POGOMOBILE\x2
+SF:0-\x203\.2\.0\x20-\x20Linux\r\nDate:\x20Thu,\x2001\x20Jan\x201970\x2000
+SF::08:07\x20GMT\r\nConnection:\x20close\r\n\r\n")%r(SIPOptions,92,"HTTP/1
+SF:\.1\x20400\x20Bad\x20Request\r\nContent-Length:\x200\r\nServer:\x20HBHT
+SF:TP\x20POGOMOBILE\x20-\x203\.2\.0\x20-\x20Linux\r\nDate:\x20Thu,\x2001\x
+SF:20Jan\x201970\x2000:08:37\x20GMT\r\nConnection:\x20close\r\n\r\n");
+==============NEXT SERVICE FINGERPRINT (SUBMIT INDIVIDUALLY)==============
+SF-Port3333-TCP:V=5.21%I=7%D=1/9%Time=52CF3D51%P=x86_64-unknown-linux-gnu%
+SF:r(GetRequest,93,"HTTP/1\.1\x20500\x20Server\x20Error\r\nContent-Length:
+SF:\x200\r\nServer:\x20HBHTTP\x20POGOMOBILE\x20-\x203\.2\.0\x20-\x20Linux\
+SF:r\nDate:\x20Thu,\x2001\x20Jan\x201970\x2000:08:08\x20GMT\r\nConnection:
+SF:\x20close\r\n\r\n")%r(HTTPOptions,A5,"HTTP/1\.1\x20500\x20Server\x20Err
+SF:or\r\nAllow:\x20GET,\x20HEAD\r\nContent-Length:\x200\r\nServer:\x20HBHT
+SF:TP\x20POGOMOBILE\x20-\x203\.2\.0\x20-\x20Linux\r\nDate:\x20Thu,\x2001\x
+SF:20Jan\x201970\x2000:08:08\x20GMT\r\nConnection:\x20close\r\n\r\n")%r(RT
+SF:SPRequest,A5,"HTTP/1\.1\x20500\x20Server\x20Error\r\nAllow:\x20GET,\x20
+SF:HEAD\r\nContent-Length:\x200\r\nServer:\x20HBHTTP\x20POGOMOBILE\x20-\x2
+SF:03\.2\.0\x20-\x20Linux\r\nDate:\x20Thu,\x2001\x20Jan\x201970\x2000:08:0
+SF:8\x20GMT\r\nConnection:\x20close\r\n\r\n")%r(FourOhFourRequest,93,"HTTP
+SF:/1\.1\x20500\x20Server\x20Error\r\nContent-Length:\x200\r\nServer:\x20H
+SF:BHTTP\x20POGOMOBILE\x20-\x203\.2\.0\x20-\x20Linux\r\nDate:\x20Thu,\x200
+SF:1\x20Jan\x201970\x2000:08:16\x20GMT\r\nConnection:\x20close\r\n\r\n")%r
+SF:(SIPOptions,92,"HTTP/1\.1\x20400\x20Bad\x20Request\r\nContent-Length:\x
+SF:200\r\nServer:\x20HBHTTP\x20POGOMOBILE\x20-\x203\.2\.0\x20-\x20Linux\r\
+SF:nDate:\x20Thu,\x2001\x20Jan\x201970\x2000:08:16\x20GMT\r\nConnection:\x
+SF:20close\r\n\r\n");
+
+Read data files from: /usr/share/nmap
+Service detection performed. Please report any incorrect results at http://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 58.14 seconds
+
+### From the DHCP Server leases file at /var/lib/dhcp/dhcpd.leases:
+lease 192.168.0.4 {
+  starts 5 2014/01/10 00:14:38;
+  ends 6 2014/01/11 00:14:38;
+  cltt 5 2014/01/10 00:14:38;
+  binding state active;
+  next binding state free;
+  hardware ethernet 00:25:31:05:c0:cd;
+  uid "\001\000%1\005\300\315";
+  client-hostname "PogoplugMobile";
+}
+
+### From tcpdump:
+jkroll@osprey:~$ sudo tcpdump -i br0 -s 65535 -w ~/scratch/local-safeplug.cap
+tcpdump: listening on br0, link-type EN10MB (Ethernet), capture size 65535 bytes
+^C3230 packets captured
+3559 packets received by filter
+329 packets dropped by kernel
