@@ -70,8 +70,6 @@ Anna Kornfeld Simpson and Annie Edmundson
 \begin{lstlisting}
 function go() { 
    var IP_SCANS = 255;
-   var prefixes = new Array("http://192.168.0.", "http://192.168.1.");
-   //var prefix = "http://172.";
    var prefix = "http://192."
    var SECOND_START = 168;
    var SECOND_END = 168;
@@ -88,12 +86,6 @@ function go() {
             var req = new XMLHttpRequest();
             req.open("POST", tryip + "/svc/xspctrl/disableTor", true);
             req.timeout = 1000;
-            //console.log(reqs[i].readyState);
-/*         req.onreadystatechange = function (ip) 
-           { 
-           return function() { console.log(ip); }
-           } (tryip); */
-            //console.log(reqs[i]);
             req.send();
          }
          // COMMENT THIS OUT BEFORE RUNNING LARGE SCANS!
