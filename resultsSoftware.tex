@@ -85,5 +85,16 @@ This seems like a fairly important vulnerability and requires action from Pogopl
 
 
 \subsubsection{Website Attack}
-We think it is also possible that an external website could perform this attack by returning the correctly formatted POST string.  Setting this up is future work.
+It is also possible that an external website could perform this attack by returning a correctly formatted POST string.  This executes the same functionality as the Insider Attack, but the attacker does not require any knowledge of the Safeplug device -- specifically the IP address.  Any malicious Internet user with access to a web server can carry out this attack with less than 30 lines of Javascript code (See Appendix A).  The following steps are necessary for the attack to be successful:
+
+\begin{enumerate}
+\item Set up a web page with the crafted Javascript code, including the POST request: http://$<$IP address$>$/svc/xspctrl/disableTor (See Appendix A).
+\item Send the malicious link to a user in the targeted private network.
+\item Once the user clicks the link and loads the malicious site, the correctly formatted POST request will be sent to every IP address in the  ranges.  
+\item Tor is disabled.  It should be noted that the user must refresh her settings page to see the modified settings.  
+\end{enumerate}  
+
+This exploits the RPC server in the same manner that the Insider Attack does.  While this attack requires a greater amount of time, the largest observed time to send requests to the 192.168.0.0/24 space was ~200 milliseconds; the entire attack costs ~400 milliseconds for sending request to both 192.168.0.0/24 and 192.168.1.0/24 ranges.  In the case of a private network in the range of 10.0.0.0/16, the attack took ~12 minutes.  The 10.0.0.0/16 range is more commonly used for business networks, whereas the other ranges are more common in home networks; because Safeplug is geared towards home network use, we conclude that ~400 milliseconds is a reasonable amount of time for the attacker to spend.  
+
+In addition to disabling Tor, the attacker can modify any other settings on the device.  This includes: enabling/disabling Tor, enabling/disabling ad-blocking, enabling/disabling the use of the device as a Tor relay node [note: this requires the user to do additional setup].  It is also interesting to note that the source code for the configurations includes the ability to use the device as a Tor exit node; therefore, the attacker can enable/disable this functionality as long as the user has already set up the device as a Tor relay node.  Lastly, the attacker can also modify the user's whitelist of sites that should not be routed through Tor.  
 
