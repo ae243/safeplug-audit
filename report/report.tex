@@ -39,11 +39,7 @@
 \input{conclusion}
 
 \section{Acknowledgements}
-We would like to express our gratitude to Josh Kroll for donating a lot of time and his computer to the routing effort.  We also thank whoever left the very nice set of screwdrivers on our desks!
-
-This paper represents our own work in accordance with University regulations.
-
-Anna Kornfeld Simpson and Annie Edmundson
+We would like to express our gratitude to Ed Felten for helping us procure the Safeplugs and to Josh Kroll for donating a lot of time and his computer to the routing effort.  We also thank whoever left the very nice set of screwdrivers on our desks!
 
 \input{bibliography}
 
@@ -79,8 +75,6 @@ function go() {
    var SECOND_END = 168;
    var THIRD_START = 0;
    var THIRD_END = 1;
-   var mydate = new Date();
-   console.log(mydate.getTime());
 
    for (var i = SECOND_START; i <= SECOND_END; i++) {
       for (var j = THIRD_START; j <= THIRD_END; j++) {
@@ -92,12 +86,7 @@ function go() {
             req.timeout = 1000;
             req.send();
          }
-         // COMMENT THIS OUT BEFORE RUNNING LARGE SCANS!
-         var mydate2 = new Date();
-         console.log(mydate2.getTime() + " " + j);
       }
-      var mydate = new Date();
-      console.log(mydate.getTime() + " " + i);
    }
 }
 \end{lstlisting}

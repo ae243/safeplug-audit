@@ -9,7 +9,7 @@
 An external website can also perform this attack by returning a correctly formatted POST string.  This executes the same functionality as the Insider Attack, but the attacker does not need to be on the local network or know the IP address of the Safeplug.  Instead, the attacker (who could be any malicious actor with access to a web server) can just send a POST request to every IP in the common ranges of local addresses in home networks, 192.168.0.0/24 and 192.168.1.0/24.  We implemented this attack with less than 30 lines of Javascript code (See Appendix A).  The following steps are necessary for the attack to be successful:
 
 \begin{enumerate}
-\item Set up a web page with the crafted Javascript code, which will send a POST request of the following format to all addresses in the range: http://$<$IP address$>$/svc/xspctrl/disableTor (See Appendix A).
+\item Set up a web page with the crafted Javascript code, which will send a POST request of the following format to all addresses in the range: \url{http://<IP address>/svc/xspctrl/disableTor} (See Appendix A).
 \item Send the malicious link to a user in the targeted private network.
 \item Once the user clicks the link and loads the malicious site, the correctly formatted POST request will be sent to every IP address in the ranges.  
 \item Tor is disabled silently.  The user must check or refresh her settings page to learn that Tor is turned off.  
