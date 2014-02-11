@@ -1,11 +1,11 @@
 \section{Usability}
 \label{sec:usability}
 
-Before setting up and using the Safeplug device, we read a variety of news articles as well as opinions through the Tor mailing list~\cite{tormailinglist}.  There were many thoughts on the Terms of Service and the option to use the device as a Tor relay node; this inspired us to start our analysis with these items.  
+Many news articles were published to announce the release of the Safeplug in addition to a lengthy discussion on the Tor-talk mailing list~\cite{tormailinglist}.  There were many thoughts on the Terms of Service and the option to use the device as a Tor relay node; this inspired us to start our analysis with these items.  
 
 \subsection{Terms of Service}
 \label{tos}
-Safeplug's Terms of Service are interesting because they are controlling, yet the product they are for is a device for anonymization.  The first section of the Terms of Service explains how to agree to them:
+The first section of the Terms of Service explains how to agree to them:
 
 \begin{quotation}
 ``You must agree to these TOS before you can use the Service. You can agree to these TOS by: a) actually using the Service, or b) clicking a box that indicates you agree to the Service, where such a box is made available to you.'' \cite{safeplug}
@@ -17,7 +17,7 @@ This is worth noting because option b) described above did not exist in any part
 ``Pogoplug may update or change these TOS from time to time and recommends that you review the TOS on a regular basis at www.pogoplug.com/safeplug. You understand and agree that your continued use of the Service after the TOS has changed constitutes your acceptance of the TOS as revised. '' \cite{safeplug}
 \end{quotation}
 
-Most Safeplug users will likely not read the Terms of Service once, let alone on a regular basis; therefore, most users will be blind to any changes.  It is also interesting that these Terms of Service are only accessible through a small link at the bottom of the Safeplug website \cite{safeplug}; specifically, there is no documentation, including the Terms of Service, in the package that the device was shipped in.  Further along in the Terms of Service, the makers of Safeplug were sloppy when they wrote:
+Most Safeplug users will likely not read the Terms of Service once, let alone on a regular basis; therefore, most users will be blind to any changes.  It is also interesting that these Terms of Service are only accessible through a small link at the bottom of the Safeplug website \cite{safeplug}; specifically, there is no documentation, including the Terms of Service, in the package that the device was shipped in.  The Terms of Service next includes:
 
 \begin{quotation}
 ``Pogoplug includes several open source components in the Software. You agree to abide by the terms of the relevant licenses, as may be updated by Pogoplug from time to time at http://pogoplug.com/home-en-developers-open-source.html. '' \cite{safeplug}
@@ -34,7 +34,13 @@ This should raise a red flag for users because they may not know when the softwa
 \subsection{Tor Relay Node Option}
 One of Safeplug's configurations is the use of the device as a Tor relay node in the Tor network.  When the device is initially setup, the default setting is to not use it as a relay node.  
 
-One of our concerns is how understandable this setting is to the average Internet user.  The settings page describes Tor in an extremely basic way, as shown in Figure~\ref{fig:funnydesc}, but describes the functionality of a Tor relay node in a much more technical manner.  This description is shown in Figure~\ref{fig:relaydesc}.  If the majority of users can only understand the simpler description, then they likely won't understand the description of a Tor relay node.  This could be a problem if users simply decide not to do anything with that setting (i.e. don't change the setting to use Safeplug as a relay node).  Then there would be a large increase in use of the Tor network, yet most of the users are not giving back to it.
+One of our concerns is how understandable this setting is to the average Internet user.  The settings page describes Tor in an extremely basic way:
+
+\begin{quotation}
+``Safeplug uses the Tor network to secure your Internet connection.  Tor works by routing your Internet through a series of random destinations, much like driving a twisty, complicated route to throw off someone who is following you, making it impossible for websites and organizations to identify the source or destination of Internet traffic.'' \cite{safeplug}
+\end{quotation}
+
+On the other hand, it describes the functionality of a Tor relay node in a much more technical manner.  This description is shown in Figure~\ref{fig:relaydesc}.  If the majority of users can only understand the simpler description, then they likely won't understand the description of a Tor relay node.  This could be a problem if users simply decide not to do anything with that setting (i.e. don't change the setting to use Safeplug as a relay node).  Then there would be a large increase in use of the Tor network, yet most of the users are not giving back to it.
 
 \begin{figure}[th]
 \begin{center}
@@ -57,7 +63,7 @@ This could easily be remedied; Safeplug should choose a target audience and have
 \subsection{Internet Use}
 \label{inetuse}
 
-\subsubsection{Setting up Safeplug} The first step was to plug Safeplug into our router and activate our device.  Our instructions are shown in Figure~\ref{fig:instructions}.  We followed them, activated our device, and then ended on the configuration page.  The configuration page has a combination of platforms and browsers, with a different set of proxy configuration instructions for each one.  It is interesting to note that the only platform options were: OSX, Windows, Android, and iOS.  Figure~\ref{fig:proxyconfig} shows our configuration. 
+\subsubsection{Setting up Safeplug} The first step was to plug Safeplug into our router and activate our device.  Our instructions are shown in Figure~\ref{fig:instructions}.  We followed them, activated our device, and then ended on the configurations page.  The configurations page has a combination of platforms and browsers, with a different set of proxy configuration instructions for each one.  It is interesting to note that the only platform options were: OSX, Windows, Android, and iOS.  Figure~\ref{fig:proxyconfig} shows our configuration. 
 
 \begin{figure}[t]
 \begin{center}
@@ -75,7 +81,7 @@ This could easily be remedied; Safeplug should choose a target audience and have
 \end{center}
 \end{figure}
 
-After we finished our configuration, we were taken to our settings.  This page is shown in Figure~\ref{fig:settings}.  This allowed us to turn on/off Tor, add white-listed websites, turn on/off ad-blocking, and turn on/off the ability of our device to be a relay node.  
+After we finished our configuration, we were taken to our settings page.  This page is shown in Figure~\ref{fig:settings}.  This allowed us to turn Tor on/off, add white-listed websites, turn ad-blocking on/off, and turn the ability of our device to be a relay node on/off.  
 
 \begin{figure}[htb]
 \begin{center}
@@ -102,7 +108,7 @@ After we finished our configuration, we were taken to our settings.  This page i
 \end{subfigure}
 \end{figure}
 
-Next, we wanted to see how usable this would be to a normal Internet user.  A user would probably decide not to use Safeplug if they could not read their web pages (if they were not in their native language), or if they could not log into their accounts (some web sites will lock a user out if they try to log in from multiple countries in a short time period).  While browsing the Internet, we experienced some pages in German and Swedish, which is expected with Tor; if a user is not familiar with Tor, then they may just get frustrated and stop using Safeplug altogether.  We were also prompted with the page in Figure~\ref{fig:funnygoogle} when we tried to log into our Google account. 
+Next, we wanted to see how usable this would be to a normal Internet user.  A user would probably decide not to use Safeplug if they could not read their web pages (if they were not in their native language), or if they could not log into their accounts (some web sites will lock a user out if they try to log in from multiple countries in a short time period).  While browsing the Internet, we experienced some pages in German and Swedish, which is expected with Tor; if a user is not familiar with Tor, then they may just get frustrated and stop using Safeplug altogether.  We were also prompted with the page in Figure~\ref{fig:funnygoogle} when we tried to log into our Google account, indicating that Google noticed we were trying to login from different locations.
 
 \begin{figure}[htb]
 \begin{center}
@@ -117,3 +123,6 @@ Next, we wanted to see how usable this would be to a normal Internet user.  A us
 This is clearly not the perfect ``anonymity'' that Safeplug promised in their publicity.  Although normal use does follow this model of persisting logged in status across browser tabs and sessions, a user concerned about anonymity and seeing each session coming up differently (German vs Swedish) might mistakenly believe that they do not have to log out of their social media accounts to preserve their anonymity when accessing other websites.
 
 More interesting and damaging to the user's control over their anonymity would be third-party cookies because the user cannot remove those just by logging out.  It requires a trip to the browser settings to clear cookies (or not have them set in the first place).  We used the FourthParty plugin developed by Jonathan Mayer at Stanford to collect information about cookies and other browsing data during the client's use of the Safeplug \cite{fourthparty}.  When collecting data on the existence of third-party cookies, we analyzed two separate browsing sessions; they were both new sessions with no cookies.  One of the sessions used the ad-block feature of the Safeplug and the other did not.  After analyzing data from Fourthparty, we found many third-party cookies in both sessions.  These included cookies from: abmr.net, bizographics.com, krxd.net, and bluekai.com among many others.
+
+\subsection{Latency}
+This is a todo item for Annie.
