@@ -1,0 +1,21 @@
+\subsubsection{Initial Plugin Behavior}
+Before allowing the Safeplug box to be connected to the outside world, we attached it to a home connection setup formed by a computer with two network cards and then captured traffic both inside that network and between the network and the internet.  The internal network card was connected to a Netgear switch and served as a gateway, DHCP server, and DNS server.  The other card was the connection to the internet.  We used Wireshark to analyze the network data that we captured \cite{wireshark}.  
+
+Analysis of the TCP dump showed that the Safeplug box repeatedly queried the local DNS server for two items: the NIST standardized time and \url{pogoplug.com}.  The first query for the time was to \url{www.nist.gov}, and subsequent queries included \url{nist1-chi.ustiming.org}, \url{nist1-ny.ustiming.org}, \url{time-nw.nist.gov}, and \url{nist1.symmetricom.com}.  Queries about pogoplug were mostly for \url{service.pogoplug.com}, but \url{secure.pogoplug.com} was attempted once.  While it was connected to the local network, we also did a scan of all the ports of the Safeplug and only port 80 was open.
+
+\subsubsection{Activation and Update Traffic}
+\label{updatetraf}
+After establishing the initial update behavior, we connected the other end of our router back to the internet and captured traffic on both of the network interfaces. As we had seen previously, the first effort of the Safeplug was to query for \url{service.pogoplug.com} and connect, and then send a POST/XML request to that server containing a 16 byte numerical string of type \verb!nid!, \verb!0x0! as \verb!flags!, and a field called \verb!pingdata! with length of 423 bytes and undiscernable contents.
+
+The client computer then navigated to the Pogoplug website to complete the activation process.  Each step of the process resulted in both TCP and UDP traffic between the Safeplug box and the Pogoplug servers.  Most interesting was the update step in which the Safeplug box knew to request a script from \url{<update server IP>/svc/upgrade/safeplug\_switch.sh}.  Since this operation occured over normal HTTP, we were able to use \verb!curl! to recover the same script and examine it to discover the contents of the upgrade.
+
+The upgrade script shows (and the network traffic confirms) that the box downloads and installs the following \verb!.tgz! files: 
+\begin{fileName}
+safeplug_lighttpd, safeplug_lighttpd_config, safeplug_wget, safeplug_certs, safeplug_gohelper, safeplug_tor, safeplug_tor_config, safeplug_privoxy, safeplug_privoxy_config
+\end{fileName}
+  Each file is compared to an MD5 hash before being unzipped and installed.  Details about the software found on the Safeplug are discussed in Section \ref{software}.  After the safeplug\_lighttpd and safeplug\_lighttpd\_config installations, a process called \verb!hbplug! is killed and lighttpd is started.  After the certs are downloaded, the current \verb!/usr/local/ssl! is overwritten with the new certs.  The \verb!go\_helper! is added to the \verb!/opt/xce/sbin! folder, and contains binary files with names related to update and upgrade.
+
+After completing the installations, a default Safeplug configuation file is written with use of Tor set to 1.  More information about the configuration is in Section \ref{spconfig}.  Finally, the old \verb!rcS! file in \verb!/etc/init.d! is replaced with commands to start lighttpd, tor and privoxy, and the LED on the front of the device is set to green after the completion of the upgrade. This means that the green LED indicates an up-to-date, internet-connected Safeplug, rather than anything about the use of TOR.
+
+\subsubsection{Traffic After Activation}
+After the activation and the configuration of the Safeplug as a proxy, all traffic runs through the Tor network.  The Safeplug connected to a directory to learn about different relays and seemed to cycle through a small set around the world for different connections.  This demonstrates that Tor is working as expected.  If there is any ``phone-home'' being done by the device after Tor has been turned on, then it is doing so through the Tor network.
