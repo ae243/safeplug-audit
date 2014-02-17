@@ -93,15 +93,11 @@ If the latency of web requests using the Safeplug is noticeably longer than that
 \item Firefox, Tor, no ad-blocking
 \item Firefox, Tor, ad-blocking
 \item Firefox, no Tor, ad-blocking
-\item Tor Browser Bundle with Safeplug
+\item Tor Browser Bundle with Safeplug (all settings turned off)
 \item Tor Browser Bundle
 \end{itemize}
 
 For each of the settings, we took 20 measurements; Figure~\ref{fig:latency2} shows the average time of a web request on each of the specified settings for three different web pages.  The differences between web pages can most likely be attributed to the amount of ads on the web page.  
-
-It is interesting to note that the average web request time for accessing \url{www.washingtonpost.com} is greatest on the same settings that the average web request time for \url{www.google.com} is the least. This setting did not include ad-blocking, and therefore \url{www.washingtonpost.com} had to render each ad; \url{www.google.com} does not have any ads.  This does not explain why the average latency was greater than the other settings for \url{www.washingtonpost.com}. 
-
-We expected the average latency for the Tor Browser Bundle with the Safeplug to be uniformly greater than the average latency of the Tor Browser Bundle, however that was not the case. [Comment: do we have any reasons why this might have happened?] 
 
 \begin{figure}[htb]
 \begin{center}
@@ -110,3 +106,7 @@ We expected the average latency for the Tor Browser Bundle with the Safeplug to 
 \label{fig:latency2}
 \end{center}
 \end{figure}
+
+It is interesting to note that the average web request time for accessing \url{www.washingtonpost.com} is greatest on the same settings that the average web request time for \url{www.google.com} is the least. This setting did not include ad-blocking, and therefore \url{www.washingtonpost.com} had to render each ad; \url{www.google.com} does not have any ads.  This also explains why the average latency was greater than the other settings for \url{www.washingtonpost.com}: each ad was requested through Tor.   
+
+The latency of using the Safeplug with Firefox, Tor, and ad-blocking is comparable to that of using the Tor Browser Bundle.  For all three web pages, the Tor Browser Bundle had slightly lower latency.  
