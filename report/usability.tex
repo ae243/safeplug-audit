@@ -89,23 +89,36 @@ Next, we wanted to see how usable this would be to a normal Internet user.  A us
 \end{center}
 \end{figure}
 
-\subsection{Cookies}  While browsing the Internet, we logged into a Google Account in a tab, and then subsequently went to a website that had the Google+ logo in a different tab.  When we clicked on the Google+ logo, it remember who we are; so we can confirm that we still have first-party cookies.  We experienced the same situation with Facebook and its corresponding ``like'' button.
+\subsection{Cookies}  
+While browsing the Internet, we logged into a Google Account in a tab, and then subsequently went to a website that had the Google+ logo in a different tab.  When we clicked on the Google+ logo, it remember who we are; so we can confirm that we still have first-party cookies.  We experienced the same situation with Facebook and its corresponding ``like'' button.
 
 This is clearly not the perfect ``anonymity'' that Safeplug promised in their publicity.  Although normal use does follow this model of persisting logged in status across browser tabs and sessions, a user concerned about anonymity and seeing each session coming up differently (German vs Swedish) might mistakenly believe that they do not have to log out of their social media accounts to preserve their anonymity when accessing other websites.
 
 More interesting and damaging to the user's control over their anonymity would be third-party cookies because the user cannot remove those just by logging out.  It requires a trip to the browser settings to clear cookies (or not have them set in the first place).  We used the FourthParty plugin developed by Jonathan Mayer at Stanford to collect information about cookies and other browsing data during the client's use of the Safeplug \cite{fourthparty}.  When collecting data on the existence of third-party cookies, we analyzed two separate browsing sessions; they were both new sessions with no cookies.  One of the sessions used the ad-block feature of the Safeplug and the other did not.  After analyzing data from Fourthparty, we found many third-party cookies in both sessions.  These included cookies from: abmr.net, bizographics.com, krxd.net, and bluekai.com among many others.
 
 \subsection{Latency}
-1) How we took the measurements
+If the latency of web requests using the Safeplug is noticeably longer than that of normal Internet use, users may be deterred from using the device.  Similarly, if turning Tor on, but not ad-blocking, adds a significant time delay, the user may only turn on the ad-blocking feature (without Tor).  We recorded the time for a web request on the following settings:
 
-2) What the measurements were (what we found)
+\begin{itemize}
+\item Plain Firefox
+\item Firefox, no Tor, no ad-blocking
+\item Firefox, Tor, no ad-blocking
+\item Firefox, Tor, ad-blocking
+\item Firefox, no Tor, ad-blocking
+\item Tor Browser Bundle with Safeplug
+\item Tor Browser Bundle
+\end{itemize}
 
-3) Why could this possibly happen (reasons, explanations, etc.)
+For each of the settings, we took 20 measurements; Figure~\ref{fig:latency2} shows the average time of a web request on each of the specified settings for three different web pages.  The differences between web pages can most likely be attributed to the amount of ads on the web page.  
+
+It is interesting to note that the average web request time for accessing \url{www.washingtonpost.com} is greatest on the same settings that the average web request time for \url{www.google.com} is the least. This setting did not include ad-blocking, and therefore \url{www.washingtonpost.com} had to render each ad; \url{www.google.com} does not have any ads.  This does not explain why the average latency was greater than the other settings for \url{www.washingtonpost.com}. 
+
+We expected the average latency for the Tor Browser Bundle with the Safeplug to be uniformly greater than the average latency of the Tor Browser Bundle, however that was not the case. [Comment: do we have any reasons why this might have happened?] 
 
 \begin{figure}[htb]
 \begin{center}
-\includegraphics[width=0.7\textwidth]{latency}
+\includegraphics[width=0.7\textwidth]{latency2}
 \caption{Latency of web requests.}
-\label{fig:latency}
+\label{fig:latency2}
 \end{center}
 \end{figure}
