@@ -5,31 +5,19 @@ Many news articles were published to announce the release of the Safeplug in add
 
 \subsection{Terms of Service}
 \label{tos}
-The first section of the Terms of Service (TOS) explains how to agree to them:
+The Terms of Service (TOS) contains three main points of interest: TOS updates, open source licensing information, and software updates.
+
+\subsubsection{TOS updates} Pogoplug suggests that users consistently read the TOS becaues they can update or change them at anytime.  Most Safeplug users will likely not read the TOS once, let alone on a regular basis; therefore, most users will be blind to any changes.  It is also interesting that these TOS are only accessible through a small link at the bottom of the Safeplug website \cite{safeplug}; specifically, there is no documentation, including the TOS, in the package that the device was shipped in.
+
+\subsubsection{Open source licensing information}  There is a section that acknowledges the use of many open source components in the Safeplug device; this section includes the statement: 
 
 \begin{quotation}
-``You must agree to these TOS before you can use the Service. You can agree to these TOS by: a) actually using the Service, or b) clicking a box that indicates you agree to the Service, where such a box is made available to you.'' \cite{safeplug}
+``You agree to abide by the terms of the relevant licenses, as may be updated by Pogoplug from time to time at http://pogoplug.com/home-en-developers-open-source.html. '' \cite{safeplug}
 \end{quotation}
 
-This is worth noting because option b) described above did not exist in any part of the setup process for Safeplug.  The TOS continues by notifying readers that Pogoplug can change them any time they wish:
+The link included is a dead link and takes the user to a web page with a 404 error.  This lack of attention to detail or respect for open source licenses does not put Pogoplug in a good light.  In fact, the Tor-talk mailing list noted this particularly, since Tor is an open source project \cite{tormailinglist}.
 
-\begin{quotation}
-``Pogoplug may update or change these TOS from time to time and recommends that you review the TOS on a regular basis at www.pogoplug.com/safeplug. You understand and agree that your continued use of the Service after the TOS has changed constitutes your acceptance of the TOS as revised. '' \cite{safeplug}
-\end{quotation}
-
-Most Safeplug users will likely not read the TOS once, let alone on a regular basis; therefore, most users will be blind to any changes.  It is also interesting that these TOS are only accessible through a small link at the bottom of the Safeplug website \cite{safeplug}; specifically, there is no documentation, including the TOS, in the package that the device was shipped in.  The TOS next includes:
-
-\begin{quotation}
-``Pogoplug includes several open source components in the Software. You agree to abide by the terms of the relevant licenses, as may be updated by Pogoplug from time to time at http://pogoplug.com/home-en-developers-open-source.html. '' \cite{safeplug}
-\end{quotation}
-
-The link included is a dead link and takes the user to a web page with a 404 error.  This lack of attention to detail or respect for open source licenses does not put Pogoplug in a good light.  In fact, the Tor-talk mailing list noted this particularly, since Tor is an open source project \cite{tormailinglist}.  The last section of the TOS that stood out described Pogoplug's policy on updates:
-
-\begin{quotation}
-``As part of the Service, you may from time to time receive updates to the Software from Pogoplug that may be automatically downloaded and installed to your applicable device. These updates may include bug fixes, security enhancements or improvements, or entirely new versions of the Software. You agree that Pogoplug may automatically deliver such updates to you as part of the Service. '' \cite{safeplug}
-\end{quotation}
-
-This should raise a red flag for users because they may not know when the software in their device is being changed or what it is changing to.  While Safeplug makes many claims about providing anonymity, users are simply putting their trust in a different entity, namely Pogoplug.
+\subsubsection{Software updates} Not only can the TOS be updated at any time, so can the software on the device.  These udpates will be ``automatically delivered'' to the user, but the user is not notified of these updates~\cite{safeplug}.  This should raise a red flag for users because they may not know when the software in their device is being changed or what it is changing to.  While Safeplug makes many claims about providing anonymity, users are simply putting their trust in a different entity, namely Pogoplug.
 
 \subsection{Tor Relay Node Option}
 One of Safeplug's configurations is the use of the device as a Tor relay node in the Tor network.  When the device is initially setup, the default setting is to not use it as a relay node.  
