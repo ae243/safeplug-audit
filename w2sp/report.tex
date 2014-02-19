@@ -103,7 +103,7 @@
 
 % *** CITATION PACKAGES ***
 %
-%\usepackage{cite}
+\usepackage{cite}
 %\usepackage{cite}
 % cite.sty was written by Donald Arseneau
 % V1.6 and later of IEEEtran pre-defines the format of the cite.sty package
@@ -253,7 +253,8 @@
 
 
 % *** SUBFIGURE PACKAGES ***
-\usepackage[tight,footnotesize]{subfig}
+%\usepackage[tight,footnotesize,caption=false]{subfig}
+\usepackage[caption=false]{subfig}
 % subfigure.sty was written by Steven Douglas Cochran. This package makes it
 % easy to put subfigures in your figures. e.g., "Figure 1a and 1b". For IEEE
 % work, it is a good idea to load it with the tight package option to reduce
@@ -338,7 +339,7 @@
 
 
 
-
+\usepackage{listings}
 
 % *** Do not adjust lengths that control margins, column widths, etc. ***
 % *** Do not use packages that alter fonts (such as pslatex).         ***
@@ -352,6 +353,9 @@
 
 
 \begin{document}
+
+\lstset{basicstyle=\footnotesize}
+
 %
 % paper title
 % can use linebreaks \\ within to get better formatting as desired
@@ -395,7 +399,7 @@
 % 
 \author{\IEEEauthorblockN{Anna Kornfeld Simpson,
 Anne Edmundson,
-Josh Kroll and,
+Josh Kroll, and
 Ed Felten}
 \IEEEauthorblockA{Department of Computer Science\\
 Princeton University,
@@ -520,7 +524,7 @@ We present the first public third-party security audit of Pogoplug's Safeplug de
 % no \IEEEPARstart
 User privacy is becoming increasingly important as more Internet users realize how vulnerable they are to attackers and eavesdroppers.  This has been exacerbated by the current news about the NSA's surveillance of the Internet~\cite{nsa}.  Unfortunately, the average Internet user is not aware of how to protect themselves against malicious users.   
 
-\begin{figure*}[t]
+\begin{figure*}
 \begin{center}
 \includegraphics[width=.75\textwidth]{instructions}
 \caption{Configuration instructions.}
@@ -541,21 +545,19 @@ Using Tor or the Tor Browser Bundle provides a tradeoff between anonymity, usabi
 \subsection{Hardware}
 Before investigating the software, we took apart one of the two Safeplug devices we purchased in order to see the physical components.  Figure~\ref{fig:top} shows the top of the board and Figure~\ref{fig:bottom} shows the bottom.  The board incorporates: (A) an SD card slot, (B) a power connector, (C) a USB slot, (D) an ethernet connector, (E) ethernet transceiver, (F) lan transformer, (G) an integrated circuit, and (H), (I) flash memory.
 
-%\begin{figure*}[htb]
-%\centering
-%\begin{subfigure}[b]{.3\textwidth}
-%  \includegraphics[width=\textwidth]{safeplug_listed_top}
-%  \caption{Top of the board inside the Safeplug device.}
-%  \label{fig:top}
-%\end{subfigure}%
-%\qquad
-%\begin{subfigure}[b]{.3\textwidth}
-%\includegraphics[width=\textwidth]{safeplug_listed_bottom}
-%\caption{Bottom of the board inside the Safeplug device.}
-%\label{fig:bottom}
-%\end{subfigure}
-%\caption{Safeplug circuit board after the teardown.}
-%\end{figure*}
+\begin{figure*}[!b]
+\centering
+\subfloat[][Top of the board inside the Safeplug device.]{
+  \includegraphics[width=.3\textwidth]{safeplug_listed_top}
+  \label{fig:top}
+}
+\qquad
+\subfloat[][Bottom of the Board inside the Safeplug device.]{
+  \includegraphics[width=.3\textwidth]{safeplug_listed_bottom}
+  \label{fig:bottom}
+}
+\caption{Safeplug circuit board after the teardown.}
+\end{figure*}
 
 \subsection{Software}
 \label{software}
@@ -586,23 +588,14 @@ One of our concerns is how understandable this setting is to the average Interne
 ``Safeplug uses the Tor network to secure your Internet connection.  Tor works by routing your Internet through a series of random destinations, much like driving a twisty, complicated route to throw off someone who is following you, making it impossible for websites and organizations to identify the source or destination of Internet traffic.'' \cite{safeplug}
 \end{quotation}
 
-On the other hand, it describes the functionality of a Tor relay node in a much more technical manner.  This description is shown in Figure~\ref{fig:relaydesc}.  If the majority of users can only understand the simpler description, then they likely won't understand the description of a Tor relay node.  This could be a problem if users simply decide not to do anything with that setting (i.e. don't change the setting to use Safeplug as a relay node).  Then there would be a large increase in use of the Tor network, yet most of the users are not giving back to it.
+On the other hand, it describes the functionality of a Tor relay node in a much more technical manner:
+\begin{quotation}
+``Make the Tor network strong for everybody! Enabling Tor Relay allows your Safeplug to act as a relay point on the Tor network. The more Tor relays that join the Tor network, the faster and more robust Tor becomes, helping everybody be more secure online. \\ \\ NOTE: You must forward inbound traffic on port 9001 to [IP-of-Safeplug]. \\ For help configuring your router, click here.''
+\cite{safeplug}
+\end{quotation}
 
-\begin{figure*}
-\begin{center}
-\includegraphics[width=\textwidth]{funnydesc.png}
-\caption{Description of Tor on Safeplug settings page.}
-\label{fig:funnydesc}
-\end{center}
-\end{figure*}
+If the majority of users can only understand the simpler description, then they likely won't understand the description of a Tor relay node.  This could be a problem if users simply decide not to do anything with that setting (i.e. don't change the setting to use Safeplug as a relay node).  Then there would be a large increase in use of the Tor network, yet most of the users are not giving back to it.
 
-\begin{figure*}[th]
-\begin{center}
-\includegraphics[width=\textwidth]{relaydesc.png}
-\caption{Description of a Tor relay on Safeplug settings page.}
-\label{fig:relaydesc}
-\end{center}
-\end{figure*}
 
 This could easily be remedied; Safeplug should choose a target audience and have consistent descriptions.  The best option is to explain the Tor network and the functionality of a Tor relay node at the same level, preferably a level that normal Internet users can understand.  This increases the chances that users will run their Safeplug as a relay node.
 
@@ -619,54 +612,46 @@ These configuration files are read by the scripts in \verb!/opt/xce/etc/init.d! 
 Many news articles were published to announce the release of the Safeplug in addition to a lengthy discussion on the Tor-talk mailing list~\cite{tormailinglist}.  There were many thoughts on the Terms of Service and the option to use the device as a Tor relay node; this inspired us to start our analysis with these items.  
 
 \subsection{Activation and Setup}
-The first step was to plug Safeplug into our router and activate our device.  Our instructions are shown in Figure~\ref{fig:instructions}.  We followed them, activated our device, and then ended on the configurations page.  The configurations page has a combination of platforms and browsers, with a different set of proxy configuration instructions for each one.  It is interesting to note that the only platform options were: OSX, Windows, Android, and iOS.  Figure~\ref{fig:proxyconfig} shows our configuration. 
+The first step was to plug Safeplug into our router and activate our device.  Our instructions are shown in Figure~\ref{fig:instructions}.  We followed them, activated our device, and then ended on the configurations page.  The configurations page has a combination of platforms and browsers, with a different set of proxy configuration instructions for each one.  It is interesting to note that the only platform options were: OSX, Windows, Android, and iOS.  
 
-\begin{figure*}[t]
-\begin{center}
-\includegraphics[width=.75\textwidth]{proxyconfig}
-\caption{Proxy Configuration.}
-\label{fig:proxyconfig}
-\end{center}
-\end{figure*}
+%%TODO: A table for platform and browsers available?
 
 After we finished our configuration, we were taken to our settings page.  This page is shown in Figure~\ref{fig:settings}.  This allowed us to turn Tor on/off, add white-listed websites, turn ad-blocking on/off, and turn the ability of our device to be a relay node on/off.  
 
-\begin{figure*}[htb]
-\begin{center}
-\includegraphics[width=.75\textwidth]{settings}
-\caption{Settings page.}
-\label{fig:settings}
-\end{center}
-\end{figure*}
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=.4\textwidth]{settings}
+  \caption{Settings page.}
+  \label{fig:settings}
+\end{figure}
 
 \subsection{Internet Use}
 \label{inetuse}
+
 Figure~\ref{fig:before} shows what a web page looks like before turning Tor and ad-blocking on, while Figure~\ref{fig:after} shows the same website after turning Tor and ad-blocking on.  Both of these figures show our IP address in the top right corner; due to the change in IP address we can see that our traffic is being routed through Tor.  
 
-%\begin{figure}[htb]
-%\centering
-%\begin{subfigure}[b]{.4\textwidth}
-%\includegraphics[width=\textwidth]{before}
-%\caption{Web page before using Tor and ad-blocking.}
-%\label{fig:before}
-%\end{subfigure}%
-%\quad
-%\begin{subfigure}[b]{.4\textwidth}
-%\includegraphics[width=\textwidth]{after}
-%\caption{Web page after using Tor and ad-blocking.}
-%\label{fig:after}
-%\end{subfigure}
-%\end{figure}
+
+\begin{figure*}[htb]
+\centering
+\subfloat[][Web page before using Tor and ad-blocking.]{
+  \includegraphics[width=.4\textwidth]{before}
+  \label{fig:before}
+}
+\quad
+\subfloat[][Webpage after using Tor and ad-blocking.]{
+  \includegraphics[width=.4\textwidth]{after}
+  \label{fig:after}
+}
+\end{figure*}
 
 Next, we wanted to see how usable this would be to a normal Internet user.  A user would probably decide not to use Safeplug if they could not read their web pages (if they were not in their native language), or if they could not log into their accounts (some web sites will lock a user out if they try to log in from multiple countries in a short time period).  While browsing the Internet, we experienced some pages in German and Swedish, which is expected with Tor; if a user is not familiar with Tor, then they may just get frustrated and stop using Safeplug altogether.  We were also prompted with the page in Figure~\ref{fig:funnygoogle} when we tried to log into our Google account, indicating that Google noticed we were trying to login from different locations.
 
-\begin{figure*}[htb]
-\begin{center}
-\includegraphics[width=0.5\textwidth]{funnygoogle}
-\caption{Google's response after trying to log in.}
-\label{fig:funnygoogle}
-\end{center}
-\end{figure*}
+\begin{figure}
+  \centering
+  \includegraphics[width=0.5\textwidth]{funnygoogle}
+  \caption{Google's response after trying to log in.}
+  \label{fig:funnygoogle}
+\end{figure}
 
 \subsection{Cookies}  
 While browsing the Internet, we logged into a Google Account in a tab, and then subsequently went to a website that had the Google+ logo in a different tab.  When we clicked on the Google+ logo, it remember who we are; so we can confirm that we still have first-party cookies.  We experienced the same situation with Facebook and its corresponding ``like'' button.
@@ -690,12 +675,11 @@ If the latency of web requests using the Safeplug is noticeably longer than that
 
 For each of the settings, we took 20 measurements; Figure~\ref{fig:latency2} shows the average time of a web request on each of the specified settings for three different web pages.  When taking these measurements, we loaded the page, but did not scroll; in many cases more objects are loaded when scrolling down a page.  The differences between web pages can most likely be attributed to the amount of ads on the web page.  
 
-\begin{figure*}[htb]
-\begin{center}
-\includegraphics[width=0.7\textwidth]{latency2}
-\caption{Latency of web requests.}
-\label{fig:latency2}
-\end{center}
+\begin{figure*}
+  \centering
+  \includegraphics[width=0.7\textwidth]{latency2}
+  \caption{Latency of web requests.}
+  \label{fig:latency2}
 \end{figure*}
 
 It is interesting to note that the average web request time for accessing \url{www.washingtonpost.com} is greatest on the same settings that the average web request time for \url{www.google.com} is the least. This setting did not include ad-blocking, and therefore \url{www.washingtonpost.com} had to render each ad; \url{www.google.com} does not have any ads.  This also explains why the average latency was greater than the other settings for \url{www.washingtonpost.com}: each ad was requested through Tor.   
@@ -705,12 +689,11 @@ The latency of using the Safeplug with Firefox, Tor, and ad-blocking is comparab
 \section{Implementing Attacks}
 As we discovered during the software analysis, the Safeplug has a remote procedure call (RPC) capability.  This is a script called \verb!xspctrl! found in \verb!/opt/xce/html/svc! and it contains various options.  Particularly, functional calls to this script include enable and disable for all of the Safeplug settings, including Tor, ad block, and Tor relay.  None of them require any arguments in the POST string.
 
-\begin{figure*}[htb]
-\begin{center}
-\includegraphics[width=.75\textwidth]{disabletor}
-\caption{Disabling Tor as an insider attack.}
-\label{disable}
-\end{center}
+\begin{figure*}
+  \centering
+  \includegraphics[width=.75\textwidth]{disabletor}
+  \caption{Disabling Tor as an insider attack.}
+  \label{disable}
 \end{figure*}
 
 \subsection{Insider Attack}
@@ -721,10 +704,10 @@ This attacker could also be any kind of device on the local network, or the loca
 This seems like a fairly important vulnerability and requires action from Pogoplug to fix.  Since the purpose of these RPC operations is unclear without access to more of the source code, it is possible that they could be disabled entirely.  If not, perhaps there is some authentication protocol that could be implemented.  The challenge of such a protocol from a user's point of view is that valid access would be infrequent so giving a user a password to remember would be a poor experience.
 
 \subsection{CSRF Attack}
-An external website can also perform this attack by returning a correctly formatted POST string.  This executes the same functionality as the Insider Attack, but the attacker does not need to be on the local network or know the IP address of the Safeplug.  Instead, the attacker (who could be any malicious actor with access to a web server) can just send a POST request to every IP in the common ranges of local addresses in home networks, 192.168.0.0/24 and 192.168.1.0/24.  We implemented this attack with less than 30 lines of Javascript code (See Appendix A).  The following steps are necessary for the attack to be successful:
+An external website can also perform this attack by returning a correctly formatted POST string.  This executes the same functionality as the Insider Attack, but the attacker does not need to be on the local network or know the IP address of the Safeplug.  Instead, the attacker (who could be any malicious actor with access to a web server) can just send a POST request to every IP in the common ranges of local addresses in home networks, 192.168.0.0/24 and 192.168.1.0/24.  We implemented this attack with less than 20 lines of Javascript code.  The following steps are necessary for the attack to be successful:
 
 \begin{enumerate}
-\item Set up a web page with the crafted Javascript code, which will send the POST request of the following format to all addresses in the common ranges: \url{http://<IP address>/svc/xspctrl/disableTor} (See Appendix \ref{App:AppendixA}).
+\item Set up a web page with the crafted Javascript code, which will send the POST request of the following format to all addresses in the common ranges: \url{http://<IP address>/svc/xspctrl/disableTor}.
 \item Send the malicious link to a user in the targeted private network.
 \item Once the user clicks the link and loads the malicious site, the correctly formatted POST request will be sent to every IP address in the ranges.  
 \item Tor is disabled silently.  The user must check or refresh her settings page to learn that Tor is turned off.  
@@ -739,15 +722,17 @@ In addition to disabling Tor, the attacker can modify any other settings on the 
 \subsection{Gaining Access through SSH}
 \label{sec:SSH}
     Safeplug runs an RPC server that allows the enabling of SSH access via HTTP. SSH instructions for Cloud Engine's other device (Pogoplug) are widely available online and an email in the Tor-talk mailing list confirms that the instructions are the same \cite{ceadmin}:
-%\begin{fileName}
-%curl --data ``'' http://<IP-of-Safeplug>/svc/xspctrl/enableSSHD
-%ssh root@<IP-of-Safeplug>
-%password: ceadmin
-%\end{fileName}
+\begin{lstlisting}
+curl --data ``'' http://<IP>/svc/xspctrl/enableSSHD
+ssh root@<IP-of-Safeplug>
+password: ceadmin
+\end{lstlisting}
 
 Obviously having a publically available root password means that SSH can be done effectively without authentication.  We tried the SSH procedure twice, once before the internet connection and activation, and once afterwards.  Before the activation and update procedure, SSH was not available.  The simple \verb!Hbplug! software on the box could not accept this RPC call.  However, once the box was updated and had lighttpd installed, the SSH procedure was available and we could download the contents of the root filesystem for analysis.
 
 \subsection{Spoofing the Update Server}
+A more dangerous class of vulnerabilities comes from the fact that the update process happens over insecure TCP rather than any kind of encrypted process.  During our network analysis of the activation process, we discovered that the update script is downloaded via TCP from an IP address provided by the pogoplug servers.  This update script (run as root) then downloads the Safeplug's software (Tor, Privoxy, Lighttpd, and wget) and checks it against MD5 hashes, but it is not clear whether there is suitable verification of the update script itself.  An adversary could use DNS spoofing or compromise the Pogoplug server in order to force users to download a malicious update script - for example, something that turns the Safeplug into a surveillance box while appearing to provide the correct functionality.  Since the most efficient way to check this would be to verify the contents of the Safeplug box itself by SSHing in, and SSHing explicitly breaks the warranty, it is clear that any kind of mitigation to this attack would be beyond an average user.  Because the activation occurs over TCP rather than anything more secure, an adversary who can spoof DNS replies to the user has a paved gateway into the Safeplug box.  This turns a device that does not live up to expectations but is otherwise harmless into something that actively harms security on the network.
+
 
 
 \section{Related Work}
@@ -783,11 +768,6 @@ Ultimately, the structural concerns of the Safeplug ``Torifying proxy-in-a-box''
 
 % conference papers do not normally have an appendix
 
-
-% use section* for acknowledgement
-%I don't think we would acknowledge co-authors.
-%\section*{Acknowledgment}
-%We would like to express our gratitude to Ed Felten for helping us procure the Safeplugs and to Josh Kroll for donating a lot of time and his computer to the routing effort.
 
 % trigger a \newpage just before the given reference
 % number - used to balance the columns on the last page
