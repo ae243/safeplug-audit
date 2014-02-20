@@ -563,7 +563,7 @@ Before investigating the software, we took apart one of the two Safeplug devices
 \label{software}
 We determined the software on the device from analyzing network traffic logs of the activation process and accessing the device via SSH.
 
-\subsection{Terms of Service}
+\subsection{Information Prior to Using the Device: Terms of Service}
 \label{tos}
 The Terms of Service (TOS) contains three main points of interest: TOS updates, open source licensing information, and software updates.
 
@@ -580,6 +580,7 @@ The link included is a dead link and takes the user to a web page with a 404 err
 {\bf Software updates.} Not only can the TOS be updated at any time, so can the software on the device.  These udpates will be ``automatically delivered'' to the user, but the user is not notified of these updates~\cite{safeplug}.  This should raise a red flag for users because they may not know when the software in their device is being changed or what it is changing to.  While Safeplug makes many claims about providing anonymity, users are simply putting their trust in a different entity, namely Pogoplug.
 
 \subsection{Tor Relay Node Option}
+\label{port9001}
 One of Safeplug's configurations is the use of the device as a Tor relay node in the Tor network.  When the device is initially setup, the default setting is to not use it as a relay node.  
 
 One of our concerns is how understandable this setting is to the average Internet user.  The settings page describes Tor in an extremely basic way:
@@ -596,11 +597,34 @@ On the other hand, it describes the functionality of a Tor relay node in a much 
 
 If the majority of users can only understand the simpler description, then they likely won't understand the description of a Tor relay node.  This could be a problem if users simply decide not to do anything with that setting (i.e. don't change the setting to use Safeplug as a relay node).  Then there would be a large increase in use of the Tor network, yet most of the users are not giving back to it.
 
-
 This could easily be remedied; Safeplug should choose a target audience and have consistent descriptions.  The best option is to explain the Tor network and the functionality of a Tor relay node at the same level, preferably a level that normal Internet users can understand.  This increases the chances that users will run their Safeplug as a relay node.
 
 \subsection{Software on the Safeplug}
-The software installed by the activation process on the Safeplug (it is not on the box prior to the activation) is in \verb!/opt/xce! and includes lighttpd, privoxy, and tor.  Lighttpd is an open-source webserver, which is serving the settings page on the device - the project's description mentions ``security, speed, compliance, and flexibility [... while being] designed and optimized for high perfomance environments'' \cite{lighttpd}.  Privoxy is a ``non-caching web proxy with advanced filtering capabilities for enhancing privacy, modifying webpage data and HTTP headers, controlling access, and removing ads and other obnoxious Internet junk'' and it specifically advertises its ``flexible configuration'' \cite{privoxy}.  Privoxy is also open source.  All three pieces of software appear to have default configuration files.  The fourth piece of software discovered on the device, which does not seem to be installed during the activation process is the Dropbear SSH server and client, used to support SSH access to the device \cite{dropbear}.  The Safeplug uses its own configuration files to determine how these pieces of software are set up and used.
+
+\begin{center}
+	\begin{tabular}{|c|c|c|}
+	\hline
+		Safeplug Software 	& Version 		& Date \\ \hline
+		Linux Kernel				& 2.6.31.8 	& 2009 \\ \hline
+		Lighttpd Web Server & 1.4.33			& 2013 \\ \hline
+		Privoxy Proxy				& 3.0.21			& 2013 \\ \hline
+		Tor Onion Routing		& 0.2.3.25		& 2012 \\ \hline
+		Dropbear sshd				& v0.52			& 2008 \\ \hline
+	\end{tabular}
+\end{center}
+
+The Safeplug runs version 2.6.31.8 of Arch Linux on an ARM architecture, which was produced at the end of 2009 and installed on 23 August 2011.  Unsurprising for its age, there are a number of network vulnerabilities for this version of the kernel - most of which seem to produce denial of service attacks if an adversary sends a particularly formed packet \cite{kernelcve}.  This is the same version of Linux that runs on Version 4 of PogoPlug's Mobile platform \cite{archforum}.
+
+The software installed by the activation process on the Safeplug (it is not on the box prior to the activation) is in \verb!/opt/xce! and includes lighttpd, privoxy, and tor.  Lighttpd is an open-source webserver, which is serving the settings page on the device - the project's description mentions ``security, speed, compliance, and flexibility [... while being] designed and optimized for high perfomance environments'' \cite{lighttpd}.  The version of lighttpd on the box is only one version away from being up to date, 1.4.33 which was released on 27 September 2013.  The current version of lighttpd, which has a number of security fixes, was released on 20 January 2014, after the Safeplug was purchased.  However, checking for an update from the Safeplug does not lead to any updated software installation, one of many cases of inattention to detail.
+
+Privoxy is a ``non-caching web proxy with advanced filtering capabilities for enhancing privacy, modifying webpage data and HTTP headers, controlling access, and removing ads and other obnoxious Internet junk'' and it specifically advertises its ``flexible configuration'' \cite{privoxy}.  Privoxy is also open source.  The version on the device is 3.0.21, which is the most recent release.
+
+The version of Tor is v0.2.3.25 which is from November 2012.  The current stable version of Tor is v0.2.4.20 from December 2013.  Unlike Lighttpd and Privoxy, the Safeplug does not contain the most up-to-date version of Tor from when it was released.
+
+The fourth piece of software discovered on the device, which is not installed during the activation process and is in \verb!/usr/sbin! is the Dropbear SSH server and client, used to support SSH access to the device \cite{dropbear}.  The Safeplug uses its own configuration files to determine how these pieces of software are set up and used.  The version of Dropbear on the Safeplug is v0.52 from 2008, which is extremely out of date.  Given the different location and installation methods, it seems likely that this was from the older Pogoplug device and is not designed to be updated in the same manner as the rest of the Safeplug software.
+
+\subsection{Networking}
+The lighttpd, Privoxy and Dropbear software give some indication of the networking services on the device.  We used \texttt{nmap} to scan the ports.  Before the activation of the Safeplug, only ports 80 and port 3333 are open.  After the activation, without the use of Tor turned on, ports 22 for SSH, port 80 for settings access and port 8080 for http-proxy are open.  When Tor is turned on as a relay, port 9001 tor-orport is opened as well.  This corresponds with the note on the settings page about Tor relays discussed in Section \ref{port9001} above.
     
 \subsection{Configuration on the Safeplug}
 \label{spconfig}
@@ -619,10 +643,11 @@ The first step was to plug Safeplug into our router and activate our device.  Ou
 After we finished our configuration, we were taken to our settings page.  This page is shown in Figure~\ref{fig:settings}.  This allowed us to turn Tor on/off, add white-listed websites, turn ad-blocking on/off, and turn the ability of our device to be a relay node on/off.  
 
 \begin{figure}[htb]
-  \centering
+  \begin{center}
   \includegraphics[width=.4\textwidth]{settings}
   \caption{Settings page.}
   \label{fig:settings}
+	\end{center}
 \end{figure}
 
 \subsection{Internet Use}
@@ -631,26 +656,28 @@ After we finished our configuration, we were taken to our settings page.  This p
 Figure~\ref{fig:before} shows what a web page looks like before turning Tor and ad-blocking on, while Figure~\ref{fig:after} shows the same website after turning Tor and ad-blocking on.  Both of these figures show our IP address in the top right corner; due to the change in IP address we can see that our traffic is being routed through Tor.  
 
 
-\begin{figure*}[htb]
+\begin{figure*}[!b]
 \centering
 \subfloat[][Web page before using Tor and ad-blocking.]{
-  \includegraphics[width=.4\textwidth]{before}
+  \includegraphics[width=.3\textwidth]{before}
   \label{fig:before}
 }
 \quad
-\subfloat[][Webpage after using Tor and ad-blocking.]{
-  \includegraphics[width=.4\textwidth]{after}
+\subfloat[][Web page after using Tor and ad-blocking.]{
+  \includegraphics[width=.3\textwidth]{after}
   \label{fig:after}
 }
+\caption{Application of Safeplug proxy settings.}
 \end{figure*}
 
 Next, we wanted to see how usable this would be to a normal Internet user.  A user would probably decide not to use Safeplug if they could not read their web pages (if they were not in their native language), or if they could not log into their accounts (some web sites will lock a user out if they try to log in from multiple countries in a short time period).  While browsing the Internet, we experienced some pages in German and Swedish, which is expected with Tor; if a user is not familiar with Tor, then they may just get frustrated and stop using Safeplug altogether.  We were also prompted with the page in Figure~\ref{fig:funnygoogle} when we tried to log into our Google account, indicating that Google noticed we were trying to login from different locations.
 
 \begin{figure}
-  \centering
-  \includegraphics[width=0.5\textwidth]{funnygoogle}
+  \begin{center}
+  \includegraphics[width=0.3\textwidth]{funnygoogle}
   \caption{Google's response after trying to log in.}
   \label{fig:funnygoogle}
+	\end{center}
 \end{figure}
 
 \subsection{Cookies}  
@@ -797,6 +824,8 @@ Ultimately, the structural concerns of the Safeplug ``Torifying proxy-in-a-box''
 NSA Toolbox'' \emph{Der Spiegel} 29 December 2013 \url{www.spiegel.de/internatio
 nal/world/catalog-reveals-nsa-has-back-doors-for-numerous-devices-a-940994.html}
 
+\bibitem{archforum} Arch Linux ARM Forums. ``Installation on the Pogoplug Series 4.'' \url{http://archlinuxarm.org/forum/viewtopic.php?f=3&t=2284&start=14&sid=11c74c51b7bab241186a8341ba953095}
+
 \bibitem{nsa} Arther, Charles.  ``NSA scandal: what data is being monitored and how does it work?'' \url{http://www.theguardian.com/world/2013/jun/07/nsa-prism-records-surveillance-questions}.
 
 \bibitem{fingerprint1} Cai, Xiang, et al. ``Touching from a distance: Website fingerprinting attacks and defenses.'' \emph{Proceedings of the 2012 ACM conference on Computer and Communications Security (CCS)}, 2012.
@@ -853,6 +882,8 @@ nal/world/catalog-reveals-nsa-has-back-doors-for-numerous-devices-a-940994.html}
 \bibitem{privoxy} Privoxy. \url{https://www.privoxy.org}
 
 \bibitem{schneier} Schneier, Bruce. ``Tor Appliance.'' \emph{Schneier on Security}, 27 November 2013. \url{https://www.schneier.com/blog/archives/2013/11/tor_appliance.html}.
+
+\bibitem{kernelcve} Security Database. ``Linux Linux Kernel 2.6.13.8 CVE'' \url{http://www.security-database.com/cpe.php?detail=cpe:/o:linux:linux_kernel:2.6.31.8}
 
 \bibitem{techreview} Simonite, Tom. ``Online Anonymity in a Box, for \$49'', \emph{MIT Technology Review}, 21 November 2013. \url{http://www.technologyreview.com/news/521676/online-anonymity-in-a-box-for-49/}.
 
