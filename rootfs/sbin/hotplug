@@ -1,0 +1,32 @@
+#!/bin/sh
+
+case "$1" in
+    firmware)
+        case "$ACTION" in
+            add)
+                echo "HOTPLUG: firmware request for $DEVPATH -- $FIRMWARE" >> /dev/console
+                if [ ! -e /sys/$DEVPATH/loading ]; then
+                    sleep 1
+                fi
+                if [ -f /usr/lib/hotplug/firmware/$FIRMWARE ]; then
+                    echo "HOTPLUG:  -- sending firmware /usr/lib/hotplug/firmware/$FIRMWARE" >> /dev/console
+                    echo 1 > /sys/$DEVPATH/loading
+                    dd if=/usr/lib/hotplug/firmware/$FIRMWARE of=/sys/$DEVPATH/data
+                    echo 0 > /sys/$DEVPATH/loading
+                else
+                    echo "HOTPLUG:  -- no firmware file /usr/lib/hotplug/firmware/$FIRMWARE" >> /dev/console
+                    echo -1 > /sys/$DEVPATH/loading
+                fi
+
+                ;;
+
+            *)
+                #echo "HOTPLUG: bad event $ACTION" >> /dev/console
+                ;;
+        esac
+        ;;
+
+    *)
+        #echo "HOTPLUG: bad argument $1" >> /dev/console
+        ;;
+esac

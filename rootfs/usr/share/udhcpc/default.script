@@ -1,0 +1,101 @@
+#!/bin/sh
+
+#LOGFILE="/tmp/dhcp_`date '+%Y%m%d%H%M'`.log"
+LOGFILE="/dev/null"
+/bin/echo "DHCP COMMAND '$1'" > $LOGFILE
+/bin/date >> $LOGFILE
+/bin/echo >> $LOGFILE
+/bin/echo "ENVIRONMENT: " >> $LOGFILE
+/usr/bin/env >> $LOGFILE
+/bin/echo >> $LOGFILE
+
+hwaddrbytes=`/sbin/ifconfig $interface | /bin/grep 'HWaddr' | /usr/bin/awk '/HWaddr/ {print $5}' | /usr/bin/tr '[A-Z]' '[a-z]' | /bin/sed 's/:/ 0x/g'`
+pip0=`/bin/echo $hwaddrbytes | /usr/bin/awk '/.*/ {print $5+0}'`
+pip1=`/bin/echo $hwaddrbytes | /usr/bin/awk '/.*/ {print $6+0}'`
+
+/bin/echo HWADDR $hwaddrbytes
+/bin/echo PIP0 $pip0
+/bin/echo PIP1 $pip1
+
+[ -n "$broadcast" ] && BROADCAST="broadcast $broadcast"
+[ -n "$subnet" ] && NETMASK="netmask $subnet"
+
+/bin/echo "PRE-SETUP ifconfig: " >> $LOGFILE
+/sbin/ifconfig >> $LOGFILE
+/bin/echo >> $LOGFILE
+/bin/echo "PRE-SETUP route: " >> $LOGFILE
+/sbin/route >> $LOGFILE
+/bin/echo >> $LOGFILE
+/bin/echo "PRE-SETUP dns: " >> $LOGFILE
+/bin/cat /etc/resolv.conf >> $LOGFILE
+/bin/echo >> $LOGFILE
+
+deconfig()
+{
+    # first remove all default routes via this interface
+    while /sbin/route del default gw 0.0.0.0 dev $interface ; do
+	:
+    done
+
+    # remove all name servers from this interface
+    /bin/grep -v $interface /etc/resolv.conf > /tmp/resolv.conf.bak
+    /bin/cat /tmp/resolv.conf.bak > /etc/resolv.conf
+    /bin/rm /tmp/resolv.conf.bak
+
+    # revert to auto-ip
+    /sbin/ifconfig $interface   0.0.0.0
+    /sbin/ifconfig $interface:0 169.254.$pip0.$pip1
+}
+
+bound()
+{
+    /sbin/ifconfig $interface $ip $BROADCAST $NETMASK
+    if [ -n "$router" ] ; then
+        # first remove all default routes via this interface
+	while /sbin/route del default gw 0.0.0.0 dev $interface ; do
+	    :
+	done
+
+        # add the new ones back in now
+	for i in $router ; do
+	    /sbin/route add default gw $i dev $interface
+	done
+    fi
+
+    if [ -n "$dns" ] ; then
+        # remove all name servers from this interface
+        /bin/grep -v $interface /etc/resolv.conf > /tmp/resolv.conf.bak
+        /bin/cat /tmp/resolv.conf.bak > /etc/resolv.conf
+        /bin/rm /tmp/resolv.conf.bak
+
+        # adding all dns values
+	for i in $dns ; do
+	    /bin/echo "nameserver $i #$interface" >> /etc/resolv.conf
+	done
+    fi
+
+    # also bind to auto-ip interface
+    /sbin/ifconfig $interface:0 169.254.$pip0.$pip1
+}
+
+case "$1" in
+    renew|bound)
+        bound
+        ;;
+    deconfig)
+        deconfig
+        ;;
+    *)
+        /bin/echo "Unexpected Argument: $1" >> $LOGFILE
+        ;;
+esac
+
+/bin/echo "POST-SETUP ifconfig: " >> $LOGFILE
+/sbin/ifconfig >> $LOGFILE
+/bin/echo >> $LOGFILE
+/bin/echo "POST-SETUP route: " >> $LOGFILE
+/sbin/route >> $LOGFILE
+/bin/echo >> $LOGFILE
+/bin/echo "POST-SETUP dns: " >> $LOGFILE
+/bin/cat /etc/resolv.conf >> $LOGFILE
+/bin/echo >> $LOGFILE

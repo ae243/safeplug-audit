@@ -1,0 +1,15 @@
+#!/bin/sh
+
+if [ ! -e /etc/dropbear/dropbear_rsa_host_key ]; then
+    cat /proc/mounts | grep ' / ' | grep ro > /dev/null
+    isro=$?
+    if [ $isro == 0 ]; then 
+        mount / -o remount,rw,noatime
+    fi
+    mkdir -p /etc/dropbear
+    /usr/bin/dropbearkey -t rsa -f /etc/dropbear/dropbear_rsa_host_key
+    /usr/bin/dropbearkey -t dss -f /etc/dropbear/dropbear_dss_host_key
+    if [ $isro == 0 ]; then 
+        mount / -o remount,ro
+    fi
+fi

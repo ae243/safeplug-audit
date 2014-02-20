@@ -1,0 +1,40 @@
+#! /bin/sh
+
+mount -t proc none /proc
+mount -t sysfs none /sys
+mount -t devpts none /dev/pts
+mount -t tmpfs none /tmp
+mkdir /tmp/var
+
+. /etc/cefs.conf
+if /usr/local/cloudengines/bin/blparam | grep cedebug > /tmp/cedebug; then
+	. /tmp/cedebug
+fi
+rm -f /tmp/cedebug
+
+echo "/tmp/core_%e_%t" > /proc/sys/kernel/core_pattern
+
+hostname Safeplug
+
+ifconfig lo 127.0.0.1
+ifconfig eth0 up
+# NB: Needs to start with "udhcpc -b " so hbplug_netmgr can find in /proc
+udhcpc -b -i eth0 -H `hostname`
+
+mount -t usbfs none /proc/bus/usb
+
+/etc/init.d/db
+
+if [ "x$cedebug" != "x" ]; then 
+    telnetd
+    /usr/sbin/dropbear
+fi
+
+/opt/xce/etc/init.d/lighttpd start
+
+insmod /usr/local/cloudengines/bin/xce.ko
+/opt/xce/sbin/ntpdate
+echo "led0=1" > /dev/xce
+
+/opt/xce/etc/init.d/tor start
+/opt/xce/etc/init.d/privoxy start
