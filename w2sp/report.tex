@@ -1,64 +1,3 @@
-
-%% bare_conf.tex
-%% V1.3
-%% 2007/01/11
-%% by Michael Shell
-%% See:
-%% http://www.michaelshell.org/
-%% for current contact information.
-%%
-%% This is a skeleton file demonstrating the use of IEEEtran.cls
-%% (requires IEEEtran.cls version 1.7 or later) with an IEEE conference paper.
-%%
-%% Support sites:
-%% http://www.michaelshell.org/tex/ieeetran/
-%% http://www.ctan.org/tex-archive/macros/latex/contrib/IEEEtran/
-%% and
-%% http://www.ieee.org/
-
-%%*************************************************************************
-%% Legal Notice:
-%% This code is offered as-is without any warranty either expressed or
-%% implied; without even the implied warranty of MERCHANTABILITY or
-%% FITNESS FOR A PARTICULAR PURPOSE! 
-%% User assumes all risk.
-%% In no event shall IEEE or any contributor to this code be liable for
-%% any damages or losses, including, but not limited to, incidental,
-%% consequential, or any other damages, resulting from the use or misuse
-%% of any information contained here.
-%%
-%% All comments are the opinions of their respective authors and are not
-%% necessarily endorsed by the IEEE.
-%%
-%% This work is distributed under the LaTeX Project Public License (LPPL)
-%% ( http://www.latex-project.org/ ) version 1.3, and may be freely used,
-%% distributed and modified. A copy of the LPPL, version 1.3, is included
-%% in the base LaTeX documentation of all distributions of LaTeX released
-%% 2003/12/01 or later.
-%% Retain all contribution notices and credits.
-%% ** Modified files should be clearly indicated as such, including  **
-%% ** renaming them and changing author support contact information. **
-%%
-%% File list of work: IEEEtran.cls, IEEEtran_HOWTO.pdf, bare_adv.tex,
-%%                    bare_conf.tex, bare_jrnl.tex, bare_jrnl_compsoc.tex
-%%*************************************************************************
-
-% *** Authors should verify (and, if needed, correct) their LaTeX system  ***
-% *** with the testflow diagnostic prior to trusting their LaTeX platform ***
-% *** with production work. IEEE's font choices can trigger bugs that do  ***
-% *** not appear when using other class files.                            ***
-% The testflow support page is at:
-% http://www.michaelshell.org/tex/testflow/
-
-
-
-% Note that the a4paper option is mainly intended so that authors in
-% countries using A4 can easily print to A4 and see how their papers will
-% look in print - the typesetting of the document will not typically be
-% affected with changes in paper size (but the bottom and side margins will).
-% Use the testflow package mentioned above to verify correct handling of
-% both paper sizes by the user's LaTeX system.
-%
 % Also note that the "draftcls" or "draftclsnofoot", not "draft", option
 % should be used if it is desired that the figures are to be displayed in
 % draft mode.
@@ -69,10 +8,6 @@
 % If IEEEtran.cls has not been installed into the LaTeX system files,
 % manually specify the path to it like:
 % \documentclass[conference]{../sty/IEEEtran}
-
-
-
-
 
 % Some very useful LaTeX packages include:
 % (uncomment the ones you want to load)
@@ -97,14 +32,9 @@
 % have to be run twice to clear warning/error messages.
 
 
-
-
-
-
 % *** CITATION PACKAGES ***
 %
 \usepackage{cite}
-%\usepackage{cite}
 % cite.sty was written by Donald Arseneau
 % V1.6 and later of IEEEtran pre-defines the format of the cite.sty package
 % \cite{} output to follow that of IEEE. Loading the cite package will
@@ -119,10 +49,6 @@
 % The latest version can be obtained at:
 % http://www.ctan.org/tex-archive/macros/latex/contrib/cite/
 % The documentation is contained in the cite.sty file itself.
-
-
-
-
 
 
 % *** GRAPHICS RELATED PACKAGES ***
@@ -166,9 +92,6 @@
 % http://www.tug.org/applications/pdftex
 
 
-
-
-
 % *** MATH PACKAGES ***
 %
 %\usepackage[cmex10]{amsmath}
@@ -189,9 +112,6 @@
 % http://www.ctan.org/tex-archive/macros/latex/required/amslatex/math/
 
 
-
-
-
 % *** SPECIALIZED LIST PACKAGES ***
 %
 %\usepackage{algorithmic}
@@ -210,8 +130,6 @@
 % Also of interest may be the (relatively newer and more customizable)
 % algorithmicx.sty package by Szasz Janos:
 % http://www.ctan.org/tex-archive/macros/latex/contrib/algorithmicx/
-
-
 
 
 % *** ALIGNMENT PACKAGES ***
@@ -249,9 +167,6 @@
 % http://www.ctan.org/tex-archive/macros/latex/contrib/eqparbox/
 
 
-
-
-
 % *** SUBFIGURE PACKAGES ***
 %\usepackage[tight,footnotesize,caption=false]{subfig}
 \usepackage[caption=false]{subfig}
@@ -263,13 +178,6 @@
 % be obtained at:
 % http://www.ctan.org/tex-archive/obsolete/macros/latex/contrib/subfigure/
 % subfigure.sty has been superceeded by subfig.sty.
-
-
-
-%\usepackage[caption=false]{caption}
-%\usepackage[font=footnotesize]{subfig}
-
-%\usepackage[caption=false]{subfig}
 % subfig.sty, also written by Steven Douglas Cochran, is the modern
 % replacement for subfigure.sty. However, subfig.sty requires and
 % automatically loads Axel Sommerfeldt's caption.sty which will override
@@ -287,8 +195,6 @@
 % http://www.ctan.org/tex-archive/macros/latex/contrib/caption/
 
 
-
-
 % *** FLOAT PACKAGES ***
 %
 \usepackage{fixltx2e}
@@ -300,7 +206,6 @@
 % single column figure to be placed prior to an earlier double column
 % figure. The latest version and documentation can be found at:
 % http://www.ctan.org/tex-archive/macros/latex/base/
-
 
 
 \usepackage{stfloats}
@@ -325,8 +230,6 @@
 
 
 
-
-
 % *** PDF, URL AND HYPERLINK PACKAGES ***
 %
 \usepackage{url}
@@ -338,19 +241,10 @@
 % \url{my_url_here}.
 
 
-
 \usepackage{listings}
-
-% *** Do not adjust lengths that control margins, column widths, etc. ***
-% *** Do not use packages that alter fonts (such as pslatex).         ***
-% There should be no need to do such things with IEEEtran.cls V1.6 and later.
-% (Unless specifically asked to do so by the journal or conference you plan
-% to submit to, of course. )
-
 
 % correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
-
 
 \begin{document}
 
@@ -359,7 +253,7 @@
 %
 % paper title
 % can use linebreaks \\ within to get better formatting as desired
-\title{Security Audit of Safeplug}
+\title{Security Audit of Safeplug ``Tor in a Box''}
 
 
 % author names and affiliations
@@ -406,12 +300,8 @@ Princeton University,
 Princeton, NJ 08540-5233}}
 
 
-
-
 % use for special paper notices
 %\IEEEspecialpapernotice{(Invited Paper)}
-
-
 
 
 % make the title area
@@ -420,7 +310,7 @@ Princeton, NJ 08540-5233}}
 
 \begin{abstract}
 %\boldmath
-We present the first public third-party security audit of Pogoplug's Safeplug device, which marketed ``complete security and anonymity online'' by using Tor technology to protect users' IP addresses.  We examine the hardware, software, and network behavior of the Safeplug device, as well as the user experience in comparison to other forms of web browsing.  Although the Safeplug appears to use Tor as advertised, lack of user education could easily allow users to be identified in ways that they might not expect.  Furthermore, an engineering vulnerability in the Safeplug's settings commands would allow an adversary internal or external to user's home network to silently disable Tor or modify other Safeplug settings, which completely overrules the security claims of the device.  Even if the engineering problem is fixed, the user experience challenges of this type of device make it inferior to the existing standard in anonymity methods, particularly the Tor Browser Bundle.
+We present the first public third-party security audit of Pogoplug's Safeplug device, which marketed ``complete security and anonymity online'' by using Tor technology to protect users' IP addresses.  We examine the hardware, software, and network behavior of the Safeplug device, as well as the user experience in comparison to other forms of web browsing.  Although the Safeplug appears to use Tor as advertised, users may still be identified in ways they may not expect.  Furthermore, an engineering vulnerability in the Safeplug's settings commands would allow an adversary internal or external to user's home network to silently disable Tor or modify other Safeplug settings, which completely overrules the security claims of the device.  Even if the engineering problem is fixed, the user experience challenges of this type of device make it inferior to the existing standard in anonymity methods, the Tor Browser Bundle.
 \end{abstract}
 % IEEEtran.cls defaults to using nonbold math in the Abstract.
 % This preserves the distinction between vectors and scalars. However,
@@ -430,9 +320,6 @@ We present the first public third-party security audit of Pogoplug's Safeplug de
 % math in the abstract anyway.
 
 % no keywords
-
-
-
 
 % For peer review papers, you can put extra information on the cover
 % page as needed:
@@ -477,8 +364,6 @@ We present the first public third-party security audit of Pogoplug's Safeplug de
 % The subfigure \label commands are set within each subfloat command, the
 % \label for the overall figure must come after \caption.
 % \hfil must be used as a separator to get equal spacing.
-% The subfigure.sty package works much the same way, except \subfigure is
-% used instead of \subfloat.
 %
 %\begin{figure*}[!t]
 %\centerline{\subfloat[Case I]\includegraphics[width=2.5in]{subfigcase1}%
@@ -525,31 +410,30 @@ We present the first public third-party security audit of Pogoplug's Safeplug de
 
 Privacy on the Internet is becoming increasingly important as more users realize how vulnerable they are to being surveilled and attacked; anonymity has become the goal for many Internet users in order to protect themselves.  A recent study has shown that people have been the victim of many security-related issues, such as compromised emails/accounts, harrassment, stolen Social Security Number, bank information, and credit card numbers, due to their online visibility~\cite{pew}.  As the Internet grows and the amount of user information that is collected and/or provided online increases, users will continue to be more vulnerable.  According to this study, 86\% of internet users have tried to become more anonymous online by either clearing cookies, encrypting their email, or using virtual networks that mask their IP address~\cite{pew}.  While this study shows that a large percentage of users are taking measures to reduce their visibility online, 59\% reported that they don't believe it is possible to become completely anonymous online~\cite{pew}.  
 
-The cloud storage company, Pogoplug, noticed the demand for online anonymity, and in November of 2013 they released the Safeplug.  This device is a small box that plugs into a user's home router and by routing all traffic through Tor, it claims to: conceal your identity, hide where you live, shield your surfing habits, and make you anonymous online~\cite{pogo}.  A device such as this should be audited to confirm or deny the validity of such bold claims.  We conducted the first public third-party security audit of the Safeplug by analyzing the hardware, software, and network behavior.  The following are some of our findings:
+The cloud storage company Pogoplug noticed the demand for online anonymity and in November of 2013 they released the Safeplug.  This device is a small box that plugs into a user's home router and by routing all traffic through Tor, it claims to: conceal your identity, hide where you live, shield your surfing habits, and make you anonymous online~\cite{pogo}.  The Safeplug also claimed simple setup and an abstraction of any technical detail, as shown by the setup instructions that came with the device shown in Figure~\ref{fig:instructions}.  A device such as this should be audited to confirm or deny the validity of the bold security claims.  We conducted the first public third-party security audit of the Safeplug by analyzing the hardware, software, and network behavior.  The following are some of our findings:
 
 \begin{itemize}
-\item The presence of both first- and third-party tracking cookies.
+\item The Safeplug functions as a HTTP proxy inside the browser, which then uses Tor on outgoing traffic (see Figure \ref{fig:flow}).
+\item The presence of both first- and third-party tracking cookies, de-anonymizing users across websites despite the presence of Tor.
 \item A Cross-Site Request Forgery (CSRF) vulnerability that allows an outside attacker to modify the Safeplug settings (i.e., turning Tor on/off, turning ad-blocking on/off, turning the Tor relay on/off, adding/removing whitelisted sites from Tor).
 \item A vulnerability that allows an attacker within the network to modify the Safeplug settings without notifying any other devices on the network of the change.
 \item A higher latency than that of the Tor Browser Bundle.
 \end{itemize} 
 
-While we found severe engineering vulnerabilities and a weak market, Pogoplug had good intentions and goals for their device.  
+Pogoplug made use of good security principles by using auditable open source software on their device, and has a laudable goal of making online security the standard for more users.  However, even if the engineering vulnerabilities are fixed with proper authentication for modifying Safeplug settings, the incompleteness of the provided anonymity and risks of adding an additional box to the trusted inside of the home network mean that there is little reason to use the Safeplug over the Tor Browser Bundle.
 
 \begin{figure*}
-\begin{center}
+\centering
 \includegraphics[width=.75\textwidth]{instructions}
-\caption{Configuration instructions.}
+\caption{Setup instructions (and the only documentation) that came in the box with the Safeplug. Pogoplug highlights the ease of installing the device but does not give a clear indication of how the Safeplug functions.}
 \label{fig:instructions}
-\end{center}
 \end{figure*}  
 
 \begin{figure*}
-\begin{center}
+\centering
 \includegraphics[width=.6\textwidth]{safeplug_flowchart}
-\caption{Flowchart.}
-\label{fig:instructions}
-\end{center}
+\caption{Flowchart demonstrating the actual functionality of the Safeplug as an HTTP proxy between a device's browser and the home network's router.}
+\label{fig:flow}
 \end{figure*}  
 
 \section{Background}
@@ -557,15 +441,15 @@ While we found severe engineering vulnerabilities and a weak market, Pogoplug ha
 
 Using Tor or the Tor Browser Bundle provides a tradeoff between anonymity, usability, and efficiency.  Sending traffic to these relays around the world slows down the traffic significantly, possibly degrading user experience for websites that load a lot of data in real-time.  In addition, because the destination website will see the user's request as coming from a new, likely international IP address, websites such as banks that have location-based safeguards may deny users access to their sites.  For many users around the world, these troubles are a worthwhile price for access to free and open internet, anonymous communications, and resisting censorship.  However, one of the biggest reasons that Tor is not more widespread is that many Internet users do not know about Tor, how it works, or how they would be able to use it to become more anonymous online.
 
-{\bf Safeplug.} Safeplug is a product that launched in December of 2013 from the cloud storage company Pogoplug, that offers any user the option of using Tor without having to know about it or how it works.  It allows users to browse the web from their own standard web browser with “complete security and anonymity” for the cheap price of \$49 \cite{safeplug}.  Safeplug offers Tor out of the box, with no additional software installation, by sitting between a user's router and the internet \cite{wired}.  Pogoplug’s marketing pitch centers around the protection of user’s IP addresses by using Tor \cite{safeplug,bittech}.
+{\bf Safeplug.} Safeplug is a product that launched in December of 2013 from the cloud storage company Pogoplug, that offers any user the option of using Tor without having to know about it or how it works.  It allows users to browse the web from their own standard web browser with “complete security and anonymity” for the cheap price of \$49 \cite{safeplug}.  Safeplug offers Tor out of the box, with no additional software installation, by sitting between a user's router and the internet \cite{wired}.  Pogoplug's marketing pitch centers around the protection of users' IP addresses by using Tor \cite{safeplug,bittech}.
 
 {\bf Pogoplug.} Pogoplug, a subsidary of Cloud Engines, also offers a box for home network file sharing without needing to use a third-party storage provider.  Based on our examination of the box discussed below, we suspect that the Pogoplug box was relabelled as Safeplug and just uses different software to achieve its newly branded purpose.
 
 \section{Design and Operation of Safeplug}
 \subsection{Hardware}
-Before investigating the software, we took apart one of the two Safeplug devices we purchased in order to see the physical components.  Figure~\ref{fig:top} shows the top of the board and Figure~\ref{fig:bottom} shows the bottom.  The board incorporates: (A) an SD card slot, (B) a power connector, (C) a USB slot, (D) an ethernet connector, (E) ethernet transceiver, (F) lan transformer, (G) an integrated circuit, and (H), (I) flash memory.
+Before investigating the software, we took apart one of the two Safeplug devices we purchased in order to see the physical components.  Figure~\ref{fig:top} shows the top of the board and Figure~\ref{fig:bottom} shows the bottom.  The board incorporates: (A) an SD card slot, (B) a power connector, (C) a USB slot, (D) an ethernet connector, (E) ethernet transceiver, (F) lan transformer, (G) the Marvell 88F6192 integrated controller, and (H), (I) flash memory.  The Marvell controller is from 2008 and runs ARM~\cite{marvellhw}. This is the same controller as version 4 of Pogoplug's cloud storage device - and takedowns of that device available online show an identical-looking circuit-board to the one in Figure~\ref{fig:circuit}\cite{pogo4}.  Also of note: the Safeplug branding is a sticker on the front of the device, whereas the Pogoplug branding is etched into the plastic on top of the device, which indicates that the Safeplug uses the same hardware as Pogoplug's existing devices, and derives its differing functionality from different software.
 
-\begin{figure*}[!b]
+\begin{figure*}[tb]
 \centering
 \subfloat[][Top of the board inside the Safeplug device.]{
   \includegraphics[width=.3\textwidth]{safeplug_listed_top}
@@ -577,33 +461,22 @@ Before investigating the software, we took apart one of the two Safeplug devices
   \label{fig:bottom}
 }
 \caption{Safeplug circuit board after the teardown.}
+\label{fig:circuit}
 \end{figure*}
-
-\subsection{Software}
-\label{software}
-We determined the software on the device from analyzing network traffic logs of the activation process and accessing the device via SSH.
 
 \subsection{Information Prior to Using the Device: Terms of Service}
 \label{tos}
-The Terms of Service (TOS) contains three main points of interest: TOS updates, open source licensing information, and software updates.
+The Terms of Service (TOS) contains three main points of interest: TOS updates, open source licensing information, and software updates.  First, the TOS are not presented to the user in the Safeplug package (the only information in the packaging were the instructions shown in Figure~\ref{fig:instructions}) or during the activation process, and are only available through a small link at the bottom of the Safeplug website\cite{safeplug}.  Although use of the Safeplug device constitutes acceptance of the TOS, most users are not likely to read the TOS even once.  However, Pogoplug suggests that users regularly review the TOS because they can update or change them at any time; this is standard language in TOS but not a good combination with them not being presented to the user.
 
-{\bf TOS updates.} Pogoplug suggests that users consistently read the TOS becaues they can update or change them at anytime.  Most Safeplug users will likely not read the TOS once, let alone on a regular basis; therefore, most users will be blind to any changes.  It is also interesting that these TOS are only accessible through a small link at the bottom of the Safeplug website \cite{safeplug}; specifically, there is no documentation, including the TOS, in the package that the device was shipped in.
+Following good security and development practices, the Safeplug makes use of several pieces of Open Source software.  A standard term of many open source licenses states that a company that uses the open source software must list the software used and its license, as well as the open source code of their own software that uses the license.  The TOS conatins a link to a page that woudl supposedly comply with this requirement  \url{http://pogoplug.com/home-en-developers-open-source.html}\cite{safeplug} but the link is dead and instead the reader sees a 404 error.  This dead link was noted by some members of the Tor-talk mailing list in November 2013\cite{tormailinglist} and has not been fixed as of Feburary 2014.  Pogoplug's open source page does exist at \url{https://pogoplug.com/opensource} and includes several pieces of software for the Safeplug: bootloader, Linux kernel, XCE kernel support driver, glibc, BusyBox, and a Safeplug source bundle.  However, there is no way to find this page from the Terms of Service.
 
-{\bf Open source licensing information.}  There is a section that acknowledges the use of many open source components in the Safeplug device; this section includes the statement: 
+The final area of interest was software updates on the device which will be ``automatically delivered'' to the user, but it is unclear whether there will be any notification~\cite{safeplug}.  Although a prompt updating mechanism is an important security feature for users who trust Pogoplug and their update servers (in fact the activation process seems designed for keeping the software up to date and it is concerning that this does not seem to uniformly occur as discussed in Section~\ref{versions}), other users might want to disable this functionality for fear of a malicious use of Pogoplug's servers or a spoofing attack (see Section \ref{dnsspoof} for more details of this attack).  This is one of the many reasons why users who truly need security and anonymity should opt for the Tor Browser Bundle rather than adding the Safeplug to their network.
 
-\begin{quotation}
-``You agree to abide by the terms of the relevant licenses, as may be updated by Pogoplug from time to time at http://pogoplug.com/home-en-developers-open-source.html. '' \cite{safeplug}
-\end{quotation}
-
-The link included is a dead link and takes the user to a web page with a 404 error.  This lack of attention to detail or respect for open source licenses does not put Pogoplug in a good light.  In fact, the Tor-talk mailing list noted this particularly, since Tor is an open source project \cite{tormailinglist}.
-
-{\bf Software updates.} Not only can the TOS be updated at any time, so can the software on the device.  These udpates will be ``automatically delivered'' to the user, but the user is not notified of these updates~\cite{safeplug}.  This should raise a red flag for users because they may not know when the software in their device is being changed or what it is changing to.  While Safeplug makes many claims about providing anonymity, users are simply putting their trust in a different entity, namely Pogoplug.
-
-\subsection{Tor Relay Node Option}
+\subsection{Explanation of Tor Configuration Options}
 \label{port9001}
-One of Safeplug's configurations is the use of the device as a Tor relay node in the Tor network.  When the device is initially setup, the default setting is to not use it as a relay node.  
+One of Safeplug's configurations is the use of the device as a Tor relay node in the Tor network.  When the device is initially set up, the default setting is to not use it as a relay node.  
 
-One of our concerns is how understandable this setting is to the average Internet user.  The settings page describes Tor in an extremely basic way:
+The settings page describes Tor in an extremely basic way:
 
 \begin{quotation}
 ``Safeplug uses the Tor network to secure your Internet connection.  Tor works by routing your Internet through a series of random destinations, much like driving a twisty, complicated route to throw off someone who is following you, making it impossible for websites and organizations to identify the source or destination of Internet traffic.'' \cite{safeplug}
@@ -615,22 +488,24 @@ On the other hand, it describes the functionality of a Tor relay node in a much 
 \cite{safeplug}
 \end{quotation}
 
+The link provided is to an advertisement-filled and not particularly reputable looking website with no clear navigation to get to the necessary instructions.  
+
 If the majority of users can only understand the simpler description, then they likely won't understand the description of a Tor relay node.  This could be a problem if users simply decide not to do anything with that setting (i.e. don't change the setting to use Safeplug as a relay node).  Then there would be a large increase in use of the Tor network, yet most of the users are not giving back to it.
 
 This could easily be remedied; Safeplug should choose a target audience and have consistent descriptions.  The best option is to explain the Tor network and the functionality of a Tor relay node at the same level, preferably a level that normal Internet users can understand.  This increases the chances that users will run their Safeplug as a relay node.
 
 \subsection{Software on the Safeplug}
-
+\label{versions}
 \begin{center}
-	\begin{tabular}{|c|c|c|}
-	\hline
-		Safeplug Software 	& Version 		& Date \\ \hline
-		Linux Kernel				& 2.6.31.8 	& 2009 \\ \hline
-		Lighttpd Web Server & 1.4.33			& 2013 \\ \hline
-		Privoxy Proxy				& 3.0.21			& 2013 \\ \hline
-		Tor Onion Routing		& 0.2.3.25		& 2012 \\ \hline
-		Dropbear sshd				& v0.52			& 2008 \\ \hline
-	\end{tabular}
+  \begin{tabular}{|l|c|c|}
+    \hline
+    Safeplug Software & Version & Date \\ \hline
+    Linux Kernel & 2.6.31.8 & 2009 \\ \hline
+    Lighttpd Web Server & 1.4.33 & 2013 \\ \hline
+    Privoxy Proxy & 3.0.21 & 2013 \\ \hline
+    Tor & 0.2.3.25 & 2012 \\ \hline
+    Dropbear sshd & v0.52 & 2008 \\ \hline
+  \end{tabular}
 \end{center}
 
 The Safeplug runs version 2.6.31.8 of Arch Linux on an ARM architecture, which was produced at the end of 2009 and installed on 23 August 2011.  Unsurprising for its age, there are a number of network vulnerabilities for this version of the kernel - most of which seem to produce denial of service attacks if an adversary sends a particularly formed packet \cite{kernelcve}.  This is the same version of Linux that runs on Version 4 of PogoPlug's Mobile platform \cite{archforum}.
@@ -648,45 +523,41 @@ The lighttpd, Privoxy and Dropbear software give some indication of the networki
     
 \subsection{Configuration on the Safeplug}
 \label{spconfig}
-The Safeplug configuration files can be found in \verb!/opt/xce/etc! and include \verb!sp.conf! and \verb!sp_version! and \verb!sp_torexceptions!.  The first contains all of the important details from the configuration page (whether to use Tor, whether to be a relay, whether to adblock) as well as a hidden option about whether to be an exit relay for the Tor network.  This is not documented anywhere on the site, so enabling this option would likely require SSH access to discover it, thereby breaking the warranty, but it is interesting that this option is available.  The version file is likely used for updates, and the exceptions file is used by the privoxy configuation to control the whitelist of sites not to connect to via Tor.
+The Safeplug configuration files can be found in \verb!/opt/xce/etc! and include \verb!sp.conf! and \verb!sp_version! and \verb!sp_torexceptions!.  The first contains all of the configuration details: whether to use Tor, whether to adblock, and whether to be a relay or an exit relay. The version file is used during the check for updates, and the exceptions file is used by the privoxy configuation to control the whitelist of sites not to connect to via Tor.
 
 These configuration files are read by the scripts in \verb!/opt/xce/etc/init.d! which enable lighttpd, privoxy, and tor.  As expected, Privoxy looks at the Tor, adblock and exceptions configurations, and Tor reads the \verb!sp.conf! file to set which Tor configuration file (regular, relay or exit relay) to use.
 
 \section{Usability}
-Many news articles were published to announce the release of the Safeplug in addition to a lengthy discussion on the Tor-talk mailing list~\cite{tormailinglist}.  There were many thoughts on the Terms of Service and the option to use the device as a Tor relay node; this inspired us to start our analysis with these items.  
+Several aspects of the user experience of the Safeplug affect the usability and security of the device.  The Safeplug advertisements highlighted the ease of setup and activation of the device 
 
 \subsection{Activation and Setup}
-The first step was to plug Safeplug into our router and activate our device.  Our instructions are shown in Figure~\ref{fig:instructions}.  We followed them, activated our device, and then ended on the configurations page.  The configurations page has a combination of platforms and browsers, with a different set of proxy configuration instructions for each one.  It is interesting to note that the only platform options were: OSX, Windows, Android, and iOS.  
+The first step was to plug Safeplug into our router and activate our device.  Our instructions are shown in Figure~\ref{fig:instructions}.  We followed them, activated our device, and then ended on the configurations page.  The configurations page has a combination of platforms and browsers, with a different set of proxy configuration instructions for each one.  The platforms presented include popular desktop and mobile platforms.  The Tor Project has an Android application, as well as the Tor Browser Bundle for Windows and OSX (and Linux, which is not supported explicitly by Pogoplug's page but is likely to have a browser with similar configuration processes to Firefox).  However, there is no existing Tor Project application for iOS.
 
-%%TODO: verify these
 \begin{center}
-	\begin{tabular}{|c|c|c|}
+	\begin{tabular}{|c|c|}
 	\hline
 		Platform & Browsers \\ \hline
-		Windows	& Internet Explorer, Firefox \\ \hline
-		OSX & Safari, Firefox \\ \hline
+		Windows	& Internet Explorer, Chrome, Firefox \\ \hline
+		OSX & Safari, Chrome, Firefox \\ \hline
 		iOS	& Safari \\ \hline
-		Android	& Firefox\\ \hline
+		Android	& Chrome \\ \hline
 	\end{tabular}
 \end{center}
 
-After we finished our configuration, we were taken to our settings page.  This page is shown in Figure~\ref{fig:settings}.  This allowed us to turn Tor on/off, add white-listed websites, turn ad-blocking on/off, and turn the ability of our device to be a relay node on/off.  
+After we finished our configuration, we were taken to the Safeplug settings page.  This page is shown in Figure~\ref{fig:settings}.  This allowed us to turn Tor on/off, add white-listed websites, turn ad-blocking on/off, and turn the ability of our device to be a relay node on/off (and if on, an additional option appeared to allow the device to be an exit node.  
 
 \begin{figure}[htb]
   \begin{center}
-  \includegraphics[width=.4\textwidth]{settings}
-  \caption{Settings page.}
+  \includegraphics[width=.4\textwidth]{settings_with_exit}
+  \caption{Safeplug settings page.  The last button ``Allow Exit'' only appears if the relay option above has been turned on.}
   \label{fig:settings}
-	\end{center}
+  \end{center}
 \end{figure}
 
 \subsection{Internet Use}
 \label{inetuse}
 
-Figure~\ref{fig:before} shows what a web page looks like before turning Tor and ad-blocking on, while Figure~\ref{fig:after} shows the same website after turning Tor and ad-blocking on.  Both of these figures show our IP address in the top right corner; due to the change in IP address we can see that our traffic is being routed through Tor.  
-
-
-\begin{figure*}[!b]
+\begin{figure*}[tb]
 \centering
 \subfloat[][Web page before using Tor and ad-blocking.]{
   \includegraphics[width=.3\textwidth]{before}
@@ -700,15 +571,10 @@ Figure~\ref{fig:before} shows what a web page looks like before turning Tor and 
 \caption{Application of Safeplug proxy settings.}
 \end{figure*}
 
-Next, we wanted to see how usable this would be to a normal Internet user.  A user would probably decide not to use Safeplug if they could not read their web pages (if they were not in their native language), or if they could not log into their accounts (some web sites will lock a user out if they try to log in from multiple countries in a short time period).  While browsing the Internet, we experienced some pages in German and Swedish, which is expected with Tor; if a user is not familiar with Tor, then they may just get frustrated and stop using Safeplug altogether.  We were also prompted with the page in Figure~\ref{fig:funnygoogle} when we tried to log into our Google account, indicating that Google noticed we were trying to login from different locations.
+Figure~\ref{fig:before} shows what a web page looks like before turning Tor and ad-blocking on, while Figure~\ref{fig:after} shows the same website after turning Tor and ad-blocking on.  Both of these figures show our IP address in the top right corner; due to the change in IP address we can see that our traffic is being routed through Tor.  
 
-\begin{figure}
-  \begin{center}
-  \includegraphics[width=0.3\textwidth]{funnygoogle}
-  \caption{Google's response after trying to log in.}
-  \label{fig:funnygoogle}
-	\end{center}
-\end{figure}
+
+Next, we wanted to see how usable this would be to a normal Internet user.  A user would probably decide not to use Safeplug if they could not read their web pages (if they were not in their native language), or if they could not log into their accounts (some web sites will lock a user out if they try to log in from multiple countries in a short time period).  While browsing the Internet, we experienced some pages in German and Swedish, which is expected with Tor; if a user is not familiar with Tor, then they may just get frustrated and stop using Safeplug altogether.  We were also prompted with a request to ``Enter the name of the city where you usually sign in'' when we tried to log into our Google account, indicating that Google noticed we were trying to login from significantly ``unusual'' location.
 
 \subsection{Cookies}  
 While browsing the Internet, we logged into a Google Account in a tab, and then subsequently went to a website that had the Google+ logo in a different tab.  When we clicked on the Google+ logo, it remember who we are; so we can confirm that we still have first-party cookies.  We experienced the same situation with Facebook and its corresponding ``like'' button.
@@ -788,6 +654,7 @@ password: ceadmin
 Obviously having a publically available root password means that SSH can be done effectively without authentication.  We tried the SSH procedure twice, once before the internet connection and activation, and once afterwards.  Before the activation and update procedure, SSH was not available.  The simple \verb!Hbplug! software on the box could not accept this RPC call.  However, once the box was updated and had lighttpd installed, the SSH procedure was available and we could download the contents of the root filesystem for analysis.
 
 \subsection{Spoofing the Update Server}
+\label{dnsspoof}
 A more dangerous class of vulnerabilities comes from the fact that the update process happens over insecure TCP rather than any kind of encrypted process.  During our network analysis of the activation process, we discovered that the update script is downloaded via TCP from an IP address provided by the pogoplug servers.  This update script (run as root) then downloads the Safeplug's software (Tor, Privoxy, Lighttpd, and wget) and checks it against MD5 hashes, but it is not clear whether there is suitable verification of the update script itself.  An adversary could use DNS spoofing or compromise the Pogoplug server in order to force users to download a malicious update script - for example, something that turns the Safeplug into a surveillance box while appearing to provide the correct functionality.  Since the most efficient way to check this would be to verify the contents of the Safeplug box itself by SSHing in, and SSHing explicitly breaks the warranty, it is clear that any kind of mitigation to this attack would be beyond an average user.  Because the activation occurs over TCP rather than anything more secure, an adversary who can spoof DNS replies to the user has a paved gateway into the Safeplug box.  This turns a device that does not live up to expectations but is otherwise harmless into something that actively harms security on the network.
 
 
@@ -921,6 +788,8 @@ nal/world/catalog-reveals-nsa-has-back-doors-for-numerous-devices-a-940994.html}
 \bibitem{kernelcve} Security Database. ``Linux Linux Kernel 2.6.13.8 CVE'' \url{http://www.security-database.com/cpe.php?detail=cpe:/o:linux:linux_kernel:2.6.31.8}
 
 \bibitem{techreview} Simonite, Tom. ``Online Anonymity in a Box, for \$49'', \emph{MIT Technology Review}, 21 November 2013. \url{http://www.technologyreview.com/news/521676/online-anonymity-in-a-box-for-49/}.
+
+\bibitem{pogo4} SmallNetBuilder. ``Pogoplug Series 4 Reviewed.'' \url{http://www.smallnetbuilder.com/cloud/cloud-storage/486-pogoplug-series-4-reviewed}
 
 \bibitem{wired} Solon, Olivia. ``Safeplug makes it super-easy to harness Tor\'s anonymity at home,'' \emph{Wired UK}, 22 November 2013. \url{http://www.wired.co.uk/news/archive/2013-11/22/safeplug-tor}.
 
