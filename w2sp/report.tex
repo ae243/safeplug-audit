@@ -581,7 +581,12 @@ While browsing the Internet, we logged into a Google Account in a tab, and then 
 
 This is clearly not the perfect ``anonymity'' that Safeplug promised in their publicity.  Although normal use does follow this model of persisting logged in status across browser tabs and sessions, a user concerned about anonymity and seeing each session coming up differently (German vs Swedish) might mistakenly believe that they do not have to log out of their social media accounts to preserve their anonymity when accessing other websites.
 
-More interesting and damaging to the user's control over their anonymity would be third-party cookies because the user cannot remove those just by logging out.  It requires a trip to the browser settings to clear cookies (or not have them set in the first place).  We used FourthParty to analyze the client's use of the Safeplug \cite{fourthparty}.  When collecting data on the existence of third-party cookies, we analyzed two separate browsing sessions; they were both new sessions with no cookies.  One of the sessions used the ad-block feature of the Safeplug and the other did not.  After analyzing data from Fourthparty, we found many third-party cookies in both sessions.  These included cookies from: abmr.net, bizographics.com, krxd.net, and bluekai.com among many others.
+More interesting and damaging to the user's control over their anonymity would be third-party cookies because the user cannot remove those just by logging out.  It requires a trip to the browser settings to clear cookies (or not have them set in the first place).  We used FourthParty to analyze the client's use of the Safeplug \cite{fourthparty}.  When collecting data on the existence of third-party cookies, we analyzed two separate browsing sessions; they were both new sessions with no cookies.  One of the sessions used the ad-block feature of the Safeplug and the other did not.  After analyzing data from Fourthparty, we found many third-party cookies in both sessions.  These included cookies from: abmr.net, bizographics.com, krxd.net, and bluekai.com among many others.  The adblock functionality on the Safeplug reduced but did not eliminate these third-party cookies.
+
+Although Safeplug has a warning about clearing cookies on their FAQ page, it only mentions clearing cookies after a browser session.  Of greater concern would be tracking a user during their browser session from website to website; preventing this requires knowledge and constant viligance from the user, or a browser that does not accept third-party cookies, such as the one provided in the Tor Browser Bundle.
+
+\subsection{Browser Fingerprinting}
+We used Panopticlick~\cite{panopticlick} to examine the fingerprint of a freshly installed Firefox browser running through the Safeplug proxy.  Panopticlick found the browser to be unique.  Fingerprinting is another way in which websites could correlate and de-anonymize user traffic without knowing the IP address.
 
 \subsection{Latency}
 If the latency of web requests using the Safeplug is noticeably longer than that of normal Internet use, users may be deterred from using the device.  Similarly, if turning Tor on, but not ad-blocking, adds a significant time delay, the user may only turn on the ad-blocking feature (without Tor).  We recorded the time for a web request on the following settings:
@@ -596,7 +601,7 @@ If the latency of web requests using the Safeplug is noticeably longer than that
 \item Tor Browser Bundle
 \end{itemize}
 
-For each of the settings, we took 20 measurements; Figure~\ref{fig:latency2} shows the average time of a web request on each of the specified settings for three different web pages.  When taking these measurements, we loaded the page, but did not scroll; in many cases more objects are loaded when scrolling down a page.  The differences between web pages can most likely be attributed to the amount of ads on the web page.  
+For each of the settings, we took 20 measurements; Figure~\ref{fig:latency2} shows the average time of a web request on each of the specified settings for three different web pages.  When taking these measurements, we loaded the page, but did not scroll; in many cases more objects are loaded when scrolling down a page.  The differences between web pages can most likely be attributed to the amount of advertisements and content running in plugins (such as video) on the web page.  
 
 \begin{figure*}
   \centering
@@ -620,14 +625,16 @@ As we discovered during the software analysis, the Safeplug has a remote procedu
 \end{figure*}
 
 \subsection{Insider Attack}
-Since the RPC server does not perform any kind of validation or authentication on the settings strings, it would be easy for anyone inside the local network to send a command and change the settings, for example to disable Tor or adblocking.  All the attacker would need to know is the IP address of the device.  It does not require SSH or discovering the (publically available) root password, or the user's new root password if they have been well-informed and adept enough to change it.  Figure \ref{disable} shows an example of this attack.
+Since the Safeplug has no validation or authentication on the settings page or these RPC calls, an malicious party inside the network could easily modify the settings.  Such an adversary with a computer could load the Safeplug's settings page and adjust options such as disabling Tor or adding a site to the whitelist; since this page is meant to be accessible to normal internet users, anyone can perform this attack.  Unlike many home routers, there is no username/password combination necessary to access this page.  
 
-This attacker could also be any kind of device on the local network, or the local gateway if it is compromised.  The NSA ``Spymall'' catalog leaked in December shows tools for compromising a number of different devices and home routers are traditionally insecure \cite{spymall}.  It is easy to imagine any malicious party, not just one with the resources of a government (although governments might be some of the most interested parties in attacking a Tor proxy), compromising the gateway and using that access to make a disabling RPC call into the Safeplug.  This would occur silently from the perspective of a client unless they happen to check the Settings page for the Safeplug.  Instead, the client would continue browsing with a belief that they are protected by their use of the Tor network, while in fact any external adversary can track their traffic.
+A more technically advanced user could send the call directly to the RPC server.  All the attacker would need to know is the IP address of the device.  It does not require SSH or discovering the (publically available) root password, or the user's new root password if they have been well-informed and adept enough to change it.  Figure \ref{disable} shows an example of the PRC version of this attack.
+
+Since the RPC version of the attack just involves basic internet tools (the ability to send a POST request), the attacker could also be any kind of device on the local network, or the local gateway if it is compromised.  The NSA ``Spymall'' catalog leaked in December shows tools for compromising a number of different devices and home routers are traditionally insecure \cite{spymall}.  It is easy to imagine any malicious party, not just one with the resources of a government (although governments might be some of the most interested parties in attacking a Tor proxy), compromising the gateway and using that access to make a disabling RPC call into the Safeplug.  This would occur silently from the perspective of a client unless they happen to check the Settings page for the Safeplug.  Instead, the client would continue browsing with a belief that they are protected by their use of the Tor network, while in fact any external adversary can track their traffic.
 
 This seems like a fairly important vulnerability and requires action from Pogoplug to fix.  Since the purpose of these RPC operations is unclear without access to more of the source code, it is possible that they could be disabled entirely.  If not, perhaps there is some authentication protocol that could be implemented.  The challenge of such a protocol from a user's point of view is that valid access would be infrequent so giving a user a password to remember would be a poor experience.
 
 \subsection{CSRF Attack}
-An external website can also perform this attack by returning a correctly formatted POST string.  This executes the same functionality as the Insider Attack, but the attacker does not need to be on the local network or know the IP address of the Safeplug.  Instead, the attacker (who could be any malicious actor with access to a web server) can just send a POST request to every IP in the common ranges of local addresses in home networks, 192.168.0.0/24 and 192.168.1.0/24.  We implemented this attack with less than 20 lines of Javascript code.  The following steps are necessary for the attack to be successful:
+An external website can also perform this attack by returning a correctly formatted POST string via an internal user's browser.  This executes the same functionality as the Insider Attack, but the attacker does not need to be on the local network or know the IP address of the Safeplug.  Instead, the attacker (who could be any malicious actor with access to a web server) can just send a POST request to every IP in the common ranges of local addresses in home networks, 192.168.0.0/24 and 192.168.1.0/24.  We implemented this attack with less than 20 lines of Javascript code.  The following steps are necessary for the attack to be successful:
 
 \begin{enumerate}
 \item Set up a web page with the crafted Javascript code, which will send the POST request of the following format to all addresses in the common ranges: \url{http://<IP address>/svc/xspctrl/disableTor}.
@@ -644,7 +651,7 @@ In addition to disabling Tor, the attacker can modify any other settings on the 
 
 \subsection{Gaining Access through SSH}
 \label{sec:SSH}
-    Safeplug runs an RPC server that allows the enabling of SSH access via HTTP. SSH instructions for Cloud Engine's other device (Pogoplug) are widely available online and an email in the Tor-talk mailing list confirms that the instructions are the same \cite{ceadmin}:
+    Another command available to the RPC server is enabling SSH to the device.  SSH instructions for Cloud Engine's other device (Pogoplug) are widely available online and an email in the Tor-talk mailing list confirms that the instructions are the same \cite{ceadmin}:
 \begin{lstlisting}
 curl --data ``'' http://<IP>/svc/xspctrl/enableSSHD
 ssh root@<IP-of-Safeplug>
@@ -731,6 +738,8 @@ nal/world/catalog-reveals-nsa-has-back-doors-for-numerous-devices-a-940994.html}
 \bibitem{tor} Dingledine, Roger, et. al. ``Tor: The second-generation onion router.'' \emph{USENIX Security Symposium}, 2004.
 
 \bibitem{dyer} Dyer, Kevin P., Coull, Scott E., Ristenpart, Thomas, and Shrimpton, Thomas.  ``Peek-a-boo, i still see you: Why efficient traffic analysis countermeasures fail.'' \emph{In Proceedings of the 33rd Annual IEEE Symposium on Security and Privacy}, 2012.
+
+\bibitem{panopticlick} Electronic Fronteir Foundation. ``Panopticlick.'' \url{https://panoptlick.eff.org}
 
 \bibitem{feamster} Feamster, Nick, and Dingledine, Roger.  ``Location Diversity in Anonymity Networks.''  \emph{In ACM Workshop on Privacy in the Electronic Society (WPES)}, 2004.
 
