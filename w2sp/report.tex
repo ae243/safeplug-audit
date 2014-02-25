@@ -170,6 +170,7 @@
 % *** SUBFIGURE PACKAGES ***
 %\usepackage[tight,footnotesize,caption=false]{subfig}
 \usepackage[caption=false]{subfig}
+\usepackage[center]{caption}
 % subfigure.sty was written by Steven Douglas Cochran. This package makes it
 % easy to put subfigures in your figures. e.g., "Figure 1a and 1b". For IEEE
 % work, it is a good idea to load it with the tight package option to reduce
@@ -410,7 +411,7 @@ We present the first public third-party security audit of Pogoplug's Safeplug de
 
 Privacy on the Internet is becoming increasingly important as more users realize how vulnerable they are to surveillance and attacks; anonymity has become the goal for many Internet users in order to protect themselves.  A recent study has shown that people have been the victim of many security-related issues, such as compromised emails/accounts, harrassment, stolen Social Security Numbers, bank information, and credit card numbers, due to their online visibility~\cite{pew}.  As the Internet grows and the amount of user information that is collected and/or provided online increases, users will continue to be more vulnerable.  According to this study, 86\% of internet users have tried to become more anonymous online by either clearing cookies, encrypting their email, or using virtual networks that mask their IP address~\cite{pew}.  While this study shows that a large percentage of users are taking measures to reduce their visibility online, 59\% reported that they don't believe it is possible to become completely anonymous online~\cite{pew}.  
 
-The cloud storage company Pogoplug noticed the demand for online anonymity and in November of 2013 they released the Safeplug.  This device is a small box that plugs into a user's home router and by routing all traffic through Tor, it claims to: conceal your identity, hide where you live, shield your surfing habits, and make you anonymous online~\cite{pogo}.  The Safeplug also claimed simple setup and an abstraction of any technical detail, as shown by the setup instructions that came with the device shown in Figure~\ref{fig:instructions}.  A device such as this should be audited to confirm or deny the validity of the bold security claims.  We conducted the first public third-party security audit of the Safeplug by analyzing the hardware, software, and network behavior.  The following are some of our findings:
+The cloud storage company Pogoplug noticed the demand for online anonymity and in December of 2013 they released the Safeplug.  This device is a small box that plugs into a user's home router and by routing all traffic through Tor, it claims to: conceal your identity, hide where you live, shield your surfing habits, and make you anonymous online~\cite{pogo}.  The Safeplug also claimed simple setup and an abstraction of any technical detail, as shown by the setup instructions that came with the device shown in Figure~\ref{fig:instructions}.  A device such as this should be audited to confirm or deny the validity of the bold security claims.  We conducted the first public third-party security audit of the Safeplug by analyzing the hardware, software, and network behavior.  The following are some of our findings:
 
 \begin{itemize}
 \item The Safeplug functions as a HTTP proxy inside the browser, which then uses Tor on outgoing traffic (see Figure \ref{fig:flow}).
