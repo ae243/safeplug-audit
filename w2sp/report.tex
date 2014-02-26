@@ -536,11 +536,12 @@ The version of Tor is v0.2.3.25 which is from November 2012.  The current stable
 
 The fourth piece of software discovered on the device, which is not installed during the activation process and is in \verb!/usr/sbin! is the Dropbear SSH server and client, used to support SSH access to the device \cite{dropbear}.  The Safeplug uses its own configuration files to determine how these pieces of software are set up and used.  The version of Dropbear on the Safeplug is v0.52 from 2008, which is extremely out of date.  Given the different location and installation methods, it seems likely that this was from the older Pogoplug device and is not designed to be updated in the same manner as the rest of the Safeplug software.
 
-[TODO: Explain Safeplug Call Graph]
+Figure \ref{fig:callgraph} shows the call graph for the modifying the settings page.  When a user modifies the settings page, Javascript on the settings page generates a POST request to xspctrl, which is running via CGI in Lighttpd. The CGI handler copies a number of environment variables and then forks and runs the xspctrl as execve (in the constructed environment). Xspctrl is a shell script which uses the end of the path to discover the correct method to run and executes any of the necessary binary files with specified arguments (go\_update, go\_upgrade, go\_sshd, or go\_updateexceptions) to complete its request before returning a response.
+
 \begin{figure*}
 \centering
-\includegraphics[width=.75\textwidth]{callgraph}
-\caption{}
+\includegraphics[width=.55\textwidth]{callgraph}
+\caption{The call graph for modifying the Safeplug settings page.}
 \label{fig:callgraph}
 \end{figure*} 
 
