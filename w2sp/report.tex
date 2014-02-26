@@ -536,7 +536,13 @@ The version of Tor is v0.2.3.25 which is from November 2012.  The current stable
 
 The fourth piece of software discovered on the device, which is not installed during the activation process and is in \verb!/usr/sbin! is the Dropbear SSH server and client, used to support SSH access to the device \cite{dropbear}.  The Safeplug uses its own configuration files to determine how these pieces of software are set up and used.  The version of Dropbear on the Safeplug is v0.52 from 2008, which is extremely out of date.  Given the different location and installation methods, it seems likely that this was from the older Pogoplug device and is not designed to be updated in the same manner as the rest of the Safeplug software.
 
-[TODO: Safeplug Call Graph]
+[TODO: Explain Safeplug Call Graph]
+\begin{figure*}
+\centering
+\includegraphics[width=.75\textwidth]{callgraph}
+\caption{}
+\label{fig:callgraph}
+\end{figure*} 
 
 \subsection{Networking}
 The Lighttpd, Privoxy, and Dropbear software give some indication of the networking services on the device.  We used \texttt{nmap} to scan the ports.  Before the activation of the Safeplug, only ports 80 and 3333 are open.  After the activation, without the use of Tor turned on, port 22 for SSH, port 80 for settings access and port 8080 for http-proxy are open.  When Tor is turned on as a relay, port 9001 tor-orport is opened as well.  This corresponds with the note on the settings page about Tor relays discussed in Section \ref{port9001} above.
