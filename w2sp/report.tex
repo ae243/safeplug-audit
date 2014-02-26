@@ -3,6 +3,20 @@
 % draft mode.
 %
 \documentclass[conference]{IEEEtran}
+\makeatletter
+\long\def\@makecaption#1#2{\ifx\@captype\@IEEEtablestring%
+\footnotesize\begin{center}{\normalfont\footnotesize #1}\\
+{\normalfont\footnotesize\scshape #2}\end{center}%
+\@IEEEtablecaptionsepspace
+\else
+\@IEEEfigurecaptionsepspace
+\setbox\@tempboxa\hbox{\normalfont\footnotesize {#1.}~~ #2}%
+\ifdim \wd\@tempboxa >\hsize%
+\setbox\@tempboxa\hbox{\normalfont\footnotesize {#1.}~~ }%
+\parbox[t]{\hsize}{\normalfont\footnotesize \noindent\unhbox\@tempboxa#2}%
+\else
+\hbox to\hsize{\normalfont\footnotesize\hfil\box\@tempboxa\hfil}\fi\fi}
+\makeatother
 % Add the compsoc option for Computer Society conferences.
 %
 % If IEEEtran.cls has not been installed into the LaTeX system files,
@@ -170,7 +184,7 @@
 % *** SUBFIGURE PACKAGES ***
 %\usepackage[tight,footnotesize,caption=false]{subfig}
 \usepackage[caption=false]{subfig}
-\usepackage[center]{caption}
+%\usepackage[center]{caption}
 % subfigure.sty was written by Steven Douglas Cochran. This package makes it
 % easy to put subfigures in your figures. e.g., "Figure 1a and 1b". For IEEE
 % work, it is a good idea to load it with the tight package option to reduce
@@ -553,11 +567,10 @@ The first step was to plug Safeplug into our router and activate our device.  Ou
 After we finished our configuration, we were taken to the Safeplug settings page.  This page is shown in Figure~\ref{fig:settings}.  This allowed us to turn Tor on/off, add white-listed websites, turn ad-blocking on/off, and turn the ability of our device to be a relay node on/off (and if on, an additional option appeared to allow the device to be an exit node).  
 
 \begin{figure}[htb]
-  \begin{center}
+  \centering
   \includegraphics[width=.4\textwidth]{settings_with_exit}
   \caption{Safeplug settings page.  The last button ``Allow Exit'' only appears if the relay option above has been turned on.}
   \label{fig:settings}
-  \end{center}
 \end{figure}
 
 \subsection{Internet Use}
@@ -632,7 +645,7 @@ As we discovered during the software analysis, the Safeplug has a remote procedu
 \subsection{Insider Attack}
 Since the Safeplug has no validation or authentication on the settings page or these RPC calls, any malicious party inside the network could easily modify the settings.  Such an adversary with a computer could load the Safeplug's settings page and adjust options such as disabling Tor or adding a site to the whitelist; since this page is meant to be accessible to normal Internet users, anyone can perform this attack.  Unlike many home routers, there is no username/password combination necessary to access this page.  
 
-A more technically advanced user could send the call directly to the RPC server.  All the attacker would need to know is the IP address of the device.  It does not require SSH or discovering the (publically available) root password, or the user's new root password if they have been well-informed and adept enough to change it.  Figure \ref{disable} shows an example of the PRC version of this attack.
+A more technically advanced user could send the call directly to the RPC server.  All the attacker would need to know is the IP address of the device.  It does not require SSH or discovering the (publically available) root password, or the user's new root password if they have been well-informed and adept enough to change it.  Figure \ref{disable} shows an example of the RPC version of this attack.
 
 Since the RPC version of the attack just involves basic Internet tools (the ability to send a POST request), the attacker could also be any kind of device on the local network, or the local gateway if it is compromised.  The NSA ``Spymall'' catalog leaked in December shows tools for compromising a number of different devices and home routers are traditionally insecure \cite{spymall}.  It is easy to imagine any malicious party, not just one with the resources of a government (although governments might be some of the most interested parties in attacking a Tor proxy), compromising the gateway and using that access to make a disabling RPC call into the Safeplug.  This would occur silently from the perspective of a client unless they happen to check the settings page for the Safeplug.  Instead, the client would continue browsing with a belief that they are protected by their use of the Tor network, while in fact any external adversary can track their traffic.
 
