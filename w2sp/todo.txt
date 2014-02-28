@@ -1,0 +1,52 @@
+Notes on the draft you sent:
+
+=====
+
+Higher-level and structural suggestions:
+
+There's a lot of stuff on the TOS and documentation before the paper gets around to the technical meat.  Is there some way to rearrange sections to move the TOS/doc stuff later; or to keep the highlights of that stuff where they are and move the bulk of it later?   It's generally a goal to try to move the technical meat of a paper closer to the front.   (It seems more logical to build up to it by laying out all of the background and preliminaries first, but that makes the paper less interesting to read, and less attractive to reviewers.)
+
+=====
+Detailed suggestions:
+
+DONE.  There should be page numbers.   This makes it easier for us and the reviewers to refer to things.
+
+DONE.  First column "According to this study ..." should be "According to one study ...".   ("this" is ambiguous---does it mean the present paper, or something being cited?)
+
+DONE.  In Figure 1, put some kind of line or box around the image, so that the shape of the original is evident.
+
+DONE.  I wouldn't say the Safeplug "functions as an HTTP proxy inside the browser".   I would say something like "... for the browser..." because the Safeplug is not literally inside the browser.
+
+TODO for ANNIE.  In the bulleted list crossing the columns of page 1, all items should be complete sentences, or all items should be non-sentence phrases; but not a mix of the two.
+
+It's worth thinking about exactly what claim to make about Tor and anonymity.  It's true that Tor is the best thing for doing what it tries to do. But it doesn't try to solve all aspects of privacy/anonymity---for example Tor itself doesn't try to block web tracking technologies.
+
+DONE.  On page 2, in the Pogoplug paragraph, I would say "the Pogoplug hardware" rather than "the Pogoplug box".
+
+DONE.  In the TOS section, I would say that use of the Safeplug *purportedly* constitutes acceptance of the TOS.  Whether it really does constitute acceptance is a legal question that we don't want to take a position on.
+
+In the software section, the text implies that Dropbear SSH might be unused.  It's worth saying that the SSH server is active and listening on (presumably) port 22.
+
+TODO for ANNIE.  Figure 4 is slightly hard to read.  It looks like a drop shadow on the words is making them harder for the eye to resolve.  (Or maybe it's just my PDF viewer.)
+
+The beginning of page 5 talks about which platforms have a Tor application.  That seems confusing to discuss at this point in the paper because the use of Safeplug doesn't require a Tor application on the client.  Also, it's a good idea to reiterate in this section that the user is setting up their client machine's browser to use the Safeplug as its HTTP proxy.   (And that the user has to do this separately for each client device they want to protect.)  In general, this section needs clearer explanation, e.g. what it means to whitelist a site.
+
+DONE.  The Google / separate tab section is awkwardly worded.   Rather than "we still have first-party cookies", be more precise---something like "a cookie associated with the login was sent to the second Google+ page".   In general, "we" is to be avoided when talking about anything other than the authors' literal selves.  (So, "We experienced the same thing ..." is fine.)
+
+In the browser fingerprinting section: Is the use of Safeplug detectable by a site, such that it would be useful in fingerprinting the user?
+
+TODO for ANNIE.  In the timing section, what is the difference between "plain Firefox" and "Firefox, no Tor, no ad-blocking"?
+
+TODO for ANNIE.  In Figure 7, let's add another group of bars on the right side, giving the average running time, averaged over the three sites.
+
+In the "Insider attack" section, rather than "inside the network" I would say "inside the home network".  And make clear that any adversary who can connect to the Safeplug can launch this attack.  So if the user is running an open WiFi network, then anyone nearby can launch the attack.   And the discussion of root passwords in this section is confusing, because SSH login attacks haven't been discussed yet and the reader isn't expecting an attack involving a login (in this section).
+
+TODO for ANNIE.  The CSRF attack section should say at the beginning that this attack requires a nonmalicious insider user to visit a web page controlled by the attacker.  Then say that the attack requires targeting the POST to the IP address of the Safeplug, but the attacker can get the right address by exhaustive search.
+
+Page 8 mentions "Cloud Engine" for the first time.   Is this the same company that is called Pogoplug earlier in the paper?   This should be consistent.  If the company is called Cloud Engine, it seems clearer to use Cloud Engine for the company and Pogoplug for the (non-Safeplug) product.
+
+Under "Engineering Fixes" rather than "A typical example ..." I would say "A typical approach to preventing CSRF attacks ..."
+
+The current text implies that the problems with proxy configuration for mobile devices apply only to iOS devices.  But really they apply to any mobile device, including non-iOS devices and laptops.   This will be a big problem for most users.
+
+DONE.  In the conclusion, I wouldn't say "not the correct method".  I would say something like "problematic as a method".  The fact is that there is no really good method; but this is not the best method for most users.
