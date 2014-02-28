@@ -431,10 +431,10 @@ The cloud storage company Pogoplug noticed the demand for online anonymity and i
 
 \begin{itemize}
 \item The Safeplug functions as a HTTP proxy for the browser, which then uses Tor on outgoing traffic (see Figure \ref{fig:flow}).
-\item The presence of both first- and third-party tracking cookies, de-anonymizing users across websites despite the presence of Tor.
-\item A Cross-Site Request Forgery (CSRF) vulnerability that allows an outside attacker to modify the Safeplug settings (i.e., turning Tor on/off, turning ad-blocking on/off, turning the Tor relay setting on/off, adding/removing whitelisted sites from Tor).
-\item A vulnerability that allows an attacker within the network to modify the Safeplug settings without notifying any other devices on the network.
-\item A higher latency than that of the Tor Browser Bundle.
+\item The browser collects both first- and third-party tracking cookies, de-anonymizing users across websites despite the presence of Tor.
+\item A Safeplug user is vulnerable to a Cross-Site Request Forgery (CSRF) attack that allows an outside attacker to modify the Safeplug settings (i.e., turning Tor on/off, turning ad-blocking on/off, turning the Tor relay setting on/off, adding/removing whitelisted sites from Tor).
+\item A malicious user within the network can modify the Safeplug settings without notifying any other devices on the network.
+\item The Safeplug has a higher web request latency than that of the Tor Browser Bundle.
 \end{itemize} 
 
 Pogoplug made use of good security principles by using auditable open source software on their device, and has a laudable goal of making online security the standard for more users.  However, even if the engineering vulnerabilities are fixed with proper authentication for modifying Safeplug settings, the incompleteness of the provided anonymity and risks of adding an additional box to the trusted inside of the home network mean that there is little reason to use the Safeplug over the Tor Browser Bundle.
@@ -536,7 +536,7 @@ Privoxy is a ``non-caching web proxy with advanced filtering capabilities for en
 
 The version of Tor is v0.2.3.25 which is from November 2012.  The current stable version of Tor is v0.2.4.20 from December 2013.  Unlike Lighttpd and Privoxy, the Safeplug does not contain the most up-to-date version of Tor from when it was released.
 
-The fourth piece of software discovered on the device, which is not installed during the activation process and is in \verb!/usr/sbin! is the Dropbear SSH server and client, used to support SSH access to the device \cite{dropbear}.  The Safeplug uses its own configuration files to determine how these pieces of software are set up and used.  The version of Dropbear on the Safeplug is v0.52 from 2008, which is extremely out of date.  Given the different location and installation methods, it seems likely that this was from the older Pogoplug device and is not designed to be updated in the same manner as the rest of the Safeplug software.
+The fourth piece of software discovered on the device, which is not installed during the activation process and is in \verb!/usr/sbin! is the Dropbear SSH server and client, used to support SSH access to the device \cite{dropbear}.  The Safeplug uses its own configuration files to determine how these pieces of software are set up and used.  The version of Dropbear on the Safeplug is v0.52 from 2008, which is extremely out of date.  Given the different location and installation methods, it seems likely that this was from the older Pogoplug device and is not designed to be updated in the same manner as the rest of the Safeplug software.  However, the SSH server is active and listening on port 22.
 
 Figure \ref{fig:callgraph} shows the call graph for the modifying the settings page.  When a user modifies the settings page, Javascript on the settings page generates a POST request to xspctrl, which is running via CGI in Lighttpd. The CGI handler copies a number of environment variables and then forks and runs the xspctrl as execve (in the constructed environment). Xspctrl is a shell script which uses the end of the path to discover the correct method to run and executes any of the necessary binary files with specified arguments (go\_update, go\_upgrade, go\_sshd, or go\_updateexceptions) to complete its request before returning a response.
 
@@ -619,8 +619,8 @@ We used Panopticlick to examine the fingerprint of a freshly installed Firefox b
 If the latency of web requests using the Safeplug is noticeably longer than that of normal Internet use, users may be deterred from using the device.  Similarly, if turning Tor on, but not ad-blocking, adds a significant time delay, the user may only turn on the ad-blocking feature (without Tor).  We recorded the time for a web request on the following settings:
 
 \begin{itemize}
-\item Plain Firefox
-\item Firefox, no Tor, no ad-blocking
+\item Plain Firefox (traffic not running through the Safeplug device)
+\item Firefox, no Tor, no ad-blocking (traffic running through the Safeplug device)
 \item Firefox, Tor, no ad-blocking
 \item Firefox, Tor, ad-blocking
 \item Firefox, no Tor, ad-blocking
@@ -661,7 +661,7 @@ Since the RPC version of the attack just involves basic Internet tools (the abil
 This seems like a fairly important vulnerability and requires action from Pogoplug to fix.  Since the purpose of these RPC operations is unclear without access to more of the source code, it is possible that they could be disabled entirely.  If not, perhaps there is some authentication protocol that could be implemented.  The challenge of such a protocol from a user's point of view is that valid access would be infrequent so giving a user a password to remember would be a poor experience.
 
 \subsection{CSRF Attack}
-An external website can also perform this attack by returning a correctly formatted POST string via an internal user's browser.  This executes the same functionality as the Insider Attack, but the attacker does not need to be on the local network or know the IP address of the Safeplug.  Instead, the attacker (who could be any malicious actor with access to a web server) can just send a POST request to every IP in the common ranges of local addresses in home networks, 192.168.0.0/24 and 192.168.1.0/24.  We implemented this attack with less than 20 lines of Javascript code.  The following steps are necessary for the attack to be successful:
+An external website can also perform this attack by returning a correctly formatted POST string via an internal user's browser.  This executes the same functionality as the Insider Attack, but the attacker does not need to be on the local network or know the IP address of the Safeplug.  The CSRF attack requires a nonmalicious insider user to visit a web page controlled by the attacker; additionally, the attacker must target the POST to the IP address of the Safeplug, but the attacker can get the right address by an exhaustive search.  We implemented this attack with less than 20 lines of Javascript code.  The following steps are necessary for the attack to be successful:
 
 \begin{enumerate}
 \item Set up a web page with the crafted Javascript code, which will send the POST request of the following format to all addresses in the common ranges: \url{http://<IP address>/svc/xspctrl/disableTor}.
@@ -702,7 +702,7 @@ To our knowledge, there has been no other study analyzing the security of Pogopl
 
 \section{Discussion}
 \subsection{Engineering Fixes}
-The most critical engineering fix is authentication in the POST calls to prevent the CSRF attack.  A typical example is a cookie and a hidden form field set in the settings page of the Safeplug hosts; the cookie must be returned by the browser when making the POST request to the RPC server \cite{csrfdef}.  Although someone doing a CSRF attack such as the one described above could get the cookie sent, because of the same-origin policy, the adversary would not be able to examine the contents of the cookie to determine what to put in the form field.
+The most critical engineering fix is authentication in the POST calls to prevent the CSRF attack.  A typical approach to preventing CSRF attacks is using a cookie and a hidden form field set in the settings page of the Safeplug hosts; the cookie must be returned by the browser when making the POST request to the RPC server \cite{csrfdef}.  Although someone doing a CSRF attack such as the one described above could get the cookie sent, because of the same-origin policy, the adversary would not be able to examine the contents of the cookie to determine what to put in the form field.
 
 \subsection{Structural Problems}
 However, there are much more significant structural problems with implementing a Tor connection via an HTTP proxy.  Several of the usability problems involve user awareness and vigilance.  For example, cookies and fingerprinting problems mean that users could still be tracked across websites, regardless of whether the ad-block functionality on the Safeplug is enabled.  This poses an unreasonable stress on users who must be aware of their browsing practices and does not bode well for the advertised security and anonymity.
