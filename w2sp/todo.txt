@@ -4,7 +4,7 @@ Notes on the draft you sent:
 
 Higher-level and structural suggestions:
 
-There's a lot of stuff on the TOS and documentation before the paper gets around to the technical meat.  Is there some way to rearrange sections to move the TOS/doc stuff later; or to keep the highlights of that stuff where they are and move the bulk of it later?   It's generally a goal to try to move the technical meat of a paper closer to the front.   (It seems more logical to build up to it by laying out all of the background and preliminaries first, but that makes the paper less interesting to read, and less attractive to reviewers.)
+TODO for Annie.  There's a lot of stuff on the TOS and documentation before the paper gets around to the technical meat.  Is there some way to rearrange sections to move the TOS/doc stuff later; or to keep the highlights of that stuff where they are and move the bulk of it later?   It's generally a goal to try to move the technical meat of a paper closer to the front.   (It seems more logical to build up to it by laying out all of the background and preliminaries first, but that makes the paper less interesting to read, and less attractive to reviewers.)
 
 =====
 Detailed suggestions:
