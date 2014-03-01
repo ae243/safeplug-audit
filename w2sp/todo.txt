@@ -4,7 +4,7 @@ Notes on the draft you sent:
 
 Higher-level and structural suggestions:
 
-TODO for Annie.  There's a lot of stuff on the TOS and documentation before the paper gets around to the technical meat.  Is there some way to rearrange sections to move the TOS/doc stuff later; or to keep the highlights of that stuff where they are and move the bulk of it later?   It's generally a goal to try to move the technical meat of a paper closer to the front.   (It seems more logical to build up to it by laying out all of the background and preliminaries first, but that makes the paper less interesting to read, and less attractive to reviewers.)
+DONE.  There's a lot of stuff on the TOS and documentation before the paper gets around to the technical meat.  Is there some way to rearrange sections to move the TOS/doc stuff later; or to keep the highlights of that stuff where they are and move the bulk of it later?   It's generally a goal to try to move the technical meat of a paper closer to the front.   (It seems more logical to build up to it by laying out all of the background and preliminaries first, but that makes the paper less interesting to read, and less attractive to reviewers.)
 
 =====
 Detailed suggestions:
@@ -27,7 +27,7 @@ DONE.  In the TOS section, I would say that use of the Safeplug *purportedly* co
 
 DONE.  In the software section, the text implies that Dropbear SSH might be unused.  It's worth saying that the SSH server is active and listening on (presumably) port 22.
 
-TODO for ANNIE.  Figure 4 is slightly hard to read.  It looks like a drop shadow on the words is making them harder for the eye to resolve.  (Or maybe it's just my PDF viewer.)
+DONE.  Figure 4 is slightly hard to read.  It looks like a drop shadow on the words is making them harder for the eye to resolve.  (Or maybe it's just my PDF viewer.)
 
 The beginning of page 5 talks about which platforms have a Tor application.  That seems confusing to discuss at this point in the paper because the use of Safeplug doesn't require a Tor application on the client.  Also, it's a good idea to reiterate in this section that the user is setting up their client machine's browser to use the Safeplug as its HTTP proxy.   (And that the user has to do this separately for each client device they want to protect.)  In general, this section needs clearer explanation, e.g. what it means to whitelist a site.
 
@@ -37,7 +37,7 @@ In the browser fingerprinting section: Is the use of Safeplug detectable by a si
 
 DONE.  In the timing section, what is the difference between "plain Firefox" and "Firefox, no Tor, no ad-blocking"?
 
-TODO for ANNIE.  In Figure 7, let's add another group of bars on the right side, giving the average running time, averaged over the three sites.
+DONE.  In Figure 7, let's add another group of bars on the right side, giving the average running time, averaged over the three sites.
 
 In the "Insider attack" section, rather than "inside the network" I would say "inside the home network".  And make clear that any adversary who can connect to the Safeplug can launch this attack.  So if the user is running an open WiFi network, then anyone nearby can launch the attack.   And the discussion of root passwords in this section is confusing, because SSH login attacks haven't been discussed yet and the reader isn't expecting an attack involving a login (in this section).
 
