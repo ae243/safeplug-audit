@@ -441,7 +441,7 @@ Pogoplug made use of good security principles by using auditable open source sof
 
 \begin{figure*}
 \centering
-\includegraphics[width=.75\textwidth]{instructions2}
+\includegraphics[width=.65\textwidth]{instructions2}
 \caption{Setup instructions (and the only documentation) that came in the box with the Safeplug. Pogoplug highlights the ease of installing the device but does not give a clear indication of how the Safeplug functions.}
 \label{fig:instructions}
 \end{figure*}  
@@ -463,38 +463,6 @@ Using Tor or the Tor Browser Bundle provides a tradeoff between anonymity, usabi
 {\bf Pogoplug.} Pogoplug, a subsidary of Cloud Engines, also offers a box for home network file sharing without needing to use a third-party storage provider.  Based on our examination of the box discussed below, we suspect that the Pogoplug hardware was relabelled as Safeplug and simply uses different software to achieve its newly branded purpose.
 
 \section{Design and Operation of Safeplug}
-
-\subsection{Information Prior to Using the Device: Terms of Service}
-\label{tos}
-The Terms of Service (TOS) contains three main points of interest: TOS updates, open source licensing information, and software updates.  First, the TOS are not presented to the user in the Safeplug package (the only information in the packaging were the instructions shown in Figure~\ref{fig:instructions}) or during the activation process, and are only available through a small link at the bottom of the Safeplug website\cite{safeplug}.  Although use of the Safeplug device purportedly constitutes acceptance of the TOS, most users are not likely to read the TOS even once.  However, Pogoplug suggests that users regularly review the TOS because they can update or change them at any time; this is standard language in TOS but not a good combination with them not being presented to the user.
-
-Following good security and development practices, the Safeplug makes use of several pieces of Open Source software.  A standard term of many open source licenses states that a company that uses the open source software must list the software used and its license, as well as the open source code of their own software that uses the license.  The TOS contains a link to a page that would supposedly comply with this requirement: \url{http://pogoplug.com/home-en-developers-open-source.html} but the link is dead and instead the reader sees a 404 error \cite{safeplug}.  This dead link was noted by some members of the Tor-talk mailing list in November 2013 and has not been fixed as of Feburary 2014 \cite{tormailinglist}.  Pogoplug's open source page does exist at \url{https://pogoplug.com/opensource} and includes several pieces of software for the Safeplug: bootloader, Linux kernel, XCE kernel support driver, glibc, BusyBox, and a Safeplug source bundle.  However, there is no way to find this page from the Terms of Service.
-
-The final area of interest was software updates on the device which will be ``automatically delivered'' to the user, but it is unclear whether there will be any notification~\cite{safeplug}.  Although a prompt updating mechanism is an important security feature for users who trust Pogoplug and their update servers (in fact the activation process seems designed for keeping the software up to date and it is concerning that this does not seem to uniformly occur as discussed in Section~\ref{versions}), other users might want to disable this functionality for fear of a malicious use of Pogoplug's servers or a spoofing attack (see Section \ref{dnsspoof}).  This is one of the many reasons why users who truly need security and anonymity should opt for the Tor Browser Bundle rather than adding the Safeplug to their network.
-
-\subsection{Explanation of Tor Configuration Options}
-\label{port9001}
-One of Safeplug's configurations is the use of the device as a Tor relay node in the Tor network.  When the device is initially set up, the default setting is to not use it as a relay node.  
-
-The settings page describes Tor in an extremely basic way:
-
-\begin{quotation}
-``Safeplug uses the Tor network to secure your Internet connection.  Tor works by routing your Internet through a series of random destinations, much like driving a twisty, complicated route to throw off someone who is following you, making it impossible for websites and organizations to identify the source or destination of Internet traffic.'' \cite{safeplug}
-\end{quotation}
-
-On the other hand, it describes the functionality of a Tor relay node in a much more technical manner:
-\begin{quotation}
-``Make the Tor network strong for everybody! Enabling Tor Relay allows your Safeplug to act as a relay point on the Tor network. The more Tor relays that join the Tor network, the faster and more robust Tor becomes, helping everybody be more secure online. \\ \\ NOTE: You must forward inbound traffic on port 9001 to [IP-of-Safeplug]. \\ For help configuring your router, click here.''
-\cite{safeplug}
-\end{quotation}
-
-The link provided is to an advertisement-filled and not particularly reputable-looking website with no clear navigation to get to the necessary instructions.  
-
-If the majority of users can only understand the simpler description, then they likely won't understand the description of a Tor relay node.  This could be a problem if users simply decide not to do anything with that setting (i.e. don't change the setting to use the Safeplug as a relay node).  In this case, there would be a large increase in use of the Tor network, yet most of the users are not giving back to it.
-
-This could easily be remedied; Safeplug should choose a target audience and have consistent descriptions.  The best option is to explain the Tor network and the functionality of a Tor relay node at the same level, preferably a level that normal Internet users can understand.  This increases the chances that users will run their Safeplug as a relay node.
-
-Another consequence of misunderstanding the use of the Safeplug as a relay node, or more specifically, as an exit node is the possible legal repercussions.  As an exit relay, all traffic that exits the node can be traced back to the Safeplug's IP address; it is likely that some of this traffic contains illegal information or is part of illegal activities.  The Tor Project recommends not running an exit relay from a user's home: ``If law enforcement becomes interested in traffic from your exit relay, it's possible that officers will seize your computer. For that reason, it's best not to run your exit relay in your home or using your home Internet connection~\cite{law}.''  Considering that the Safeplug is intended for home use, it is a poor design choice to allow the user to use it as an exit relay, especially without providing the user with any information.
 
 \subsection{Hardware}
 Before investigating the software, we took apart one of the two Safeplug devices we purchased in order to see the physical components.  Figure~\ref{fig:top} shows the top of the board and Figure~\ref{fig:bottom} shows the bottom.  The board incorporates: (A) an SD card slot, (B) a power connector, (C) a USB slot, (D) an ethernet connector, (E) ethernet transceiver, (F) lan transformer, (G) the Marvell 88F6192 integrated controller, and (H), (I) flash memory.  The Marvell controller is from 2008 and runs ARM~\cite{marvellhw}. This is the same controller as version 4 of Pogoplug's cloud storage device; takedowns of that device that are available online show an identical-looking circuit-board to the one in Figure~\ref{fig:circuit}\cite{pogo4}.  It is also interesting to note that the Safeplug branding is a sticker on the front of the device, whereas the Pogoplug branding is etched into the plastic on top of the device, which indicates that the Safeplug uses the same hardware as Pogoplug's existing devices, and derives its differing functionality from different software.
@@ -559,8 +527,33 @@ These configuration files are read by the scripts in \verb!/opt/xce/etc/init.d! 
 \section{Usability}
 Several aspects of the user experience of the Safeplug affect the usability and security of the device.  The Safeplug advertisements highlighted the ease of setup and activation of the device.
 
+\subsection{Information Prior to Using the Device: Terms of Service}
+\label{tos}
+The Terms of Service (TOS) contains three main points of interest: TOS updates, open source licensing information, and software updates.  First, the TOS are not presented to the user in the Safeplug package (the only information in the packaging were the instructions shown in Figure~\ref{fig:instructions}) or during the activation process, and are only available through a small link at the bottom of the Safeplug website\cite{safeplug}.  Although use of the Safeplug device purportedly constitutes acceptance of the TOS, most users are not likely to read the TOS even once.  However, Pogoplug suggests that users regularly review the TOS because they can update or change them at any time; this is standard language in TOS but not a good combination with them not being presented to the user.
+
+Following good security and development practices, the Safeplug makes use of several pieces of Open Source software.  A standard term of many open source licenses states that a company that uses the open source software must list the software used and its license, as well as the open source code of their own software that uses the license.  The TOS contains a link to a page that would supposedly comply with this requirement: \url{http://pogoplug.com/home-en-developers-open-source.html} but the link is dead and instead the reader sees a 404 error \cite{safeplug}.  This dead link was noted by some members of the Tor-talk mailing list in November 2013 and has not been fixed as of Feburary 2014 \cite{tormailinglist}.  Pogoplug's open source page does exist at \url{https://pogoplug.com/opensource} and includes several pieces of software for the Safeplug: bootloader, Linux kernel, XCE kernel support driver, glibc, BusyBox, and a Safeplug source bundle.  However, there is no way to find this page from the Terms of Service.
+
+The final area of interest was software updates on the device which will be ``automatically delivered'' to the user, but it is unclear whether there will be any notification~\cite{safeplug}.  Although a prompt updating mechanism is an important security feature for users who trust Pogoplug and their update servers (in fact the activation process seems designed for keeping the software up to date and it is concerning that this does not seem to uniformly occur as discussed in Section~\ref{versions}), other users might want to disable this functionality for fear of a malicious use of Pogoplug's servers or a spoofing attack (see Section \ref{dnsspoof}).  This is one of the many reasons why users who truly need security and anonymity should opt for the Tor Browser Bundle rather than adding the Safeplug to their network.
+
 \subsection{Activation and Setup}
 The first step was to plug Safeplug into our router and activate our device.  Our instructions are shown in Figure~\ref{fig:instructions}.  We followed them, activated our device, and then ended on the configurations page.  The configurations page has a combination of platforms and browsers, with a different set of proxy configuration instructions for each one.  The platforms presented include popular desktop and mobile platforms.  The Tor Project has an Android application, as well as the Tor Browser Bundle for Windows and OSX (and Linux, which is not supported explicitly by Pogoplug's page but is likely to have a browser with similar configuration processes to Firefox).  However, there is no existing Tor Project application for iOS.
+
+
+%\begin{table}[!t]
+%\renewcommand{\arraystretch}{1.3}
+%\caption{The platforms and browsers that the Safeplug settings page provides instructions for.}
+%\label{table_example}
+%\centering
+%	\begin{tabular}{|c|c|}
+%	\hline
+%		Platform & Browsers \\ \hline
+%		Windows	& Internet Explorer, Chrome, Firefox \\ \hline
+%		OSX & Safari, Chrome, Firefox \\ \hline
+%		iOS	& Safari \\ \hline
+%		Android	& Chrome \\ \hline
+%	\end{tabular}
+%\end{table}
+
 
 \begin{center}
 	\begin{tabular}{|c|c|}
@@ -575,12 +568,36 @@ The first step was to plug Safeplug into our router and activate our device.  Ou
 
 After we finished our configuration, we were taken to the Safeplug settings page.  This page is shown in Figure~\ref{fig:settings}.  This allowed us to turn Tor on/off, add white-listed websites, turn ad-blocking on/off, and turn the ability of our device to be a relay node on/off (and if on, an additional option appeared to allow the device to be an exit node).  
 
-\begin{figure}[htb]
+\begin{figure*}
   \centering
-  \includegraphics[width=.4\textwidth]{settings_with_exit}
+  \includegraphics[width=.7\textwidth]{settings_with_exit}
   \caption{Safeplug settings page.  The last button ``Allow Exit'' only appears if the relay option above has been turned on.}
   \label{fig:settings}
-\end{figure}
+\end{figure*}
+
+\subsection{Explanation of Tor Configuration Options}
+\label{port9001}
+One of Safeplug's configurations is the use of the device as a Tor relay node in the Tor network.  When the device is initially set up, the default setting is to not use it as a relay node.  
+
+The settings page describes Tor in an extremely basic way:
+
+\begin{quotation}
+``Safeplug uses the Tor network to secure your Internet connection.  Tor works by routing your Internet through a series of random destinations, much like driving a twisty, complicated route to throw off someone who is following you, making it impossible for websites and organizations to identify the source or destination of Internet traffic.'' \cite{safeplug}
+\end{quotation}
+
+On the other hand, it describes the functionality of a Tor relay node in a much more technical manner:
+\begin{quotation}
+``Make the Tor network strong for everybody! Enabling Tor Relay allows your Safeplug to act as a relay point on the Tor network. The more Tor relays that join the Tor network, the faster and more robust Tor becomes, helping everybody be more secure online. \\ \\ NOTE: You must forward inbound traffic on port 9001 to [IP-of-Safeplug]. \\ For help configuring your router, click here.''
+\cite{safeplug}
+\end{quotation}
+
+The link provided is to an advertisement-filled and not particularly reputable-looking website with no clear navigation to get to the necessary instructions.  
+
+If the majority of users can only understand the simpler description, then they likely won't understand the description of a Tor relay node.  This could be a problem if users simply decide not to do anything with that setting (i.e. don't change the setting to use the Safeplug as a relay node).  In this case, there would be a large increase in use of the Tor network, yet most of the users are not giving back to it.
+
+This could easily be remedied; Safeplug should choose a target audience and have consistent descriptions.  The best option is to explain the Tor network and the functionality of a Tor relay node at the same level, preferably a level that normal Internet users can understand.  This increases the chances that users will run their Safeplug as a relay node.
+
+Another consequence of misunderstanding the use of the Safeplug as a relay node, or more specifically, as an exit node is the possible legal repercussions.  As an exit relay, all traffic that exits the node can be traced back to the Safeplug's IP address; it is likely that some of this traffic contains illegal information or is part of illegal activities.  The Tor Project recommends not running an exit relay from a user's home: ``If law enforcement becomes interested in traffic from your exit relay, it's possible that officers will seize your computer. For that reason, it's best not to run your exit relay in your home or using your home Internet connection~\cite{law}.''  Considering that the Safeplug is intended for home use, it is a poor design choice to allow the user to use it as an exit relay, especially without providing the user with any information.
 
 \subsection{Internet Use}
 \label{inetuse}
@@ -632,7 +649,7 @@ For each of the settings, we took 20 measurements; Figure~\ref{fig:latency2} sho
 
 \begin{figure*}
   \centering
-  \includegraphics[width=0.7\textwidth]{graph2}
+  \includegraphics[width=0.5\textwidth]{latencygraph}
   \caption{Latency of web requests.}
   \label{fig:latency2}
 \end{figure*}
