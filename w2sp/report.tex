@@ -435,7 +435,7 @@ The cloud storage company Pogoplug noticed the demand for online anonymity and i
 
 \begin{itemize}
 \item The Safeplug functions as a HTTP proxy for the browser, which then uses Tor for outgoing traffic (see Figure \ref{fig:flow}).
-\item Despite the use of Privoxy as an ad-blocker, the Safeplug does nothing to prevent users' browsers from collecting both first- and third-party tracking cookies, allowing users to be de-anonymized across websites despite the presence of Tor.%\cite{arvindpets}.
+\item Despite the use of Privoxy as an ad-blocker, the Safeplug does nothing to prevent users' browsers from collecting both first- and third-party tracking cookies, allowing users to be de-anonymized across websites despite the presence of Tor~\cite{arvindpets}.
 \item Safeplug users are vulnerable to a Cross-Site Request Forgery (CSRF) attack that allows an attacker external to their home network to modify the Safeplug settings (including silently turning off the use of Tor).
 \item A malicious user within the network can modify the Safeplug settings without notifying any other devices on the network.
 \item The Safeplug has a higher web request latency than that of the Tor Browser Bundle.
@@ -543,23 +543,11 @@ The final area of interest was software updates on the device which will be ``au
 The first step was to plug Safeplug into our router and activate our device.  Our instructions are shown in Figure~\ref{fig:instructions}.  We followed them, activated our device, and then ended on the configurations page.  The configurations page shows a variety of platforms and browsers, shown in the table below, and links to proxy configuration instructions for each one.  The platforms presented include many popular desktop and mobile platforms.  For every browser on every client device that the user wants to protect, they must set up the Safeplug as the browser's HTTP proxy and ensure that the proxy stays set up when the browser is updated or re-installed.
 
 
-%\begin{table}[!t]
-%\renewcommand{\arraystretch}{1.3}
-%\caption{The platforms and browsers that the Safeplug settings page provides instructions for.}
-%\label{table_example}
-%\centering
-%	\begin{tabular}{|c|c|}
-%	\hline
-%		Platform & Browsers \\ \hline
-%		Windows	& Internet Explorer, Chrome, Firefox \\ \hline
-%		OSX & Safari, Chrome, Firefox \\ \hline
-%		iOS	& Safari \\ \hline
-%		Android	& Chrome \\ \hline
-%	\end{tabular}
-%\end{table}
-
-
-\begin{center}
+\begin{table*}[!t]
+\renewcommand{\arraystretch}{1.3}
+\caption{The platforms and browsers that the Safeplug settings page provides instructions for.}
+\label{table_example}
+\centering
 	\begin{tabular}{|c|c|}
 	\hline
 		Platform & Browsers \\ \hline
@@ -568,7 +556,19 @@ The first step was to plug Safeplug into our router and activate our device.  Ou
 		iOS	& Safari \\ \hline
 		Android	& Chrome \\ \hline
 	\end{tabular}
-\end{center}
+\end{table*}
+
+
+%\begin{center}
+%	\begin{tabular}{|c|c|}
+%	\hline
+%		Platform & Browsers \\ \hline
+%		Windows	& Internet Explorer, Chrome, Firefox \\ \hline
+%		OSX & Safari, Chrome, Firefox \\ \hline
+%		iOS	& Safari \\ \hline
+%		Android	& Chrome \\ \hline
+%	\end{tabular}
+%\end{center}
 
 After we finished configuring our Safeplug and browser, we were taken to the Safeplug settings page.  This page is shown in Figure~\ref{fig:settings}.  This page allows the user to set a number of options on the device, including turning Tor on/off, turning ad-blocking on/off, and turning relay node ability on/off (and if on, an additional option appeared to allow the device to be an exit relay).  Additionally, the user can specify ``white-listed'' domains that will be connected to directly even if Tor is turned on, without going through the Tor network.  The Safeplug FAQ website describes this as an option for bank websites or other sites that might completely prevent logons from foreign IP addresses\cite{safeplug}.
 
@@ -596,7 +596,7 @@ On the other hand, it describes the functionality of a Tor relay node in a much 
 
 The link provided is to an advertisement-filled and not particularly reputable-looking website with no clear navigation to get to the necessary instructions.  
 
-If the majority of users can only understand the simpler description, then they likely won't understand the description of a Tor relay node.  This could be a problem if users simply decide not to do anything with that setting (i.e. don't change the setting to use the Safeplug as a relay node).  In this case, there would be a large increase in use of the Tor network, yet most of the users are not giving back to it.
+The two descriptions are targeting two different audiences: one with much more knowledge about technology and Tor, the other with much less knowledge of these topics.  It is likely that at least one of these audiences will not understand one of the descriptions.  This could be a problem if users simply decide not to do anything with that setting (i.e. don't change the setting to use the Safeplug as a relay node).  In this case, there would be a large increase in use of the Tor network, yet most of the users are not giving back to it.
 
 This could easily be remedied; Safeplug should choose a target audience and have consistent descriptions.  The best option is to explain the Tor network and the functionality of a Tor relay node at the same level, preferably a level that normal Internet users can understand.  This increases the chances that users will run their Safeplug as a relay node.
 
@@ -619,7 +619,7 @@ Another consequence of misunderstanding the use of the Safeplug as a relay node,
 \caption{Application of Safeplug proxy settings.}
 \end{figure*}
 
-Figure~\ref{fig:before} shows what a web page looks like before turning Tor and ad-blocking on, while Figure~\ref{fig:after} shows the same website after turning Tor and ad-blocking on.  Both of these figures show our IP address in the top right corner; due to the change in IP address we can see that our traffic is being routed through Tor.  
+Figure~\ref{fig:before} shows what a web page looks like before turning Tor and ad-blocking on, while Figure~\ref{fig:after} shows the same website after turning Tor and ad-blocking on.  Both of these figures show our IP address in the top right corner; we can see that our traffic is being routed through Tor due to the change in IP address.  
 
 Next, we wanted to see how usable this would be to a normal Internet user.  A user would probably decide not to use Safeplug if they could not read their web pages (if they were not in their native language), or if they could not log into their accounts (some web sites will lock a user out if they try to log in from multiple countries in a short time period).  While browsing the Internet, we experienced some pages in German and Swedish, which is expected with Tor; if a user is not familiar with Tor, they may get frustrated and stop using Safeplug altogether.  We were also prompted with a request to ``Enter the name of the city where you usually sign in'' when we tried to log into our Google account, indicating that Google noticed we were trying to login from significantly ``unusual'' location.
 
@@ -841,6 +841,8 @@ nal/world/catalog-reveals-nsa-has-back-doors-for-numerous-devices-a-940994.html}
 
 %\bibitem{schneier} Schneier, Bruce. ``Tor Appliance.'' \emph{Schneier on Security}, 27 November 2013. \url{https://www.schneier.com/blog/archives/2013/11/tor_appliance.html}.
 
+\bibitem{arvindpets} Reisman, Dillon and Englehardt, Steven and Eubank, Christian and Zimmerman, Peter and Narayanan, Arvind.  ``Cookies that give you away: Evaluating the surveillance implications of web tracking.'' \emph{Manuscript}.  2014.
+
 \bibitem{kernelcve} Security Database. ``Linux Linux Kernel 2.6.13.8 CVE'' \url{http://www.security-database.com/cpe.php?detail=cpe:/o:linux:linux_kernel:2.6.31.8}
 
 %\bibitem{techreview} Simonite, Tom. ``Online Anonymity in a Box, for \$49'', \emph{MIT Technology Review}, 21 November 2013. \url{http://www.technologyreview.com/news/521676/online-anonymity-in-a-box-for-49/}.
@@ -862,7 +864,6 @@ nal/world/catalog-reveals-nsa-has-back-doors-for-numerous-devices-a-940994.html}
 %\bibitem{wireshark} Wireshark, \url{http://www.wireshark.org/}. 
 
 \bibitem{csrfdef} Zeller and Felten. ``Cross-Site Request Forgeries: Exploitation and Prevention.'' \emph{Princeton Technical Report}. 2008.
-
 
 \end{thebibliography}
 
