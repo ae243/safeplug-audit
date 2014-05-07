@@ -60,19 +60,19 @@ We present the first public third-party security audit of Pogoplug's Safeplug de
 %\setlength{\parskip}{1ex plus 2ex minus 2ex}
 
 \section{Introduction}
-Privacy on the Internet is becoming increasingly important as users realize how vulnerable they are to surveillance and theft of their data.  A recent Pew study listed compromised emails/accounts, harassment, and stolen Social Security Numbers, bank information, and credit card numbers as some of the results of online visibility~\cite{pew}.  According to the study, 86\% of internet users have tried to become more anonymous online by either clearing cookies, encrypting their email, or using virtual networks that mask their IP address, but despite their efforts~\cite{pew}.  Despite this, users do not believe that they have the tools to solve the problem.
+Privacy on the Internet is becoming increasingly important as users realize how vulnerable they are to surveillance and theft of their data.  A recent Pew study listed compromised emails/accounts, harassment, and stolen Social Security Numbers, bank information, and credit card numbers as some of the results of online visibility; according to the study, 86\% of internet users have tried to become more anonymous online~\cite{pew}.  Despite this, users do not believe that they have the tools to solve this problem.
 
-In December of 2013, the cloud storage company, Pogoplug, released the Safeplug, which is a small box that plugs into a user's home router.  It claims to: conceal your identity, hide where you live, shield your surfing habits, and make you anonymous online by routing all traffic through Tor~\cite{safeplug}.  Given Pogoplug's bold security claims about the Safeplug device, the device should be audited by a third-party.  We conducted the first public third-party security audit of the Safeplug by analyzing the hardware, software, network behavior, and usability of the device.  The following are some of our findings:
+In December of 2013, the cloud storage company, Pogoplug, released the Safeplug, which is a small box that plugs into a user's home router.  It claims to: conceal your identity, hide where you live, shield your surfing habits, and make you anonymous online by routing all traffic through Tor~\cite{safeplug}.  We conducted the first public third-party security audit of the Safeplug by analyzing the hardware, software, network behavior, and usability of the device.  The following are some of our findings:
 
 \begin{itemize} \setlength{\itemsep}{.2mm}
-\item The Safeplug functions as a HTTP proxy for the browser, which then uses Tor for outgoing traffic (see Figure \ref{fig:flow}).
+\item The Safeplug functions as a HTTP proxy for the browser, which then uses Tor for outgoing traffic.
 \item Despite the use of Privoxy as an ad-blocker, the Safeplug does nothing to prevent users' browsers from collecting both first- and third-party tracking cookies, allowing users to be de-anonymized across websites despite the presence of Tor~\cite{arvindpets}.
 \item Safeplug users are vulnerable to a Cross-Site Request Forgery (CSRF) attack that allows an attacker external to their home network to modify the Safeplug settings (including silently turning off the use of Tor).
 \item A malicious user within the network can modify the Safeplug settings without notifying any other devices on the network.
 \item The Safeplug has a higher web request latency than that of the Tor Browser Bundle.
 \end{itemize} 
 
-Pogoplug made use of good security principles by using auditable open source software on their device, and has the laudable goal of making online security the standard for more users.  However, given the incompleteness of the provided anonymity and risks of adding an additional box to the trusted inside of the home network, there is little reason to use the Safeplug over the Tor Browser Bundle.  As well as the Tor network technology used in the Safeplug, the Tor Browser Bundle contains protections against tracking cookies and fingerprinting, making it an improvement over the privacy offerings of the Safeplug.
+Pogoplug made use of good security principles by using auditable open source software on their device, and has the laudable goal of making online security the standard for more users.  However, there is little reason to use the Safeplug over the Tor Browser Bundle; in addition to the Tor network technology used in the Safeplug, the Tor Browser Bundle contains protections against tracking cookies and fingerprinting, making it an improvement over the privacy offerings of the Safeplug.
 
 %\begin{figure}
 %\centering
@@ -128,6 +128,8 @@ Before investigating the software, we took apart one of the two Safeplug devices
 \end{figure}
 
 \subsection{Software on the Safeplug}
+\begin{table}[!t]
+\caption{Software and the corresponding version numbers on the Safeplug.}
 \label{versions}
 \begin{center}
   \begin{tabular}{|l|c|c|c|}
@@ -140,6 +142,7 @@ Before investigating the software, we took apart one of the two Safeplug devices
     Dropbear sshd & v0.52 & 2008 & No\\ \hline
   \end{tabular}
 \end{center}
+\end{table}
 
 Table \ref{versions} shows the software used by the device, the corresponding version of the software, as well as the date of that versions release and if it is up to date.  There are many known vulnerabilities in the pieces of software that are not up to date.  
 
@@ -151,7 +154,7 @@ Table \ref{versions} shows the software used by the device, the corresponding ve
 %
 %The fourth piece of software the device, which is not installed during the activation process and is in a different location (\verb!/usr/sbin!) is the Dropbear SSH server and client, used to support SSH access to the device \cite{dropbear}.  The Safeplug uses its own configuration files to determine how these pieces of software are set up and used.  The version of Dropbear on the Safeplug is v0.52 from 2008, which is extremely out of date.  Given the different location and installation methods, it seems likely that this was from the older Pogoplug device and is not designed to be updated in the same manner as the rest of the Safeplug software.  However, the SSH server is active and listening on port 22.
 
-Figure \ref{fig:callgraph} shows the call graph for the modifying the settings page.  When a user modifies the settings page, Javascript on the settings page generates a POST request to {\tt xspctrl}, which is a script running via CGI in Lighttpd. The CGI handler copies a number of environment variables, and then forks and runs {\tt xspctrl} via {\tt execve} (in the constructed environment). {\tt xspctrl} is a shell script with a method for each settings change; these methods execute any necessary Safeplug binary files (go\_update, go\_upgrade, go\_sshd, or go\_updateexceptions) and then return a HTTP response.
+When a user modifies the settings page, Javascript on the settings page generates a POST request to {\tt xspctrl}, which is a script running via CGI in Lighttpd. The CGI handler copies a number of environment variables, and then forks and runs {\tt xspctrl} via {\tt execve} (in the constructed environment). {\tt xspctrl} is a shell script with a method for each settings change; these methods execute any necessary Safeplug binary files (go\_update, go\_upgrade, go\_sshd, or go\_updateexceptions) and then return a HTTP response.
 
 %\begin{figure*}
 %\centering
@@ -172,12 +175,12 @@ Several aspects of the user experience of the Safeplug also affect the security 
 
 \subsection{Information Prior to Using the Device: Terms of Service}
 \label{tos}
-The Terms of Service (TOS) contains three main points of interest: TOS updates, open source licensing information, and software updates.  First, the TOS are never presented to the user: they aren't presented in the Safeplug package (the only information in the packaging were the instructions shown in Figure~\ref{fig:instructions}) or shown during the activation process, and are only available through a small link at the bottom of the Safeplug website\cite{safeplug}.  
+The TOS are never presented to the user: they aren't presented in the Safeplug package or shown during the activation process, and are only available through a small link at the bottom of the Safeplug website\cite{safeplug}.  
 
-The Safeplug makes uses several pieces of open source software.  A standard term of many open source licenses states that a company that uses the open source software must list the software used and its license, as well as the open source code of their own software that uses the license.  The TOS contains a link to a page that would supposedly comply with this requirement: \url{http://pogoplug.com/home-en-developers-open-source.html} but the link is dead; instead, the reader sees a 404 error \cite{safeplug}.  This dead link was noted by some members of the Tor-talk mailing list in November 2013 and has not been fixed as of Feburary 2014 \cite{tormailinglist}.  Pogoplug does maintain an open source page at \url{https://pogoplug.com/opensource}, which describes several pieces of software for the Safeplug: the bootloader, Linux kernel, XCE kernel support driver, glibc, BusyBox, and a Safeplug source bundle.  However, there is no way to find this page from the Terms of Service or the Safeplug website.
+The Safeplug uses several pieces of open source software.  A standard term of many open source licenses states that a company that uses the open source software must list the software used and its license, as well as the open source code of their own software that uses the license.  The TOS contains a link to a page that would supposedly comply with this requirement: \url{http://pogoplug.com/home-en-developers-open-source.html} but the link is dead; instead, the reader sees a 404 error \cite{safeplug}.  This dead link was noted by some members of the Tor-talk mailing list in November 2013 and has not been fixed as of May 2014 \cite{tormailinglist}.  Pogoplug does maintain an open source page at \url{https://pogoplug.com/opensource}, which describes several pieces of software for the Safeplug: the bootloader, Linux kernel, XCE kernel support driver, glibc, BusyBox, and a Safeplug source bundle.  However, there is no way to find this page from the Terms of Service or the Safeplug website.
 
 \subsection{Activation and Setup}
-The first step was to plug Safeplug into our router and activate our device.  Our instructions are shown in Figure~\ref{fig:instructions}.  We followed them, activated our device, and then ended on the configurations page.  The configurations page shows a variety of platforms and browsers, shown in the table below, and links to proxy configuration instructions for each one.  The platforms presented include many popular desktop and mobile platforms.  For every browser on every client device that the user wants to protect, they must set up the Safeplug as the browser's HTTP proxy and ensure that the proxy stays set up when the browser is updated or re-installed.
+The first step was to plug Safeplug into our router and activate our device.  We followed the simple instructions, activated our device, and then ended on the configurations page.  The configurations page shows a variety of platforms and browsers, shown in Table \ref{table_example}, and links to proxy configuration instructions for each one.  The platforms presented include many popular desktop and mobile platforms.  For every browser on every client device that the user wants to protect, they must set up the Safeplug as the browser's HTTP proxy and ensure that the proxy stays set up when the browser is updated or re-installed.
 
 
 \begin{table}[!t]
@@ -240,19 +243,19 @@ Using Safeplug as an exit node has possible legal repercussions.  As an exit rel
 %\caption{Application of Safeplug proxy settings.}
 %\end{figure*}
 
-Next, we examined popular webpages, with an eye for changes in the user experience.  A user would probably decide not to use Safeplug if they could not read their web pages (due to a different language), or if they could not log into their accounts (some web sites will lock a user out if they try to log in from multiple countries in a short time period).  While browsing the Internet, we experienced some pages in German and Swedish; if a user is not familiar with Tor, they may not understand why this is happening.  We were also prompted with a request to ``Enter the name of the city where you usually sign in'' when we tried to log into our Google account, indicating that Google noticed we were trying to login from significantly ``unusual'' location.
+Next, we examined popular webpages, with an eye for changes in the user experience.  A user would probably decide not to use Safeplug if they could not read their web pages (due to a different language), or if they could not log into their accounts (some web sites will lock a user out if they try to log in from multiple countries in a short time period).  While browsing the Internet, we experienced some pages in German and Swedish; if a user is not familiar with Tor, they may not understand why this is happening.  We were also prompted with a request to ``Enter the name of the city where you usually sign in'' when we tried to log into our Google account, indicating that Google noticed we were trying to login from an ``unusual'' location.
 
 \subsection{Cookies}  
 While browsing the Internet in a fresh browser session, we logged into a Google Account in a tab, and then subsequently went to a website that had the Google+ widget in a different tab.  When we clicked on the Google+ widget, it knew who we were; so we can confirm that a cookie associated with the login was sent to the second Google+ page.  We experienced the same situation with Facebook and its corresponding ``like'' button.  This was confirmed by using FourthParty, a plugin developed by Jonathan Mayer to collect information about cookies and other browsing data~\cite{fourthparty}.
 
 This is clearly not the perfect ``anonymity'' that Safeplug promised in their publicity.  Although normal use does follow this model of persisting logged in status across browser tabs and sessions, a user concerned about anonymity and seeing each session coming up differently (e.g., German then Swedish) might mistakenly believe that they do not have to log out of their social media accounts to preserve their anonymity when accessing other websites.
 
-More interesting and damaging to the user's control over their anonymity would be third-party cookies because the user cannot remove those just by logging out.  Most browsers require a trip to the browser settings to clear cookies (or not have them set in the first place).  We used FourthParty to analyze the client's use of the Safeplug \cite{fourthparty}.  When collecting data on the existence of third-party cookies, we analyzed two separate browsing sessions; they were both new sessions with no cookies.  One of the sessions used the ad-block feature of the Safeplug and the other did not.  After analyzing data from Fourthparty, we found many third-party cookies in both sessions.  These included cookies from: abmr.net, bizographics.com, krxd.net, and bluekai.com among many others.  The ad-block functionality on the Safeplug reduced, but did not eliminate these third-party cookies.
+More interesting and damaging to the user's control over their anonymity would be third-party cookies because the user cannot remove those just by logging out.  Most browsers require a trip to the browser settings to clear cookies (or not have them set in the first place).  When collecting data on the existence of third-party cookies, we analyzed two separate browsing sessions; they were both new sessions with no cookies.  One of the sessions used the ad-block feature of the Safeplug and the other did not.  After analyzing data from Fourthparty, we found many third-party cookies in both sessions.  These included cookies from: abmr.net, bizographics.com, krxd.net, and bluekai.com among many others.  The ad-block functionality on the Safeplug reduced, but did not eliminate, these third-party cookies.
 
 Although Safeplug has a warning about clearing cookies on their FAQ page, it only mentions clearing cookies after a browser session.  Of greater concern would be tracking a user during their browser session from website to website; preventing this requires knowledge and constant vigilance from the user, or a browser that does not accept third-party cookies, such as the one provided in the Tor Browser Bundle.
 
 \subsection{Browser Fingerprinting}
-We used Panopticlick~\cite{panopticlick} to examine the fingerprint of a freshly installed Firefox browser running through the Safeplug proxy.  Panopticlick found the browser to be unique, which means that websites that did fingerprinting could very accurately track, correlate, and de-anonymize user traffic without knowing the IP address or even storing a cookie.  The presence of the Safeplug, as an HTTP proxy, should be completely undetectable by the fingerprinting service because HTTP is designed to make proxies transparent.  Unlike the Tor Browser Bundle, Safeplug users do not even have the fingerprints of other users of the service to help hide their fingerprints.  Allowing the user to use their own browsers significantly incrases the amount of variation and customization between users and therefore the likelihood of having a unique fingerprint.  This danger to anonymity (unlike cookies) is not even mentioned in the Safeplug FAQ page~\cite{safeplug}.
+We used Panopticlick~\cite{panopticlick} to examine the fingerprint of a freshly installed Firefox browser running through the Safeplug proxy.  Panopticlick found the browser to be unique, which means that websites that did fingerprinting could very accurately track, correlate, and de-anonymize user traffic without knowing the IP address or even storing a cookie.  The presence of the Safeplug, as an HTTP proxy, should be completely undetectable by the fingerprinting service because HTTP is designed to make proxies transparent.  Unlike the Tor Browser Bundle, Safeplug users do not even have the fingerprints of other users of the service to help hide their fingerprints.  Allowing the user to use their own browsers significantly increases the amount of variation and customization between users and therefore the likelihood of having a unique fingerprint.  This danger to anonymity (unlike cookies) is not even mentioned in the Safeplug FAQ page~\cite{safeplug}.
 
 \subsection{Latency}
 If the latency of web requests using the Safeplug is noticeably longer than that of normal Internet use, users may be deterred from using the device.  Similarly, if turning Tor on, but not ad-blocking, adds a significant time delay, the user may only turn on the ad-blocking feature (without Tor).  We recorded the time for a web request on the following settings:
@@ -277,7 +280,7 @@ For each of the settings, we took 20 measurements; Figure~\ref{fig:latency2} sho
 \end{figure}
 
 \section{Vulnerabilities}
-As we discovered during our software analysis, the Safeplug has a remote procedure call (RPC) capability.  Implemented is a script called \verb!xspctrl! found in \verb!/opt/xce/html/svc!.  Particularly, functional calls to this script include the ability to enable and disable for all of the Safeplug settings, including Tor, ad block, and Tor relay.  None of them require any arguments in the POST string.
+As we discovered during our software analysis, the Safeplug has a remote procedure call (RPC) capability.  This is a script called \verb!xspctrl! found in \verb!/opt/xce/html/svc!.  Functional calls to this script include the ability to enable and disable all of the Safeplug settings, including Tor, ad block, and Tor relay.  None of them require any arguments in the POST string.
 
 \begin{figure*}
   \centering
@@ -324,7 +327,7 @@ password: ceadmin
 \end{verbatim}
 }
 
-Having a publicly available root password means that SSH is done effectively without authentication.  We tried the SSH procedure twice, once before the Internet connection and activation, and once afterwards.  Before the activation and update procedure, SSH was not available because the RPC server code was not running without Lighttpd being installed.  However, once the box was updated and had Lighttpd installed, the SSH procedure was available and any adversary on the home network could log into the box and install malware, surveillance software, or virtually anything they desired.
+Having a publicly available root password means that SSH is done effectively without authentication.  Once the box was activated and had Lighttpd installed, the SSH procedure was available and any adversary on the home network could log into the box and install malware, surveillance software, or virtually anything they desired.
 
 \subsection{Spoofing the Update Server}
 \label{dnsspoof}
