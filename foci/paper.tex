@@ -28,6 +28,7 @@
 \usepackage{usenix,epsfig}
 \usepackage{url}
 \usepackage{listings}
+\usepackage{subfigure}
 
 \begin{document}
 
@@ -51,19 +52,19 @@
 
 \maketitle
 
-\thispagestyle{empty}
+%\thispagestyle{empty}
 
 \subsection*{Abstract}
 We present the first public third-party security audit of Pogoplug's Safeplug device, which markets ``complete security and anonymity online'' by using Tor technology to protect users' IP addresses.  We examine the hardware, software, and network behavior of the Safeplug device, as well as the user experience in comparison to other forms of web browsing.  Although the Safeplug appears to use Tor as advertised, users may still be identified in ways they may not expect.  Furthermore, an engineering vulnerability in how the Safeplug accepts settings changes would allow an adversary internal or external to a user's home network to silently disable Tor or modify other Safeplug settings, which completely invalidates the security claims of the device.  Beyond this problem, the user experience challenges of this type of device make it inferior to the existing gold standard for anonymous browsing: the Tor Browser Bundle.
 
-\setlength{\parskip}{1ex plus 2ex minus 2ex}
+%\setlength{\parskip}{1ex plus 2ex minus 2ex}
 
 \section{Introduction}
-Privacy on the Internet is becoming increasingly important as users realize how vulnerable they are to surveillance and theft of their data; anonymity has become the goal for many Internet users in order to protect themselves.  A recent Pew study listed compromised emails/accounts, harassment, and stolen Social Security Numbers, bank information, and credit card numbers as some of the results of online visibility~\cite{pew}.  According to the study, 86\% of internet users have tried to become more anonymous online by either clearing cookies, encrypting their email, or using virtual networks that mask their IP address, but despite their efforts, 59\% of users reported that they don't believe it is possible to become completely anonymous online~\cite{pew}.  Users are dissatisfied with their ability to protect themselves and their data online and do not believe that they have the tools to solve the problem.
+Privacy on the Internet is becoming increasingly important as users realize how vulnerable they are to surveillance and theft of their data.  A recent Pew study listed compromised emails/accounts, harassment, and stolen Social Security Numbers, bank information, and credit card numbers as some of the results of online visibility~\cite{pew}.  According to the study, 86\% of internet users have tried to become more anonymous online by either clearing cookies, encrypting their email, or using virtual networks that mask their IP address, but despite their efforts~\cite{pew}.  Despite this, users do not believe that they have the tools to solve the problem.
 
-The cloud storage company Pogoplug noticed the demand for online anonymity and in December of 2013 they released the Safeplug.  This device is a small box that plugs into a user's home router and it claims to: conceal your identity, hide where you live, shield your surfing habits, and make you anonymous online by routing all traffic through Tor~\cite{safeplug}.  The Safeplug also claimed simple setup and the removal of any technical detail, as shown in Figure~\ref{fig:instructions}, the entire setup instructions that came with the device.  Given Pogoplug's bold security claims about the Safeplug device, the device should be audited by a third-party.  We conducted the first public third-party security audit of the Safeplug by analyzing the hardware, software, network behavior, and usability of the device.  The following are some of our findings:
+In December of 2013, the cloud storage company, Pogoplug, released the Safeplug, which is a small box that plugs into a user's home router.  It claims to: conceal your identity, hide where you live, shield your surfing habits, and make you anonymous online by routing all traffic through Tor~\cite{safeplug}.  Given Pogoplug's bold security claims about the Safeplug device, the device should be audited by a third-party.  We conducted the first public third-party security audit of the Safeplug by analyzing the hardware, software, network behavior, and usability of the device.  The following are some of our findings:
 
-\begin{itemize}
+\begin{itemize} \setlength{\itemsep}{.2mm}
 \item The Safeplug functions as a HTTP proxy for the browser, which then uses Tor for outgoing traffic (see Figure \ref{fig:flow}).
 \item Despite the use of Privoxy as an ad-blocker, the Safeplug does nothing to prevent users' browsers from collecting both first- and third-party tracking cookies, allowing users to be de-anonymized across websites despite the presence of Tor~\cite{arvindpets}.
 \item Safeplug users are vulnerable to a Cross-Site Request Forgery (CSRF) attack that allows an attacker external to their home network to modify the Safeplug settings (including silently turning off the use of Tor).
@@ -71,14 +72,14 @@ The cloud storage company Pogoplug noticed the demand for online anonymity and i
 \item The Safeplug has a higher web request latency than that of the Tor Browser Bundle.
 \end{itemize} 
 
-Pogoplug made use of good security principles by using auditable open source software on their device, and has the laudable goal of making online security the standard for more users.  However, even if the engineering vulnerabilities regarding settings modification and the CSRF attack are fixed by introducing proper authentication for modifying Safeplug settings, given the incompleteness of the provided anonymity and risks of adding an additional box to the trusted inside of the home network, there is little reason to use the Safeplug over the Tor Browser Bundle.  As well as the Tor network technology used in the Safeplug, the Tor Browser Bundle contains protections against tracking cookies and fingerprinting, making it an improvement over the privacy offerings of the Safeplug.
+Pogoplug made use of good security principles by using auditable open source software on their device, and has the laudable goal of making online security the standard for more users.  However, given the incompleteness of the provided anonymity and risks of adding an additional box to the trusted inside of the home network, there is little reason to use the Safeplug over the Tor Browser Bundle.  As well as the Tor network technology used in the Safeplug, the Tor Browser Bundle contains protections against tracking cookies and fingerprinting, making it an improvement over the privacy offerings of the Safeplug.
 
-\begin{figure}
-\centering
-\includegraphics[width=.45\textwidth]{instructions2}
-\caption{Setup instructions (and the only documentation) that came in the box with the Safeplug. Pogoplug highlights the ease of installing the device but does not give a clear indication of how the Safeplug functions.}
-\label{fig:instructions}
-\end{figure}  
+%\begin{figure}
+%\centering
+%\includegraphics[width=.45\textwidth]{instructions2}
+%\caption{Setup instructions (and the only documentation) that came in the box with the Safeplug. Pogoplug highlights the ease of installing the device but does not give a clear indication of how the Safeplug functions.}
+%\label{fig:instructions}
+%\end{figure}  
 
 %\begin{figure*}
 %\centering
@@ -110,6 +111,21 @@ Before investigating the software, we took apart one of the two Safeplug devices
 %\caption{Safeplug circuit board after the teardown.  The explanation of the components is in the text.}
 %\label{fig:circuit}
 %\end{figure*}
+
+\begin{figure}[ht]
+ \centering
+ \subfigure[Top of board.]{
+  \includegraphics[width=.2\textwidth]{safeplug_listed_top}
+   \label{fig:top}
+   }
+ \subfigure[Bottom of board.]{
+  \includegraphics[width=.2\textwidth]{safeplug_hardware_new}
+   \label{fig:bottom}
+   }
+ \label{fig:circuit}
+ \caption[Safeplug circuit board after the teardown.  The explanation of the components is in the text.]{%
+  Safeplug circuit board after the teardown.  The explanation of the components is in the text.}
+\end{figure}
 
 \subsection{Software on the Safeplug}
 \label{versions}
@@ -241,7 +257,7 @@ We used Panopticlick~\cite{panopticlick} to examine the fingerprint of a freshly
 \subsection{Latency}
 If the latency of web requests using the Safeplug is noticeably longer than that of normal Internet use, users may be deterred from using the device.  Similarly, if turning Tor on, but not ad-blocking, adds a significant time delay, the user may only turn on the ad-blocking feature (without Tor).  We recorded the time for a web request on the following settings:
 
-\begin{itemize} %\setlength{\itemsep}{2mm}
+\begin{itemize} \setlength{\itemsep}{.2mm}
 \item Plain Firefox (no use of the Safeplug device)
 \item Firefox, no Tor, no ad-blocking (traffic running through the Safeplug device)
 \item Firefox, Tor, no ad-blocking
@@ -278,7 +294,7 @@ Since the RPC version of the attack just involves basic Internet tools (the abil
 \subsection{CSRF Attack}
 Any external website can also perform the above attack by returning a correctly formatted POST string via an internal user's browser.  This executes the same functionality as the Insider Attack, but the attacker does not need to be on the local network.  This Cross Site Request Forgery (CSRF) attack requires a nonmalicious insider user to visit a web page controlled by the attacker, allowing the attacker to send the POST to the Safeplug.  If the attacker does not know the IP address of the Safeplug, he can perform an exhaustive search on the address space.  We implemented this attack with less than 20 lines of Javascript code.  The following steps are necessary for the attack:
 
-\begin{enumerate}
+\begin{enumerate} \setlength{\itemsep}{.2mm}
 \item Set up a web page with the Javascript code, which will send the POST request of the following format to all addresses in the common ranges: \url{http://<IP address>/svc/xspctrl/disableTor}.
 \item Send the malicious link to a user in the targeted private network.
 \item Once the user clicks the link and loads the malicious site, the correctly formatted POST request will be sent to every IP address in the ranges.  
@@ -294,11 +310,19 @@ In addition to disabling Tor, the attacker can modify any other settings on the 
 \subsection{Gaining Access through SSH}
 \label{sec:SSH}
     Another command available to the RPC server is enabling SSH to the device.  SSH instructions for Pogoplug's other device (called Pogoplug) are widely available online and an email in the Tor-talk mailing list confirmed the instructions \cite{ceadmin}:
-\begin{lstlisting}
+%\begin{lstlisting}
+%curl --data ``'' http://<IP>/svc/xspctrl/enableSSHD
+%ssh root@<IP-of-Safeplug>
+%password: ceadmin
+%\end{lstlisting}
+
+{\tt \small
+\begin{verbatim}
 curl --data ``'' http://<IP>/svc/xspctrl/enableSSHD
 ssh root@<IP-of-Safeplug>
 password: ceadmin
-\end{lstlisting}
+\end{verbatim}
+}
 
 Having a publicly available root password means that SSH is done effectively without authentication.  We tried the SSH procedure twice, once before the Internet connection and activation, and once afterwards.  Before the activation and update procedure, SSH was not available because the RPC server code was not running without Lighttpd being installed.  However, once the box was updated and had Lighttpd installed, the SSH procedure was available and any adversary on the home network could log into the box and install malware, surveillance software, or virtually anything they desired.
 
@@ -307,11 +331,11 @@ Having a publicly available root password means that SSH is done effectively wit
 An additional dangerous class of vulnerabilities comes from the the use of insecure TCP rather than any kind of encrypted communication during the software update process.  We discovered that the update script is downloaded via TCP from an IP address provided by the Pogoplug servers.  This update script (run as root) then downloads the Safeplug's software (Tor, Privoxy, Lighttpd, and wget) and checks it against MD5 hashes, but it is not clear whether there is verification of the update script itself.  An adversary could use DNS spoofing or compromise the Pogoplug server and force users to download a malicious update script - for example, something that turns the Safeplug into a surveillance box while appearing to provide the correct functionality.  Because the activation occurs over TCP rather than anything more secure, an adversary who can spoof DNS replies to the user can install arbitrary software onto the Safeplug box.  This turns a device that does not live up to expectations, but is otherwise harmless, into something that actively harms security on the network.
 
 \section{Related Work}
-To our knowledge, there has been no other study analyzing the security of Pogoplug's Safeplug device.  However there has been much prior research on the primary technology that the device uses: Tor.  Additionally, the security vulnerabilities that Safeplug attempts to secure users against have been previously studied in great detail; these include fingerprinting and cookies.  
+To our knowledge, there has been no other study analyzing the security of Pogoplug's Safeplug device.  However there has been much prior research on the primary technology that the device uses, Tor, as well as the vuvlnerability of fingerprinting.
 
-{\bf Tor.} Prior security evaluations of the Tor network reveal a myriad of potential vulnerabilities.  A significant area of research on Tor relates to diversity of autonomous systems (ASes).  Feamster and Dingledine argue that a user's anonymity may be compromised by using geographically diverse ASes; when analyzing both sides of an anonymous path, it is more likely the same AS will appear in both sides of a long path than in a short path~\cite{feamster}.  Murdoch and Zielinski also argue against AS diversity.  They state that AS diversity does not improve security because traffic is routed through ASes at Internet exchange points (IXPs); therefore, an IXP can observe traffic that passes through multiple ASes~\cite{murdoch2}.  There has also been proven traffic correlation attacks that are efficient on the Tor network~\cite{murdoch, overlier}.  Johnson, Wacek, Jansen, Sherr, and Syverson evaluated Tor's security against reasonably realistic adversaries and contribute metrics that model security over time.  They found that in a period of six months, 80\% of all users may be deanonymized by a reasonably realistic Tor-relay adversary.  Johnson et al. take into account how the Tor network evolves over time when evaluating Tor's security~\cite{tor2}.  While Safeplug does not introduce or modify how Tor is used, it routes all traffic through the Tor network; Safeplug is also vulnerable to the attacks found in prior research on Tor.  
+{\bf Tor.} Prior security evaluations of the Tor network reveal a myriad of potential vulnerabilities.  A significant area of research on Tor relates to diversity of autonomous systems (ASes).  Researchers argue that a user's anonymity may be compromised by using geographically diverse ASes~\cite{feamster, murdoch2}.  There has also been proven traffic correlation attacks that are efficient on the Tor network~\cite{murdoch, overlier}.  Johnson, Wacek, Jansen, Sherr, and Syverson found that in a period of six months, 80\% of all users may be deanonymized by a reasonably realistic Tor-relay adversary~\cite{tor2}.  While Safeplug does not introduce or modify how Tor is used, it routes all traffic through the Tor network; Safeplug is also vulnerable to the attacks found in prior research on Tor.  
 
-{\bf Fingerprinting.}  Website fingerprinting attacks as well as remote physical device fingerprinting attacks have shown they can identify users, even when specific defenses have been used in order to prevent them. Previous research has shown that web page fingerprinting attacks are possible~\cite{dyer, herrmann, panchenko}.  Cai, Zhang, Joshi, and Johnson introduced both a web page and website fingerprinting attack that defeats many recently proposed defenses, including cover traffic and randomized pipeling.  They find that their attack is successful 83.7\% of the time when the defense is the use of Tor; the success rate decreases to 52.2\% when the defense is the use of Tor, randomized pipelining, padding packets to 1500 bytes, and adding cover traffic at a 1:1 ratio~\cite{fingerprint1}.  These results can be extended to the security of Safeplug.  Because Safeplug uses only Tor to anonymize users, it may be susceptible to this type of fingerprinting attack.
+{\bf Fingerprinting.}  Website fingerprinting attacks as well as remote physical device fingerprinting attacks have shown they can identify users, even when specific defenses have been used in order to prevent them. Previous research has shown that web page fingerprinting attacks are possible~\cite{dyer, herrmann, panchenko}.  Cai, Zhang, Joshi, and Johnson found that their fingerprinting attack is successful 83.7\% of the time when the defense is the use of Tor~\cite{fingerprint1}.  These results can be extended to the security of Safeplug.  Because Safeplug uses Tor to anonymize users, it may be susceptible to this type of fingerprinting attack.
 
 \section{Discussion}
 \subsection{Necessary Fixes}
@@ -328,9 +352,10 @@ Despite all the structural problems, is there a market for a Torifying piece of 
 \section{Conclusion}
 Ultimately, the structural concerns of the Safeplug ``Torifying proxy-in-a-box'' strategy indicate that this is problematic as a method for security and anonymity online.  It is critical for Safeplug to correct their security errors, particularly the vulnerability to silently disable Tor, in order to protect customers who have already made use of the device, but users who are truly concerned about safety and anonymity online should make use of technologies directly from the Tor Project.
 
-
 {\footnotesize \bibliographystyle{acm}
 \bibliography{paper}}
+
+%\theendnotes
 
 \end{document}
 
