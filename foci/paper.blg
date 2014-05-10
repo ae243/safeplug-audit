@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99d (TeX Live 2013)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: paper.aux
+The style file: acm.bst
+Database file #1: paper.bib
+Warning--to sort, need author or key in torproject
+Warning--to sort, need author or key in tormailinglist
+Warning--to sort, need author or key in law
+Warning--empty journal in arvindpets
+You've used 22 entries,
+            2253 wiz_defined-function locations,
+            631 strings with 7228 characters,
+and the built_in function-call counts, 7143 in all, are:
+= -- 686
+> -- 286
+< -- 0
++ -- 122
+- -- 98
+* -- 428
+:= -- 1063
+add.period$ -- 62
+call.type$ -- 22
+change.case$ -- 115
+chr.to.int$ -- 0
+cite$ -- 26
+duplicate$ -- 313
+empty$ -- 651
+format.name$ -- 98
+if$ -- 1584
+int.to.chr$ -- 0
+int.to.str$ -- 22
+missing$ -- 12
+newline$ -- 109
+num.names$ -- 38
+pop$ -- 184
+preamble$ -- 1
+purify$ -- 93
+quote$ -- 0
+skip$ -- 257
+stack$ -- 0
+substring$ -- 376
+swap$ -- 106
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 88
+warning$ -- 4
+while$ -- 65
+width$ -- 24
+write$ -- 210
+(There were 4 warnings)
