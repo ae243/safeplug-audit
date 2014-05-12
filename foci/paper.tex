@@ -70,9 +70,10 @@ In December of 2013, the cloud storage company, Pogoplug, released the Safeplug,
 \item Safeplug users are vulnerable to a Cross-Site Request Forgery (CSRF) attack that allows an attacker external to their home network to modify the Safeplug settings (including silently turning off the use of Tor).
 \item A malicious user within the network can modify the Safeplug settings without notifying any other devices on the network.
 \item The Safeplug has a higher web request latency than that of the Tor Browser Bundle.
+\item The Tor Browser Bundle provides more protection than the use of Privoxy, and therefore the use of the Safeplug.
 \end{itemize} 
 
-Pogoplug made use of good security principles by using auditable open source software on their device, and has the laudable goal of making online security the standard for more users.  However, there is little reason to use the Safeplug over the Tor Browser Bundle; in addition to the Tor network technology used in the Safeplug, the Tor Browser Bundle contains protections against tracking cookies and fingerprinting, making it an improvement over the privacy offerings of the Safeplug.
+Pogoplug made use of good security principles by using auditable open source software on their device, and has the laudable goal of making online security the standard for more users. However, there are other technologies available that aim to provide the same functionality, such as the Tor Browser Bundle; additionally, this technology is free.  In order to determine if there is a market for the Safeplug, we measure the privacy implications between the different technologies.  We show that there is little reason to use the Safeplug over the Tor Browser Bundle; in addition to the Tor network technology used in the Safeplug, the Tor Browser Bundle contains protections against tracking cookies and fingerprinting, making it an improvement over the privacy offerings of the Safeplug.
 
 %\begin{figure}
 %\centering
@@ -129,12 +130,13 @@ Before investigating the software, we took apart one of the two Safeplug devices
 
 \subsection{Software on the Safeplug}
 \begin{table}[!t]
-\caption{Software and the corresponding version numbers on the Safeplug.}
+\renewcommand{\arraystretch}{1.3}
+\caption{Software and the corresponding version numbers on the Safeplug as of May 2014.}
 \label{versions}
 \begin{center}
   \begin{tabular}{|l|c|c|c|}
     \hline
-    Safeplug Software & Version & Date & Up To Date (as of May 2014)\\ \hline
+    Safeplug Software & Version & Date & Up To Date\\ \hline
     Linux Kernel & 2.6.31.8 & 2009 & No\\ \hline
     Lighttpd Web Server & 1.4.33 & 2013 & No\\ \hline
     Privoxy Proxy & 3.0.21 & 2013 & Yes\\ \hline
@@ -278,6 +280,25 @@ For each of the settings, we took 20 measurements; Figure~\ref{fig:latency2} sho
   \caption{Latency of web requests.}
   \label{fig:latency2}
 \end{figure}
+
+\section{Privoxy vs. Tor Browser Bundle}
+The Safeplug uses two primary technologies: Tor and Privoxy.  The Tor Project has developed the Tor Browser Bundle, which is a free custom browser that uses Tor as well as other protection mechanisms to help preserve a user's privacy.  The Tor Browser Bundle may be a better solution than the Safeplug if it has fewer privacy implications.  The differentiating factor between the Safeplug and the Tor Browser Bundle is the use of Privoxy; in order to determine the effectiveness of the Safeplug in comparison to that of the Tor Browser Bundle, we must find the value of Privoxy in terms of privacy.  We ran a measurement study of the privacy implications of the use of Firefox, Firefox with Privoxy, and the Tor Browser Bundle; our data was collected by running crawls on the Alexa Top 100 sites in each of the specified browsers~\cite{alexa}.  All browser configurations were modified with Pagestats \cite{pagestats} and Cookie Manager+ \cite{cookiemonster} to aggregate information about third party requests, javascript objects, flash objects, and third party cookies.  Table \ref{tbb} shows the average number per page of: third party domains accessed, javascript objects received from third parties, flash objects received from third parties, and cookies received from third parties.  
+
+\begin{table}[!t]
+\renewcommand{\arraystretch}{1.3}
+\caption{Privacy implications of using Firefox, Privoxy, or the Tor Browser Bundle; the numbers represent the average number per page.}
+\label{tbb}
+\centering
+	\begin{tabular}{| p{1.85cm} | p{1.3cm} | p{1.25cm} | p{.7cm} | p{1cm} |}
+	\hline
+		Configuration & Third Party Domains & Javascript & Flash & Cookies \\ \hline
+		Plain Firefox	& 0.64 & 0.01 & 0.01 & 0.88 \\ \hline
+		Privoxy & 0.72 & 0.00 & 0.01 & 0.84 \\ \hline
+		Tor Browser	& 0.58 & 0.01 & 0.00 & 0.00 \\ \hline
+	\end{tabular}
+\end{table}
+
+It is clear to see that the Tor Browser Bundle had the fewest privacy implications in most categories; it's interesting to note that the Tor Browser Bundle did not receive any cookies, where as both other configurations received a significant number of them.  The one category where Privoxy performed better than the Tor Browser Bundle is in the number of javascript objects received from third parties; this can be attributed to the fact that our measurements were taken using the default settings for the Tor Browser Bundle, which allows javascript (NoScript is disabled)~\cite{torproject}.  This is explained on the Tor Project's website; they explain that disabling javascript causes some web pages to break, making the browser less user-friendly.  The user has the option to enable javascript by simply clicking a button.  Our data shows that the Tor Browser is a less expensive alternative to the Safeplug, and provides more privacy protections.    
 
 \section{Vulnerabilities}
 As we discovered during our software analysis, the Safeplug has a remote procedure call (RPC) capability.  This is a script called \verb!xspctrl! found in \verb!/opt/xce/html/svc!.  Functional calls to this script include the ability to enable and disable all of the Safeplug settings, including Tor, ad block, and Tor relay.  None of them require any arguments in the POST string.

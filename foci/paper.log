@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  9 MAY 2014 20:10
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  11 MAY 2014 21:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -268,73 +268,74 @@ File: omsptm.fd
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 68.
+ [1{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+
+
+]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 92.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 93.
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ú in font ptmr7t!
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ù in font ptmr7t!
- [1{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
-
-]
 <safeplug_listed_top.png, id=9, 330.23375pt x 401.5pt>
 File: safeplug_listed_top.png Graphic file (type png)
 
 <use safeplug_listed_top.png>
-Package pdftex.def Info: safeplug_listed_top.png used on input line 120.
+Package pdftex.def Info: safeplug_listed_top.png used on input line 121.
 (pdftex.def)             Requested size: 93.94955pt x 114.22652pt.
 
 <safeplug_hardware_new.png, id=10, 326.21875pt x 385.44pt>
 File: safeplug_hardware_new.png Graphic file (type png)
 
 <use safeplug_hardware_new.png>
-Package pdftex.def Info: safeplug_hardware_new.png used on input line 124.
+Package pdftex.def Info: safeplug_hardware_new.png used on input line 125.
 (pdftex.def)             Requested size: 93.94955pt x 111.00427pt.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 135.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 137.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 135.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 137.
 
-Overfull \hbox (76.19499pt too wide) in paragraph at lines 135--144
+Overfull \hbox (4.54546pt too wide) in paragraph at lines 137--146
  [] 
  []
 
 
-Underfull \hbox (badness 3049) in paragraph at lines 171--172
+Underfull \hbox (badness 3049) in paragraph at lines 173--174
 \OT1/ptm/m/n/10 The Safe-plug con-fig-u-ra-tion files can be found in
  []
 
 [2 <./safeplug_listed_top.png> <./safeplug_hardware_new.png>]
-Underfull \hbox (badness 1082) in paragraph at lines 180--181
+Underfull \hbox (badness 1082) in paragraph at lines 182--183
 []\OT1/ptm/m/n/10 The Safe-plug uses sev-eral pieces of open source
  []
 
 
-Underfull \hbox (badness 1824) in paragraph at lines 180--181
+Underfull \hbox (badness 1824) in paragraph at lines 182--183
 \OT1/ptm/m/n/10 soft-ware. A stan-dard term of many open source
  []
 
 
-Underfull \hbox (badness 1917) in paragraph at lines 180--181
+Underfull \hbox (badness 1917) in paragraph at lines 182--183
 \OT1/ptm/m/n/10 li-censes states that a com-pany that uses the open
  []
 
 
-Underfull \hbox (badness 1728) in paragraph at lines 180--181
+Underfull \hbox (badness 1728) in paragraph at lines 182--183
 \OT1/ptm/m/n/10 li-cense, as well as the open source code of their
  []
 
 
-Underfull \hbox (badness 4036) in paragraph at lines 180--181
+Underfull \hbox (badness 4036) in paragraph at lines 182--183
 \OT1/cmtt/m/n/10 home-[]en-[]developers-[]open-[]source . html$ \OT1/ptm/m/n/10
  but the
  []
 
 
-Underfull \hbox (badness 2689) in paragraph at lines 201--202
+Underfull \hbox (badness 2689) in paragraph at lines 203--204
 []\OT1/ptm/m/n/10 After we fin-ished con-fig-ur-ing our Safe-plug and
  []
 
@@ -342,115 +343,147 @@ Underfull \hbox (badness 2689) in paragraph at lines 201--202
 File: settings_with_exit.png Graphic file (type png)
 
 <use settings_with_exit.png>
-Package pdftex.def Info: settings_with_exit.png used on input line 205.
+Package pdftex.def Info: settings_with_exit.png used on input line 207.
 (pdftex.def)             Requested size: 305.33788pt x 274.71877pt.
- [3]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [4 <./settings_with_exit.png (PNG copy)>]
+ [3] [4 <./settings_with_exit.png (PNG copy)>]
 <latencygraph.png, id=22, 463.0098pt x 315.0972pt>
 File: latencygraph.png Graphic file (type png)
  <use latencygraph.png>
-Package pdftex.def Info: latencygraph.png used on input line 277.
+Package pdftex.def Info: latencygraph.png used on input line 279.
 (pdftex.def)             Requested size: 234.87749pt x 159.84642pt.
 
-Overfull \hbox (9.03374pt too wide) in paragraph at lines 277--278
+Overfull \hbox (9.03374pt too wide) in paragraph at lines 279--280
+ [][] 
+ []
+
+[5 <./latencygraph.png>]
+Overfull \hbox (2.92177pt too wide) in paragraph at lines 294--294
+[]\OT1/ptm/m/n/10 Configuration| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 294--294
+[]\OT1/ptm/m/n/10 Third
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 294--294
+\OT1/ptm/m/n/10 Party
+ []
+
+
+Overfull \hbox (3.97346pt too wide) in paragraph at lines 294--294
+[]\OT1/ptm/m/n/10 Javascript| 
+ []
+
+
+Overfull \hbox (1.75282pt too wide) in paragraph at lines 294--294
+[]\OT1/ptm/m/n/10 Flash| 
+ []
+
+
+Overfull \hbox (4.3269pt too wide) in paragraph at lines 294--294
+[]\OT1/ptm/m/n/10 Cookies| 
+ []
+
+
+Overfull \hbox (7.7182pt too wide) in paragraph at lines 292--299
  [][] 
  []
 
 
-Underfull \hbox (badness 1448) in paragraph at lines 283--284
+Underfull \hbox (badness 1448) in paragraph at lines 304--305
 \OT1/ptm/m/n/10 Safe-plug has a re-mote pro-ce-dure call (RPC) ca-pa-
  []
 
 
-Underfull \hbox (badness 1810) in paragraph at lines 283--284
+Underfull \hbox (badness 1810) in paragraph at lines 304--305
 \OT1/ptm/m/n/10 bil-ity. This is a script called []\OT1/cmtt/m/n/10 xspctrl \OT
 1/ptm/m/n/10 found in
  []
 
-<disabletor2.png, id=24, 736.7525pt x 123.46124pt>
+<disabletor2.png, id=28, 736.7525pt x 123.46124pt>
 File: disabletor2.png Graphic file (type png)
  <use disabletor2.png>
-Package pdftex.def Info: disabletor2.png used on input line 287.
+Package pdftex.def Info: disabletor2.png used on input line 308.
 (pdftex.def)             Requested size: 352.31624pt x 59.0384pt.
 
-[5 <./latencygraph.png>]
-Overfull \hbox (15.12845pt too wide) in paragraph at lines 327--327
+Underfull \vbox (badness 1939) has occurred while \output is active []
+
+ [6]
+Overfull \hbox (15.12845pt too wide) in paragraph at lines 348--348
 []\OT1/cmtt/m/n/9 curl --data ``'' http://<IP>/svc/xspctrl/enableSSHD[] 
  []
 
-[6 <./disabletor2.png>]
-Underfull \vbox (badness 2556) has occurred while \output is active []
-
- [7]
-(./paper.bbl
+[7 <./disabletor2.png>] (./paper.bbl
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 5.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 5.
 
-Underfull \hbox (badness 3965) in paragraph at lines 4--6
+Underfull \hbox (badness 3965) in paragraph at lines 13--15
 []\OT1/ptm/m/n/8 The le-gal faq for tor re-lay op-er-a-tors.  $\OT1/cmtt/m/n/8 
 https : / / www .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 8--11
+Underfull \hbox (badness 10000) in paragraph at lines 21--24
 []\OT1/ptm/m/n/8 Tor mail-ing list.  $\OT1/cmtt/m/n/8 https : / / lists . torpr
 oject . org /
  []
 
-
-Underfull \hbox (badness 4181) in paragraph at lines 47--51
+[8]
+Underfull \hbox (badness 4181) in paragraph at lines 60--64
 []\OT1/ptm/m/sc/8 Halfacree, G.  \OT1/ptm/m/n/8 Pogo-plug launches tor-powered 
 safe-
  []
 
 
-Underfull \hbox (badness 5147) in paragraph at lines 67--71
+Underfull \hbox (badness 5147) in paragraph at lines 80--84
 []\OT1/ptm/m/sc/8 Marvell\OT1/ptm/m/n/8 .  88f6190 and 88f6192 in-te-grated con
 -troller
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 67--71
+Underfull \hbox (badness 10000) in paragraph at lines 80--84
 \OT1/ptm/m/n/8 hard-ware spec-i-fi-ca-tions.  $\OT1/cmtt/m/n/8 http : / / www .
  marvell . com /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 67--71
+Underfull \hbox (badness 10000) in paragraph at lines 80--84
 \OT1/cmtt/m/n/8 /embedded-[]processors / kirkwood / assets / HW _ 88F619x _
  []
 
 
-Underfull \hbox (badness 4366) in paragraph at lines 118--121
+Underfull \hbox (badness 4366) in paragraph at lines 131--134
 []\OT1/ptm/m/sc/8 Solon, O.  \OT1/ptm/m/n/8 Safe-plug makes it super-easy to ha
 r-ness
  []
 
-) [8] (./paper.aux) ) 
+) [9
+
+] (./paper.aux) ) 
 Here is how much of TeX's memory you used:
- 3191 strings out of 493315
- 46509 string characters out of 6137904
- 112611 words of memory out of 5000000
- 6588 multiletter control sequences out of 15000+600000
+ 3195 strings out of 493315
+ 46547 string characters out of 6137904
+ 113631 words of memory out of 5000000
+ 6592 multiletter control sequences out of 15000+600000
  37214 words of font info for 79 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 38i,8n,32p,1286b,348s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/base/8
-r.enc}</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10
-.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.
-pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pf
-b></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-</usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/loca
-l/texlive/2013/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/
-2013/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (8 pages, 734160 bytes).
+ 38i,9n,32p,1316b,348s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/base/8r.en
+c}</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
+></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></
+usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></us
+r/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/te
+xlive/2013/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2013
+/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on paper.pdf (9 pages, 737906 bytes).
 PDF statistics:
- 68 PDF objects out of 1000 (max. 8388607)
- 43 compressed objects within 1 object stream
+ 71 PDF objects out of 1000 (max. 8388607)
+ 45 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

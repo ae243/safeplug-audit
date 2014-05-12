@@ -1,8 +1,21 @@
 \begin{thebibliography}{10}
 
+\bibitem{alexa}
+Alexa.
+\newblock \url{http://www.alexa.com/topsites}.
+
+\bibitem{cookiemonster}
+Cookie manager+.
+\newblock
+  \url{https://addons.mozilla.org/en-US/firefox/addon/cookies-manager-plus/}.
+
 \bibitem{law}
 The legal faq for tor relay operators.
 \newblock \url{https://www.torproject.org/eff/tor-legal-faq}.
+
+\bibitem{pagestats}
+Pagestats.
+\newblock \url{http://web.cs.wpi.edu/~cew/pagestats/}.
 
 \bibitem{tormailinglist}
 Tor mailing list.

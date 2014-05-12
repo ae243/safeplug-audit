@@ -6,46 +6,49 @@ Database file #1: paper.bib
 Warning--to sort, need author or key in torproject
 Warning--to sort, need author or key in tormailinglist
 Warning--to sort, need author or key in law
+Warning--to sort, need author or key in alexa
+Warning--to sort, need author or key in pagestats
+Warning--to sort, need author or key in cookiemonster
 Warning--empty journal in arvindpets
-You've used 22 entries,
+You've used 25 entries,
             2253 wiz_defined-function locations,
-            631 strings with 7228 characters,
-and the built_in function-call counts, 7143 in all, are:
-= -- 686
-> -- 286
+            640 strings with 7436 characters,
+and the built_in function-call counts, 7620 in all, are:
+= -- 731
+> -- 289
 < -- 0
-+ -- 122
++ -- 125
 - -- 98
-* -- 428
-:= -- 1063
-add.period$ -- 62
-call.type$ -- 22
-change.case$ -- 115
+* -- 443
+:= -- 1114
+add.period$ -- 68
+call.type$ -- 25
+change.case$ -- 124
 chr.to.int$ -- 0
-cite$ -- 26
-duplicate$ -- 313
-empty$ -- 651
+cite$ -- 32
+duplicate$ -- 334
+empty$ -- 720
 format.name$ -- 98
-if$ -- 1584
+if$ -- 1704
 int.to.chr$ -- 0
-int.to.str$ -- 22
+int.to.str$ -- 25
 missing$ -- 12
-newline$ -- 109
+newline$ -- 121
 num.names$ -- 38
-pop$ -- 184
+pop$ -- 208
 preamble$ -- 1
-purify$ -- 93
+purify$ -- 99
 quote$ -- 0
-skip$ -- 257
+skip$ -- 281
 stack$ -- 0
-substring$ -- 376
-swap$ -- 106
+substring$ -- 391
+swap$ -- 109
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 88
-warning$ -- 4
+type$ -- 100
+warning$ -- 7
 while$ -- 65
-width$ -- 24
-write$ -- 210
-(There were 4 warnings)
+width$ -- 27
+write$ -- 231
+(There were 7 warnings)
