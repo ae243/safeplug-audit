@@ -4,51 +4,49 @@ The top-level auxiliary file: paper.aux
 The style file: acm.bst
 Database file #1: paper.bib
 Warning--to sort, need author or key in torproject
-Warning--to sort, need author or key in tormailinglist
-Warning--to sort, need author or key in law
 Warning--to sort, need author or key in alexa
 Warning--to sort, need author or key in pagestats
 Warning--to sort, need author or key in cookiemonster
 Warning--empty journal in arvindpets
-You've used 25 entries,
+You've used 21 entries,
             2253 wiz_defined-function locations,
-            640 strings with 7436 characters,
-and the built_in function-call counts, 7620 in all, are:
-= -- 731
-> -- 289
+            626 strings with 6999 characters,
+and the built_in function-call counts, 6880 in all, are:
+= -- 663
+> -- 273
 < -- 0
-+ -- 125
-- -- 98
-* -- 443
-:= -- 1114
-add.period$ -- 68
-call.type$ -- 25
-change.case$ -- 124
++ -- 116
+- -- 94
+* -- 419
+:= -- 1012
+add.period$ -- 58
+call.type$ -- 21
+change.case$ -- 110
 chr.to.int$ -- 0
-cite$ -- 32
-duplicate$ -- 334
-empty$ -- 720
-format.name$ -- 98
-if$ -- 1704
+cite$ -- 26
+duplicate$ -- 304
+empty$ -- 628
+format.name$ -- 94
+if$ -- 1532
 int.to.chr$ -- 0
-int.to.str$ -- 25
+int.to.str$ -- 21
 missing$ -- 12
-newline$ -- 121
-num.names$ -- 38
-pop$ -- 208
+newline$ -- 103
+num.names$ -- 34
+pop$ -- 176
 preamble$ -- 1
-purify$ -- 99
+purify$ -- 89
 quote$ -- 0
-skip$ -- 281
+skip$ -- 249
 stack$ -- 0
-substring$ -- 391
-swap$ -- 109
+substring$ -- 370
+swap$ -- 103
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 100
-warning$ -- 7
-while$ -- 65
-width$ -- 27
-write$ -- 231
-(There were 7 warnings)
+type$ -- 84
+warning$ -- 5
+while$ -- 61
+width$ -- 23
+write$ -- 199
+(There were 5 warnings)

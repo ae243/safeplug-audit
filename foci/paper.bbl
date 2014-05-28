@@ -9,18 +9,9 @@ Cookie manager+.
 \newblock
   \url{https://addons.mozilla.org/en-US/firefox/addon/cookies-manager-plus/}.
 
-\bibitem{law}
-The legal faq for tor relay operators.
-\newblock \url{https://www.torproject.org/eff/tor-legal-faq}.
-
 \bibitem{pagestats}
 Pagestats.
 \newblock \url{http://web.cs.wpi.edu/~cew/pagestats/}.
-
-\bibitem{tormailinglist}
-Tor mailing list.
-\newblock
-  \url{https://lists.torproject.org/pipermail/tor-talk/2013-November/031199.html}.
 
 \bibitem{torproject}
 The tor project.
@@ -75,17 +66,6 @@ The tor project.
   adversaries.
 \newblock In {\em Proceedings of the 2013 ACM SIGSAC conference on Computer \&
   communications security\/} (2013), ACM, pp.~337--348.
-
-\bibitem{marvellhw}
-{\sc Marvell}.
-\newblock 88f6190 and 88f6192 integrated controller hardware specifications.
-\newblock
-  \url{http://www.marvell.com//embedded-processors/kirkwood/assets/HW_88F619x_OpenSource.pdf}.
-
-\bibitem{fourthparty}
-{\sc Mayer, J.}
-\newblock Fourthparty.
-\newblock \url{http://fourthparty.info}.
 
 \bibitem{murdoch}
 {\sc Murdoch, S.~J., and Danezis, G.}
