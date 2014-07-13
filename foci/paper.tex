@@ -278,19 +278,19 @@ If the latency of web requests using the Safeplug is noticeably longer than that
 
 For each of the settings, we took 20 measurements because we were confident this would give us enough data points that would span multiple Tor circuits; Figure~\ref{fig:latency2} shows the average time of a web request on each of the specified settings for three different web pages.  When taking these measurements, we loaded the page, but did not scroll; in many cases more objects are loaded when scrolling down a page.  The differences between web pages can most likely be attributed to the amount of advertisements and content running in plugins (such as video) on the web page.  
 
-\begin{figure*}
+\begin{figure}
   \centering
   \includegraphics[width=0.5\textwidth]{latencygraph}
   \caption{Latency of web requests.}
   \label{fig:latency2}
-\end{figure*}
+\end{figure}
 
-\begin{figure*}
+\begin{figure}
   \centering
   \includegraphics[width=0.5\textwidth]{rangeanddistcocacola}
   \caption{Web request time variation for www.coca-cola.com.}
   \label{fig:boxandwhisker}
-\end{figure*}
+\end{figure}
 
 Figure~\ref{fig:boxandwhisker} displays the variation among fetch requests for each setting when fetching \url{www.coca-cola.com}.  The greater variation for settings using Tor leads us to believe that more than one Tor circuit was used.  Despite performing these fetches close in time, this variation shows that more than one Tor circuit was used, and therefore, we were not simply measuring the variation in Tor circuit performance.  
 
@@ -299,11 +299,11 @@ The average web request time for accessing \url{www.washingtonpost.com} is great
 The latency of using the Safeplug with Firefox, Tor, and ad-blocking is comparable to that of using the Tor Browser Bundle.  For all three web pages, the Tor Browser Bundle had slightly lower latency; the Tor Browser Bundle blocks scripts, and for web pages such as \url{www.coca-cola.com}, this provides a significant latency decrease.  This, in conjunction with the fact that the Tor Browser Bundle is free and is issued directly from The Tor Project, shows a convincing argument to use the Tor Browser Bundle in place of the Safeplug.  
 
 \section{Privoxy vs. Tor Browser Bundle}
-The Safeplug uses two primary technologies: Tor and Privoxy.  The Tor Project has developed the Tor Browser Bundle, which is a free custom browser that uses Tor as well as other protection mechanisms to help preserve a user's privacy.  The Tor Browser Bundle may be a better solution than the Safeplug if it has fewer privacy implications.  The differentiating factor between the Safeplug and the Tor Browser Bundle is the use of Privoxy; in order to determine the effectiveness of the Safeplug in comparison to that of the Tor Browser Bundle, we must measure the value of Privoxy.  We ran a measurement study of the privacy implications of the use of Firefox, Firefox with Privoxy, and the Tor Browser Bundle; our data was collected by running crawls on the Alexa Top 100 sites in each of the specified browsers~\cite{alexa}.  All browser configurations were modified with Pagestats \cite{pagestats} and Cookie Manager+ \cite{cookiemonster} to aggregate information about third party requests, JavaScript objects, flash objects, and third party cookies.  Table \ref{tbb} shows the per page fraction of: third party domains accessed, JavaScript objects received from third parties, flash objects received from third parties, and cookies received from third parties.  
+The Safeplug uses two primary technologies: Tor and Privoxy.  The Tor Project has developed the Tor Browser Bundle, which is a free custom browser that uses Tor as well as other protection mechanisms to help preserve a user's privacy.  A differentiating factor between the Safeplug and the Tor Browser Bundle is the use of Privoxy; in order to determine the effectiveness of the Safeplug in comparison to that of the Tor Browser Bundle, we must measure the value of Privoxy.  We ran a privacy study on the use of Firefox, Firefox with Privoxy, and the Tor Browser Bundle; our data was collected by running crawls on the Alexa Top 100 sites in each of the specified browsers~\cite{alexa}.  All browser configurations were modified with Pagestats \cite{pagestats} and Cookie Manager+ \cite{cookiemonster} to aggregate information about third party requests, JavaScript objects, flash objects, and third party cookies.  Because measuring privacy is a difficult task, we measured potential ways for a user's privacy to be compromised.  First, we recorded how many third party domains were accessed per page; this is shown in the second column of Table \ref{tbb}.  The third and fourth columns show the number of JavaScript objects and the number of Flash objects received from third parties per page, respectively.  Lastly, we kept track of the number of third party cookies received per page, and this is seen in the last column.  
 
 \begin{table}[!t]
 \renewcommand{\arraystretch}{1.3}
-\caption{Privacy implications of using Firefox, Privoxy, or the Tor Browser Bundle; the numbers represent the fraction of the corresponding privacy implications per page.}
+\caption{Measurements of using Firefox, Privoxy, or the Tor Browser Bundle; the numbers represent the fraction of Third Party Domains accessed per page, Javascript objects received from third parties per page, the number of Flash objects received from third parties per page, and the number of third party cookies received per page.}
 \label{tbb}
 \centering
 \small
@@ -316,7 +316,7 @@ The Safeplug uses two primary technologies: Tor and Privoxy.  The Tor Project ha
 	\end{tabular}
 \end{table}
 
-It is clear that the Tor Browser Bundle had the fewest privacy implications in most categories. The one category where Privoxy performed better than the Tor Browser Bundle is in the number of JavaScript objects received from third parties; this can be attributed to the fact that our measurements were taken using the default settings for the Tor Browser Bundle, which allows JavaScript~\cite{torproject}.  This is explained on the Tor Project's website; they explain that disabling JavaScript causes some web pages to break, making the browser less user-friendly.  The user has the option to disable JavaScript by simply clicking a button.  This shows that the Tor Browser is a less expensive alternative to the Safeplug, and provides more privacy protections.    
+It is clear that the Tor Browser Bundle performed the best in most categories. The one category where Privoxy performed better than the Tor Browser Bundle is in the number of JavaScript objects received from third parties; this can be attributed to the fact that our measurements were taken using the default settings for the Tor Browser Bundle, which allows JavaScript~\cite{torproject}.  This is explained on the Tor Project's website; they explain that disabling JavaScript causes some web pages to break, making the browser less user-friendly.  The user has the option to disable JavaScript by simply clicking a button.  This shows that the Tor Browser is a less expensive alternative to the Safeplug, and provides more privacy protections.    
 
 \section{Vulnerabilities}
 As we discovered during our software analysis, the Safeplug has a remote procedure call (RPC) capability.  This is a script called \verb!xspctrl! found in \verb!/opt/xce/html/svc!.  Functional calls to this script include the ability to enable and disable all of the Safeplug settings, including Tor, ad block, and Tor relay.  None of them require any authentication.
