@@ -48,10 +48,10 @@
  {\rm Anna Kornfeld Simpson}\\
  Princeton University
  \and
- {\rm Joshua Kroll}\\
+ {\rm Joshua A. Kroll}\\
  Princeton University
  \and
- {\rm Edward Felten}\\
+ {\rm Edward W. Felten}\\
  Princeton University
 } % end author
 
@@ -269,11 +269,11 @@ If the latency of web requests using the Safeplug is noticeably longer than that
 \begin{itemize} %\setlength{\itemsep}{2mm}
 \item Plain Firefox (no use of the Safeplug device)
 \item Firefox, no Tor, no ad-blocking (traffic running through the Safeplug device)
-\item Firefox, Tor, no ad-blocking
-\item Firefox, Tor, ad-blocking
-\item Firefox, no Tor, ad-blocking
+\item Firefox, Tor, no ad-blocking (using the Safeplug device)
+\item Firefox, Tor, ad-blocking (using the Safeplug device)
+\item Firefox, no Tor, ad-blocking (using the Safeplug device)
 \item Tor Browser Bundle with Safeplug (all settings off)
-\item Tor Browser Bundle
+\item Tor Browser Bundle (no use of the Safeplug device)
 \end{itemize}
 
 For each of the settings, we took 20 measurements because we were confident this would give us enough data points that would span multiple Tor circuits; Figure~\ref{fig:latency2} shows the average time of a web request on each of the specified settings for three different web pages.  When taking these measurements, we loaded the page, but did not scroll; in many cases more objects are loaded when scrolling down a page.  The differences between web pages can most likely be attributed to the amount of advertisements and content running in plugins (such as video) on the web page.  
@@ -285,6 +285,8 @@ For each of the settings, we took 20 measurements because we were confident this
   \label{fig:latency2}
 \end{figure}
 
+The average web request time for accessing \url{www.washingtonpost.com} is greatest on the same settings that the average web request time for \url{www.google.com} is the least. This setting did not include ad-blocking, and therefore \url{www.washingtonpost.com} had to render each ad (which it requested through Tor); \url{www.google.com} does not have any ads.
+
 \begin{figure}
   \centering
   \includegraphics[width=0.5\textwidth]{rangeanddistcocacola}
@@ -294,16 +296,14 @@ For each of the settings, we took 20 measurements because we were confident this
 
 Figure~\ref{fig:boxandwhisker} displays the variation among fetch requests for each setting when fetching \url{www.coca-cola.com}.  The greater variation for settings using Tor leads us to believe that more than one Tor circuit was used.  Despite performing these fetches close in time, this variation shows that more than one Tor circuit was used, and therefore, we were not simply measuring the variation in Tor circuit performance.  
 
-The average web request time for accessing \url{www.washingtonpost.com} is greatest on the same settings that the average web request time for \url{www.google.com} is the least. This setting did not include ad-blocking, and therefore \url{www.washingtonpost.com} had to render each ad (which it requested through Tor); \url{www.google.com} does not have any ads.
-
 The latency of using the Safeplug with Firefox, Tor, and ad-blocking is comparable to that of using the Tor Browser Bundle.  For all three web pages, the Tor Browser Bundle had slightly lower latency; the Tor Browser Bundle blocks scripts, and for web pages such as \url{www.coca-cola.com}, this provides a significant latency decrease.  This, in conjunction with the fact that the Tor Browser Bundle is free and is issued directly from The Tor Project, shows a convincing argument to use the Tor Browser Bundle in place of the Safeplug.  
 
 \section{Privoxy vs. Tor Browser Bundle}
-The Safeplug uses two primary technologies: Tor and Privoxy.  The Tor Project has developed the Tor Browser Bundle, which is a free custom browser that uses Tor as well as other protection mechanisms to help preserve a user's privacy.  A differentiating factor between the Safeplug and the Tor Browser Bundle is the use of Privoxy; in order to determine the effectiveness of the Safeplug in comparison to that of the Tor Browser Bundle, we must measure the value of Privoxy.  We ran a privacy study on the use of Firefox, Firefox with Privoxy, and the Tor Browser Bundle; our data was collected by running crawls on the Alexa Top 100 sites in each of the specified browsers~\cite{alexa}.  All browser configurations were modified with Pagestats \cite{pagestats} and Cookie Manager+ \cite{cookiemonster} to aggregate information about third party requests, JavaScript objects, flash objects, and third party cookies.  Because measuring privacy is a difficult task, we measured potential ways for a user's privacy to be compromised.  First, we recorded how many third party domains were accessed per page; this is shown in the second column of Table \ref{tbb}.  The third and fourth columns show the number of JavaScript objects and the number of Flash objects received from third parties per page, respectively.  Lastly, we kept track of the number of third party cookies received per page, and this is seen in the last column.  
+The Safeplug uses two primary technologies: Tor and Privoxy.  The Tor Project has developed the Tor Browser Bundle, which is a free custom browser that uses Tor as well as other protection mechanisms to help preserve a user's privacy.  A differentiating factor between the Safeplug and the Tor Browser Bundle is the use of Privoxy; in order to determine the effectiveness of the Safeplug in comparison to that of the Tor Browser Bundle, we must measure the value of Privoxy.  We ran a privacy study on the use of Firefox, Firefox with Privoxy, and the Tor Browser Bundle; our data was collected by running crawls on the Alexa Top 100 sites in each of the specified browsers~\cite{alexa}.  All browser configurations were modified with Pagestats \cite{pagestats} and Cookie Manager+ \cite{cookiemonster} to aggregate information about third party requests, JavaScript objects, flash objects, and third party cookies.  Because measuring privacy is a difficult task, we measured potential ways for a user's privacy to be compromised.  First, we recorded how many third party domains were accessed total (throughout the crawl); in addition, we recorded the total number of JavaScript and Flash objects received from third parties, as well as the total number of third party cookies received.  We then found the on-average, per-page numbers corresponding to these measurements by dividing the totals by 100.  These fractions are shown in Table~\ref{tbb}.
 
 \begin{table}[!t]
 \renewcommand{\arraystretch}{1.3}
-\caption{Measurements of using Firefox, Privoxy, or the Tor Browser Bundle; the numbers represent the fraction of Third Party Domains accessed per page, Javascript objects received from third parties per page, the number of Flash objects received from third parties per page, and the number of third party cookies received per page.}
+\caption{Measurements of using Firefox, Privoxy, or the Tor Browser Bundle; the numbers represent the average number of Third Party Domains accessed per page, the average number of Javascript objects received from third parties per page, the average number of Flash objects received from third parties per page, and the average number of third party cookies received per page.}
 \label{tbb}
 \centering
 \small
@@ -392,7 +392,7 @@ One type of client that deserves special attention is a mobile phone user.  Alth
 Despite all the structural problems, is there a market for a Torifying piece of hardware?  Given the security pitfalls in comparison to a piece of software such as the Tor Browser Bundle, there seems to be no reason for a user who can run the Tor Browser Bundle to purchase the Safeplug or any other device.  For mobile phones, the proxy problems with mobility contribute to an already high usability cost.  However, there are an emerging class of ``smart home'' devices which may connect to the Internet.  It is possible that some of these devices can be configured to use an HTTP proxy or some other middle box to Torify their traffic to an external service provider.  For them, is the benefit of some anonymity via a Safeplug-like device worthwhile?  Since the data sent by these devices to the service provider likely contains identifying information, the use of Tor would only protect the user's location at the expense of connection time and load on the Tor network.  Since proxy configuration on such devices is likely to be difficult and the amount of information hidden is unlikely to be worth the effort, a Torifying box that functions as a proxy is of questionable value in this space as well.
 
 \section{Future Work}
-A more in-depth analysis of the performance of the Safeplug would be useful in the future.  The performance of the Safeplug reflects it's usability, and would be helpful in determining the trade-offs of using the device.  Additionally, a greater breadth of privacy measurements would cement Safeplug's position as a useful privacy-preserving technology, or a device that doesn't protect privacy as well as other tools.  
+A more in-depth analysis of the performance of the Safeplug would be useful in the future.  The performance of the Safeplug reflects its usability, and would be helpful in determining the trade-offs of using the device.  Additionally, clearer privacy metrics are needed to help evaluate privacy-enhancing technologies, such as the Safeplug.  
 
 \section{Conclusion}
 Ultimately, the structural concerns of the Safeplug ``Torifying proxy-in-a-box'' strategy indicate that this is problematic as a method for security and anonymity online.  It is critical for Safeplug to correct their security errors, particularly the vulnerability to silently disable Tor, in order to protect customers who have already made use of the device, but users who are truly concerned about safety and anonymity online should make use of technologies directly from the Tor Project.
