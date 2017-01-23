@@ -1,0 +1,120 @@
+\begin{thebibliography}{10}
+
+\bibitem{alexa}
+Alexa.
+\newblock \url{http://www.alexa.com/topsites}.
+
+\bibitem{cookiemonster}
+Cookie manager+.
+\newblock
+  \url{https://addons.mozilla.org/en-US/firefox/addon/cookies-manager-plus/}.
+
+\bibitem{pagestats}
+Pagestats.
+\newblock \url{http://web.cs.wpi.edu/~cew/pagestats/}.
+
+\bibitem{torproject}
+The tor project.
+\newblock \url{https://www.torproject.org/}.
+
+\bibitem{fingerprint1}
+{\sc Cai, X., Zhang, X.~C., Joshi, B., and Johnson, R.}
+\newblock Touching from a distance: Website fingerprinting attacks and
+  defenses.
+\newblock In {\em Proceedings of the 2012 ACM conference on Computer and
+  Communications Security\/} (2012), ACM, pp.~605--616.
+
+\bibitem{ceadmin}
+{\sc Colleton, L.}
+\newblock Fwd: Ssh on safeplug.
+\newblock \url{http://archives.seul.org/or/talk/Jan-2014/msg00003.html}.
+
+\bibitem{dyer}
+{\sc Dyer, K.~P., Coull, S.~E., Ristenpart, T., and Shrimpton, T.}
+\newblock Peek-a-boo, i still see you: Why efficient traffic analysis
+  countermeasures fail.
+\newblock In {\em Security and Privacy (SP), 2012 IEEE Symposium on\/} (2012),
+  IEEE, pp.~332--346.
+
+\bibitem{feamster}
+{\sc Feamster, N., and Dingledine, R.}
+\newblock Location diversity in anonymity networks.
+\newblock In {\em Proceedings of the 2004 ACM workshop on Privacy in the
+  electronic society\/} (2004), ACM, pp.~66--76.
+
+\bibitem{panopticlick}
+{\sc Foundation, E.~F.}
+\newblock Panopticlick.
+\newblock \url{https://panoptlick.eff.org}.
+
+\bibitem{bittech}
+{\sc Halfacree, G.}
+\newblock Pogoplug launches tor-powered safeplug.
+\newblock
+  \url{http://www.bit-tech.net/news/hardware/2013/11/25/pogoplug-safeplug/1}.
+
+\bibitem{herrmann}
+{\sc Herrmann, D., Wendolsky, R., and Federrath, H.}
+\newblock Website fingerprinting: attacking popular privacy enhancing
+  technologies with the multinomial na{\"\i}ve-bayes classifier.
+\newblock In {\em Proceedings of the 2009 ACM workshop on Cloud computing
+  security\/} (2009), ACM, pp.~31--42.
+
+\bibitem{tor2}
+{\sc Johnson, A., Wacek, C., Jansen, R., Sherr, M., and Syverson, P.}
+\newblock Users get routed: Traffic correlation on tor by realistic
+  adversaries.
+\newblock In {\em Proceedings of the 2013 ACM SIGSAC conference on Computer \&
+  communications security\/} (2013), ACM, pp.~337--348.
+
+\bibitem{murdoch}
+{\sc Murdoch, S.~J., and Danezis, G.}
+\newblock Low-cost traffic analysis of tor.
+\newblock In {\em Security and Privacy, 2005 IEEE Symposium on\/} (2005), IEEE,
+  pp.~183--195.
+
+\bibitem{murdoch2}
+{\sc Murdoch, S.~J., and Zieli{\'n}ski, P.}
+\newblock Sampled traffic analysis by internet-exchange-level adversaries.
+\newblock In {\em Privacy Enhancing Technologies\/} (2007), Springer,
+  pp.~167--183.
+
+\bibitem{overlier}
+{\sc Overlier, L., and Syverson, P.}
+\newblock Locating hidden servers.
+\newblock In {\em Security and Privacy, 2006 IEEE Symposium on\/} (2006), IEEE,
+  pp.~15--pp.
+
+\bibitem{panchenko}
+{\sc Panchenko, A., Niessen, L., Zinnen, A., and Engel, T.}
+\newblock Website fingerprinting in onion routing based anonymization networks.
+\newblock In {\em Proceedings of the 10th annual ACM workshop on Privacy in the
+  electronic society\/} (2011), ACM, pp.~103--114.
+
+\bibitem{safeplug}
+{\sc Pogoplug}.
+\newblock Safeplug.
+\newblock \url{https://pogoplug.com/safeplug}.
+
+\bibitem{pew}
+{\sc Rainie, L., Kiesler, S., Kang, R., Madden, M., Duggan, M., Brown, S., and
+  Dabbish, L.}
+\newblock Anonymity, privacy, and security online.
+\newblock {\em Pew Research Center\/} (2013).
+
+\bibitem{arvindpets}
+{\sc Reisman, D., Englehardt, S., Eubank, C., Zimmerman, P., and Narayanan, A.}
+\newblock Cookies that give you away: Evaluating the surveillance implications
+  of web tracking (draft: April 2, 2014).
+
+\bibitem{wired}
+{\sc Solon, O.}
+\newblock Safeplug makes it super-easy to harness tor\'s anonymity at home.
+\newblock \url{http://www.wired.co.uk/news/archive/2013-11/22/safeplug-tor}.
+
+\bibitem{csrfdef}
+{\sc Zeller, W., and Felten, E.~W.}
+\newblock Cross-site request forgeries: Exploitation and prevention.
+\newblock {\em Bericht, Princeton University\/} (2008).
+
+\end{thebibliography}
